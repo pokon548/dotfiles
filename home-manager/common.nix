@@ -16,15 +16,11 @@
       };
     };
   };
-
-  home.dconf.
-
+  
   programs.home-manager.enable = true;
 
   programs.git.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
-
-  home.stateVersion = lib.mkDefault "23.11";
 }

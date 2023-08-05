@@ -1,8 +1,11 @@
-{ config, pkgs, inputs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  inherit (lib.hm.gvariant)
+    mkArray mkTuple mkString mkUint32 type;
+in {
   dconf.settings = {
     "org/gnome/shell" = {
       disable-user-extensions = false;
-      enabled-extensions = map (p: p.extensionUuid) extensionPkgs;
       disabled-extensions = [ ];
       welcome-dialog-last-shown-version = "44.2";
     };
@@ -58,4 +61,6 @@
       preload-engines = [ "libpinyin" "xkb:us::eng" ];
     };
   };
+
+  home.stateVersion = lib.mkDefault "23.11";
 }

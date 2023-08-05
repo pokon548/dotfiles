@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   extensionPkgs = with pkgs.gnomeExtensions; [
     gsconnect
@@ -14,10 +14,9 @@ let
 
     night-theme-switcher
   ];
-  inherit (inputs.home-manager.lib.hm.gvariant)
+  inherit (lib.hm.gvariant)
     mkArray mkTuple mkString mkUint32 type;
-in 
-{
+in {
   sops.secrets.pokon548_password.neededForUsers = true;
 
   users.users.pokon548 = {
@@ -27,9 +26,7 @@ in
   };
 
   home-manager.users.pokon548 = {
-    imports = [
-      ./gnome.nix
-    ];
+    imports = [ ./gnome.nix ];
 
     home.packages = extensionPkgs ++ (with pkgs; [
       vim
@@ -75,6 +72,7 @@ in
       };
 
       "org/gnome/shell" = {
+        enabled-extensions = map (p: p.extensionUuid) extensionPkgs;
         favorite-apps = lib.mkBefore [
           "brave-browser.desktop"
           "com.raggesilver.BlackBox.desktop"
