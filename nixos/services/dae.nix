@@ -12,6 +12,9 @@ with lib;
   config = mkIf config.services.dae.enable {
     environment.systemPackages = [ pkgs.dae ];
 
+    networking.firewall.allowedTCPPorts = [ 12345 ];
+    networking.firewall.allowedUDPPorts = [ 12345 ];
+
     systemd.services.dae =
       {
         unitConfig = {
@@ -20,7 +23,7 @@ with lib;
           After = [
             "network.target"
             "systemd-sysctl.service"
-          ] ++ tableServices;
+          ];
           Wants = [ "network.target" ];
         };
 
@@ -38,6 +41,4 @@ with lib;
         wantedBy = [ "multi-user.target" ];
       };
   };
-
-  meta.maintainers = with maintainers; [ elliot ];
 }
