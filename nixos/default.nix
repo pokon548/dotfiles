@@ -2,7 +2,5 @@
   imports = [
     ./common.nix
     ./surfacego.nix
-    
-    ./services/dae.nix
   ];
 }
