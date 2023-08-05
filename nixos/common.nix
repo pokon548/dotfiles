@@ -1,7 +1,5 @@
 { inputs, outputs, lib, config, pkgs, ... }: {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
-    inputs.nur.nixosModules.nur
   ];
 
   nixpkgs = {
@@ -40,7 +38,10 @@
     };
   };
 
-  networking.networkmanager.enable = true;
+  networking = {
+    networkmanager.enable = true;
+  };
+
   i18n.defaultLocale = "zh_CN.UTF-8";
   time.timeZone = "Asia/Shanghai";
 
