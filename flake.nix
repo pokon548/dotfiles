@@ -9,6 +9,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Rusty!
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     # sops-nix
@@ -41,7 +42,7 @@
       # Acessible through 'nix develop' or 'nix-shell' (legacy)
       devShells = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./shell.nix { inherit pkgs; }
+        in import ./shell { inherit pkgs; }
       );
 
       # Your custom packages and modifications, exported as overlays
