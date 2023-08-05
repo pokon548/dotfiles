@@ -12,8 +12,7 @@ let
 
     night-theme-switcher
   ];
-  inherit (lib.hm.gvariant)
-    mkArray mkTuple mkString mkUint32 type;
+  inherit (lib.hm.gvariant) mkArray mkTuple mkString mkUint32 type;
 in {
   sops.secrets.zenarea_password.neededForUsers = true;
 
@@ -24,9 +23,7 @@ in {
   };
 
   home-manager.users.zenarea = {
-    imports = [
-      ./gnome.nix
-    ];
+    imports = [ ./common.nix ./gnome.nix ];
 
     home.packages = extensionPkgs ++ (with pkgs; [
       blanket

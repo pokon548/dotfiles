@@ -14,8 +14,7 @@ let
 
     night-theme-switcher
   ];
-  inherit (lib.hm.gvariant)
-    mkArray mkTuple mkString mkUint32 type;
+  inherit (lib.hm.gvariant) mkArray mkTuple mkString mkUint32 type;
 in {
   sops.secrets.pokon548_password.neededForUsers = true;
 
@@ -26,7 +25,7 @@ in {
   };
 
   home-manager.users.pokon548 = {
-    imports = [ ./gnome.nix ];
+    imports = [ ./common.nix ./gnome.nix ];
 
     home.packages = extensionPkgs ++ (with pkgs; [
       vim
