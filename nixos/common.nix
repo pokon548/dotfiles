@@ -1,5 +1,9 @@
 { inputs, outputs, lib, config, pkgs, ... }: {
   imports = [
+    inputs.lanzaboote.nixosModules.lanzaboote
+    inputs.nur.nixosModules.nur
+    inputs.sops-nix.nixosModules.sops
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   nixpkgs = {

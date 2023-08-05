@@ -59,11 +59,6 @@
         surfacego = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            lanzaboote.nixosModules.lanzaboote
-            nur.nixosModules.nur
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-
             # > Our main nixos configuration file <
             ./nixos/common.nix
             ./nixos/surfacego.nix
