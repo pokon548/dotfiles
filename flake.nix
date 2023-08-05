@@ -56,15 +56,31 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        workstation = nixpkgs.lib.nixosSystem {
+        surfacego = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
             lanzaboote.nixosModules.lanzaboote
             nur.nixosModules.nur
             sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
 
             # > Our main nixos configuration file <
-            ./nixos
+            ./nixos/common.nix
+            ./nixos/surfacego.nix
+          ];
+        };
+
+        xiaoxin = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            lanzaboote.nixosModules.lanzaboote
+            nur.nixosModules.nur
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+
+            # > Our main nixos configuration file <
+            ./nixos/common.nix
+            ./nixos/xiaoxin2020.nix
           ];
         };
       };

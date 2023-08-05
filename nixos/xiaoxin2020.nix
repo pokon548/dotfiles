@@ -40,6 +40,7 @@
 
   networking = {
     useDHCP = lib.mkDefault true;
+    hostName = "xiaoxin";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

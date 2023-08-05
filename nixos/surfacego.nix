@@ -43,7 +43,7 @@
 
   networking = {
     useDHCP = lib.mkDefault true;
-    hostName = "workstation";
+    hostName = "surfacego";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
