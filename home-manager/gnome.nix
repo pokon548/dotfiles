@@ -61,6 +61,4 @@ in {
       preload-engines = [ "libpinyin" "xkb:us::eng" ];
     };
   };
-
-  home.stateVersion = lib.mkDefault "23.11";
 }
