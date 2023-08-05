@@ -116,7 +116,5 @@ in
         preload-engines = [ "libpinyin" "xkb:us::eng" ];
       };
     };
-
-    home.stateVersion = "23.11";
   };
 }
