@@ -14,7 +14,7 @@
     ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
   };
 
-  services.v2raya.enable = true;
+  services.dae.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   environment = {
