@@ -7,14 +7,9 @@
   ];
 
   nixpkgs = {
-    overlays = [
-      inputs.nur.overlay
-      inputs.rust-overlay.overlays.default
-    ];
+    overlays = [ inputs.nur.overlay inputs.rust-overlay.overlays.default ];
 
-    config = {
-      allowUnfree = true;
-    };
+    config = { allowUnfree = true; };
   };
 
   sops = {
@@ -29,28 +24,34 @@
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
+      config.nix.registry;
 
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
   };
 
-  networking = {
-    networkmanager.enable = true;
-  };
+  networking = { networkmanager.enable = true; };
 
   i18n.defaultLocale = "zh_CN.UTF-8";
   time.timeZone = "Asia/Shanghai";
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  #boot.lanzaboote = {
-  #  enable = true;
-  #  pkiBundle = "/etc/secureboot";
-  #};
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
 
   system.stateVersion = "23.11";
 }
