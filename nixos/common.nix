@@ -31,6 +31,7 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       substituters = [
+        "https://mirrors.bfsu.edu.cn/nix-channels/store"
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
       ];
@@ -45,7 +46,7 @@
   # But keep the current one intact for stability purpose :)
   system.autoUpgrade = {
     enable = true;
-    dates = "Fri 03:00";
+    dates = "Fri 04:00";
     operation = "boot";
   };
 
