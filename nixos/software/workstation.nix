@@ -8,12 +8,16 @@
   fonts = {
     packages = with pkgs; [
       roboto
+      noto-fonts
       dejavu_fonts
       source-han-sans
       source-han-serif
       source-han-mono
+
+      nur.repos.rewine.ttf-wps-fonts
+      nur.repos.rewine.ttf-ms-win10
     ];
-    fontconfig = {
+    fontconfig = { # Shamelessly kanged from Arch Wiki :)
       enable = true;
       localConf = ''
         <?xml version="1.0"?>
@@ -155,16 +159,6 @@
               <string>Source Han Serif CN</string>
             </edit>
           </match>
-
-          <!-- Load local system customization file -->
-          <include ignore_missing="yes">conf.d</include>
-
-          <!-- Font cache directory list -->
-
-          <cachedir>/var/cache/fontconfig</cachedir>
-          <cachedir prefix="xdg">fontconfig</cachedir>
-          <!-- the following element will be removed in the future -->
-          <cachedir>~/.fontconfig</cachedir>
 
           <config>
             <!-- Rescan configuration every 30 seconds when FcFontSetList is called -->
