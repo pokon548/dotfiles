@@ -28,6 +28,7 @@ in {
     home.packages = extensionPkgs ++ (with pkgs; [
       blanket
       obsidian
+      geogebra6
 
       nur.repos.pokon548.chengla-electron
 
