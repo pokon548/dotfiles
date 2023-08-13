@@ -27,6 +27,13 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
       config.nix.registry;
 
+    # Delete old generations that is older than 28 days
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 28d";
+      dates = "daily";
+    };
+
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
@@ -60,6 +67,7 @@
 
   boot.lanzaboote = {
     enable = true;
+    configurationLimit = 28;
     pkiBundle = "/etc/secureboot";
   };
 
