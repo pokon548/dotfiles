@@ -40,6 +40,15 @@
     };
   };
 
+  # Automatically download and prepare for latest packages.
+  #
+  # But keep the current one intact for stability purpose :)
+  system.autoUpgrade = {
+    enable = true;
+    date = "Fri 03:00";
+    operation = "boot";
+  };
+
   networking = { networkmanager.enable = true; };
 
   i18n.defaultLocale = "zh_CN.UTF-8";
