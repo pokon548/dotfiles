@@ -42,6 +42,8 @@ in {
       thunderbird
       todoist-electron
 
+      transmission_4-gtk
+
       ungoogled-chromium
       brave
       wpsoffice-cn

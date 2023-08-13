@@ -8,9 +8,9 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
+    source-han-sans
+    source-han-serif
+    source-han-mono
   ];
 
   i18n.inputMethod = {

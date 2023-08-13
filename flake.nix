@@ -14,6 +14,10 @@
 
     # sops-nix
     sops-nix.url = "github:Mic92/sops-nix";
+  
+    # nix-index
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # Lanzaboote
     lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0";
@@ -24,7 +28,7 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, lanzaboote, rust-overlay, nixos-hardware, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, sops-nix, nix-index-database, lanzaboote, rust-overlay, nixos-hardware, nur, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -73,6 +77,7 @@
             nur.nixosModules.nur
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
+            nix-index-database.nixosModules.nix-index
 
             # > Our main nixos configuration file <
             ./nixos/common.nix
