@@ -45,7 +45,7 @@
   # But keep the current one intact for stability purpose :)
   system.autoUpgrade = {
     enable = true;
-    date = "Fri 03:00";
+    dates = "Fri 03:00";
     operation = "boot";
   };
 
