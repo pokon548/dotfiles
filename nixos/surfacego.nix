@@ -2,7 +2,6 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, inputs, lib, pkgs, modulesPath, ... }:
-
 {
   imports = with inputs.nixos-hardware.nixosModules;
     [ 
@@ -12,6 +11,7 @@
       ../home-manager/pokon548.nix
       ../home-manager/zenarea.nix
       ./software/workstation.nix
+      ./firmware/ath10k-surface.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
