@@ -45,7 +45,6 @@ in {
       transmission_4-gtk
 
       ungoogled-chromium
-      brave
       wpsoffice-cn
       libreoffice-fresh
 
