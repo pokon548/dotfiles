@@ -25,7 +25,7 @@ in {
   };
 
   home-manager.users.pokon548 = {
-    imports = [ ./common.nix ./gnome.nix ];
+    imports = [ ./common.nix ./gnome.nix ./librewolf.nix ];
 
     home.packages = extensionPkgs ++ (with pkgs; [
       vim
