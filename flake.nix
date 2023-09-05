@@ -73,12 +73,6 @@
         xiaoxin = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            lanzaboote.nixosModules.lanzaboote
-            nur.nixosModules.nur
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            nix-index-database.nixosModules.nix-index
-
             # > Our main nixos configuration file <
             ./nixos/common.nix
             ./nixos/xiaoxin2020.nix
