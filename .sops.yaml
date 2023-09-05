@@ -1,5 +1,6 @@
 keys:
   - &pokon548 age1rlxnl9ngsmfzf2k9037d42rgyd696qk3axhg5dm0u9yhk9v955zqdyt5yy
+  - &workstation_xiaoxin age1talqkkpr2gml020yq8dsr79j92r9uy0emv0dszx8j368mx0ad96spzesdf
   - &workstation_surface age100k4tfn8ks43fktwjwrrzqhe7nkc3zvn79mr0kw52h0yqdzhp4vsclvhgq
 
 creation_rules:
@@ -7,4 +8,5 @@ creation_rules:
     key_groups:
     - age:
       - *pokon548
+      - *workstation_xiaoxin
       - *workstation_surface
