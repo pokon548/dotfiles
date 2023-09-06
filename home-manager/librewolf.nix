@@ -11,6 +11,7 @@ let
     lockPref("identity.fxaccounts.enabled", true);
 
     lockPref("browser.compactmode.show", true);
+    lockPref("browser.tabs.tabmanager.enabled", false);
   '';
   extraPolicies = {
     ExtensionSettings = {
