@@ -189,7 +189,7 @@
   };
 
   i18n.inputMethod = {
-    enabled = "ibus";
+    enabled = "fcitx5";
     ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
   };
 
