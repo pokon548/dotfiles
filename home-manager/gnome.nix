@@ -50,11 +50,21 @@ in {
 
     "org/gnome/shell/extensions/dash-to-dock" = {
       transparency-mode = "DYNAMIC";
+      multi-monitor = true;
+      isolate-monitors = true;
+      show-mounts = false;
+      custom-theme-shrink = true;
     };
 
     "org/gnome/desktop/interface" = {
       clock-show-weekday = true;
       text-scaling-factor = 1.12;
+
+      color-scheme = "prefer-dark";
+      gtk-theme = "Adwaita-dark";
+      icon-theme = "Tela-circle-dark";
+
+      show-battery-percentage = true;
     };
 
     "desktop/ibus/general" = {
