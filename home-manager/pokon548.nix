@@ -28,6 +28,10 @@ in {
     extraGroups = [ "wheel" "networkmanager" "kvm" "libvirt" "vboxusers" ];
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1v"
+  ];
+
   home-manager.users.pokon548 = {
     imports = [ ./common.nix ./gnome.nix ./librewolf.nix ];
 
@@ -48,6 +52,8 @@ in {
       todoist-electron
       gnome-solanum
 
+      obs-studio
+
       transmission_4-gtk
 
       ungoogled-chromium
@@ -60,10 +66,13 @@ in {
       steam
       prismlauncher
 
+      localsend
+
       vlc
       bitwarden
       keepassxc
       telegram-desktop
+      element-desktop
 
       tela-circle-icon-theme
 
@@ -75,12 +84,6 @@ in {
     dconf.settings = {
       # Style
       "org/gnome/desktop/background" = {
-        color-shading-type = "solid";
-        picture-options = "zoom";
-        picture-uri =
-          "file:///run/current-system/sw/share/backgrounds/gnome/fold-l.webp";
-        picture-uri-dark =
-          "file:///run/current-system/sw/share/backgrounds/gnome/fold-d.webp";
         primary-color = "#26a269";
         secondary-color = "#000000";
       };
