@@ -196,6 +196,17 @@
   #services.dae.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
 
+  virtualisation.libvirtd = {
+    enable = true;
+    allowedBridges = [
+      "virbr0"
+    ];
+    qemu = {
+      swtpm.enable = true;
+      runAsRoot = true;
+    };
+  };
+
   environment = {
     systemPackages = with pkgs; [ ];
 
