@@ -6,6 +6,8 @@ let
     dash-to-dock
     runcat
 
+    kimpanel
+
     clipboard-history
     transparent-top-bar
     just-perfection

@@ -190,10 +190,10 @@
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
+    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
   };
 
-  services.dae.enable = true;
+  #services.dae.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   environment = {
