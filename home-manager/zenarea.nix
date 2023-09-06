@@ -28,9 +28,10 @@ in {
     home.packages = extensionPkgs ++ (with pkgs; [
       blanket
       obsidian
-      #geogebra6
+      geogebra6
 
       nur.repos.pokon548.chengla-electron
+      nur.repos.pokon548.nekoray-bin
 
       tela-circle-icon-theme
     ]);
