@@ -193,7 +193,7 @@
     fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
   };
 
-  #services.dae.enable = true;
+  services.dae.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   virtualisation.libvirtd = {
@@ -205,6 +205,10 @@
       swtpm.enable = true;
       runAsRoot = true;
     };
+  };
+
+  virtualisation.virtualbox.host = {
+    enable = true;
   };
 
   environment = {
