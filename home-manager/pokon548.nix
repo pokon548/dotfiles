@@ -71,6 +71,12 @@ in {
         secondary-color = "#000000";
       };
 
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "Adwaita-dark";
+        icon-theme = "Tela-circle-dark";
+      };
+
       "org/gnome/shell" = {
         enabled-extensions = map (p: p.extensionUuid) extensionPkgs;
         favorite-apps = lib.mkBefore [
