@@ -17,17 +17,17 @@
   boot.extraModulePackages = [ ];
 
   boot.initrd.luks.devices."cryptroot" = {
-    device = "/dev/disk/by-uuid/66fdf319-d6ef-4a8b-a41e-e96762d68b6d";
+    device = "/dev/disk/by-uuid/3d9a75e3-2f54-45ea-b679-ef5297e72397";
     preLVM = true;
   };
 
   fileSystems."/" =
     { device = "/dev/mapper/MyVolGroup-root";
-      fsType = "xfs";
+      fsType = "btrfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/EDFC-BAAD";
+    { device = "/dev/disk/by-uuid/CDDF-AEBF";
       fsType = "vfat";
     };
 
