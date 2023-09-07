@@ -51,6 +51,7 @@ in {
       thunderbird
       todoist-electron
       gnome-solanum
+      birdtray
 
       obs-studio
 

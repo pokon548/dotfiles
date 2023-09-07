@@ -24,4 +24,13 @@
     LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib64:$LD_LIBRARY_PATH";
     ELECTRON_OVERRIDE_DIST_PATH = "${pkgs.electron}/bin/";
   };
+
+  learning = pkgs.mkShell {
+    nativeBuildInputs = with pkgs; [
+      clang
+      stdenv.cc.cc.lib
+    ];
+
+    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib64:$LD_LIBRARY_PATH";
+  };
 }
