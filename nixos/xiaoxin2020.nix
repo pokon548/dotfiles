@@ -33,6 +33,7 @@
 
   zramSwap = {
     enable = true;
+    memoryPercent = 100;
     writebackDevice = "/dev/mapper/MyVolGroup-swap";
   };
 

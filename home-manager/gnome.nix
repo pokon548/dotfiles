@@ -67,6 +67,15 @@ in {
       show-battery-percentage = true;
     };
 
+    "org/gnome/shell/extensions/just-perfection" = {
+      activities-button = false;
+      accessibility-menu = false;
+      calendar = false;
+      events-button = false;
+      window-demands-attention-focus = true;
+      startup-status = 0;
+    };
+
     "desktop/ibus/general" = {
       preload-engines = [ "libpinyin" "xkb:us::eng" ];
     };
