@@ -19,6 +19,12 @@ let
       version = "2.0.2";
       sha256 = "ttvCwxk3dMwva5LmVHq4p31INTa/T91qQISEU4gYNbg=";
     }
+    {
+      name = "playwright";
+      publisher = "ms-playwright";
+      version = "1.0.15";
+      sha256 = "3G/xMKzsXLP7aJm9tBLDZQD0rRF28sHzo0Y2TiDP3ME=";
+    }
   ];
 in
 
@@ -36,6 +42,16 @@ in
       "security.workspace.trust.enabled" = false;
       "editor.fontFamily" = "'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace";
       "window.zoomLevel" = 0.5;
+      "todo-tree.general.tags" = [
+        "BUG"
+        "HACK"
+        "FIXME"
+        "TODO"
+        "XXX"
+      ];
+      "[typescriptreact]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
     };
   };
 
