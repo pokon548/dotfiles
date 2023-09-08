@@ -25,7 +25,7 @@ in
 
   users.users.pokon548 = {
     passwordFile = config.sops.secrets.pokon548_password.path;
-    shell = pkgs.zsh;
+    shell = "${pkgs.zsh}/bin/zsh";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "kvm" "libvirt" "vboxusers" ];
   };
