@@ -25,6 +25,7 @@ in
 
   users.users.pokon548 = {
     passwordFile = config.sops.secrets.pokon548_password.path;
+    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "kvm" "libvirt" "vboxusers" ];
   };
@@ -34,7 +35,7 @@ in
   ];
 
   home-manager.users.pokon548 = {
-    imports = [ ./common.nix ./gnome.nix ./librewolf.nix ./vscode.nix ];
+    imports = [ ./common.nix ./gnome.nix ./librewolf.nix ./vscode.nix ./ohmyzsh.nix ];
 
     home.packages = extensionPkgs ++ (with pkgs; [
       vim
