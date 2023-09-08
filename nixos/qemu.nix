@@ -4,7 +4,7 @@
 { config, inputs, lib, pkgs, modulesPath, ... }:
 {
   imports = with inputs.nixos-hardware.nixosModules;
-    [ 
+    [
       common-pc-ssd
       common-cpu-intel
 
@@ -24,12 +24,14 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/mapper/MyVolGroup-root";
+    {
+      device = "/dev/mapper/MyVolGroup-root";
       fsType = "xfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/EDFC-BAAD";
+    {
+      device = "/dev/disk/by-uuid/EDFC-BAAD";
       fsType = "vfat";
     };
 

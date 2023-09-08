@@ -2,7 +2,7 @@
 
 {
   imports = with inputs.nixos-hardware.nixosModules;
-    [ 
+    [
       common-pc-ssd
       common-cpu-intel
 
@@ -22,12 +22,14 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/mapper/MyVolGroup-root";
+    {
+      device = "/dev/mapper/MyVolGroup-root";
       fsType = "btrfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/CDDF-AEBF";
+    {
+      device = "/dev/disk/by-uuid/CDDF-AEBF";
       fsType = "vfat";
     };
 
@@ -45,7 +47,7 @@
     driSupport32Bit = true;
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -53,15 +55,15 @@
     open = false;
     nvidiaSettings = true;
     prime = {
-	    offload = {
-		    enable = true;
-		    enableOffloadCmd = true;
-	    };
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
 
-	    # Make sure to use the correct Bus ID values for your system!
-	    intelBusId = "PCI:0:2:0";
-	    nvidiaBusId = "PCI:1:0:0";
-	  };
+      # Make sure to use the correct Bus ID values for your system!
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
 
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };

@@ -19,7 +19,8 @@ let
     night-theme-switcher
   ];
   inherit (lib.hm.gvariant) mkArray mkTuple mkString mkUint32 type;
-in {
+in
+{
   sops.secrets.pokon548_password.neededForUsers = true;
 
   users.users.pokon548 = {

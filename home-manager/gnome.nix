@@ -2,7 +2,8 @@
 let
   inherit (lib.hm.gvariant)
     mkArray mkTuple mkString mkUint32 type;
-in {
+in
+{
   dconf.settings = {
     "org/gnome/shell" = {
       disable-user-extensions = false;
