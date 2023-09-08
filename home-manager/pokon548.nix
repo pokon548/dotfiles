@@ -61,7 +61,7 @@ in {
       wpsoffice-cn
       libreoffice-fresh
 
-      vscode-fhs
+      vscodium-fhs
       androidStudioPackages.canary
 
       steam
@@ -95,7 +95,7 @@ in {
           "librewolf.desktop"
           "com.raggesilver.BlackBox.desktop"
           "obsidian.desktop"
-          "code.desktop"
+          "codium.desktop"
           "org.gnome.Nautilus.desktop"
         ];
       };
