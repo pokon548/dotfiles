@@ -70,7 +70,8 @@ let
             f (lib.attrPath ++ [ n ]) values
           else
             lib.last values);
-    in f [ ] attrList;
+    in
+    f [ ] attrList;
   shippedPoliciesJSON = builtins.fromJSON
     (builtins.readFile (builtins.concatStringsSep "" pkg.extraPoliciesFiles));
   customPoliciesJSON = { policies = extraPolicies; };
@@ -81,12 +82,13 @@ let
     builtins.readFile (builtins.concatStringsSep "" pkg.extraPrefsFiles);
   overallPrefsFile = pkgs.writeText "librewolf.cfg"
     (builtins.concatStringsSep "" [ shippedPrefs extraPrefs ]);
-in {
+in
+{
   programs.firefox = {
     enable = true;
     package = pkgs.wrapFirefox pkg {
       inherit (pkg)
-      ;
+        ;
       wmClass = "LibreWolf";
       libName = "librewolf";
 
