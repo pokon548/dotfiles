@@ -52,7 +52,7 @@ in
       thunderbird
       todoist-electron
       gnome-solanum
-      birdtray
+      goldendict-ng
 
       obs-studio
 
