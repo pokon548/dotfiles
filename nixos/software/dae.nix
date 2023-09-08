@@ -25,7 +25,7 @@
       dns {
         upstream {
           alidns: 'udp://dns.alidns.com:53'
-          adguarddns: 'tcp+udp://94.140.14.140:53'
+          googledns: 'tcp+udp://dns.google:53'
         }
         routing {
           request {
@@ -40,15 +40,22 @@
         }
       }
 
+      group {
+        my_group {
+          policy: min_moving_avg
+        }
+      }
+
       routing {
         pname(NetworkManager) -> direct
+        dport(52443) -> direct
         dip(224.0.0.0/3, 'ff00::/8') -> direct
 
         dip(geoip:private) -> direct
         dip(geoip:cn) -> direct
         domain(geosite:cn) -> direct
 
-        fallback: node1
+        fallback: my_group
       }
     '';
   };
