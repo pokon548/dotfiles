@@ -29,13 +29,8 @@
         }
         routing {
           request {
-            fallback: alidns
-          }
-
-          response {
-            upstream(googledns) -> accept
-            !qname(geosite:cn) && ip(geoip:private) -> googledns
-            fallback: accept
+            qname(geosite:cn) -> alidns
+            fallback: googledns
           }
         }
       }
