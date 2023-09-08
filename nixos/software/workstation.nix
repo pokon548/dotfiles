@@ -1,4 +1,5 @@
 { lib, config, pkgs, ... }: {
+  imports = [ ./dae.nix ];
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -202,7 +203,6 @@
     { from = 1714; to = 1764; }
   ];
 
-  services.dae.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   virtualisation.libvirtd = {
