@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 let
   extensionPkgs = with pkgs.gnomeExtensions; [
     gsconnect
@@ -35,7 +35,7 @@ in
   ];
 
   home-manager.users.pokon548 = {
-    imports = [ ./common.nix ./gnome.nix ./librewolf.nix ./vscode.nix ./ohmyzsh.nix ];
+    imports = [ inputs.nix-index-database.hmModules.nix-index ./common.nix ./gnome.nix ./librewolf.nix ./vscode.nix ./ohmyzsh.nix ];
 
     home.packages = extensionPkgs ++ (with pkgs; [
       vim

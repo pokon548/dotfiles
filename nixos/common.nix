@@ -2,6 +2,7 @@
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nur.nixosModules.nur
+    inputs.nix-index-database.nixosModules.nix-index
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -64,6 +65,8 @@
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  programs.command-not-found.enable = lib.mkForce false;
 
   boot.lanzaboote = {
     enable = true;
