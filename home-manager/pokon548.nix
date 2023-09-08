@@ -33,7 +33,7 @@ in {
   ];
 
   home-manager.users.pokon548 = {
-    imports = [ ./common.nix ./gnome.nix ./librewolf.nix ];
+    imports = [ ./common.nix ./gnome.nix ./librewolf.nix ./vscode.nix ];
 
     home.packages = extensionPkgs ++ (with pkgs; [
       vim
@@ -61,7 +61,6 @@ in {
       wpsoffice-cn
       libreoffice-fresh
 
-      vscodium-fhs
       androidStudioPackages.canary
 
       steam
