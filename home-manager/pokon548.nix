@@ -115,6 +115,10 @@ in
       "org/gnome/nautilus/preferences" = {
         click-policy = "single";
       };
+
+      "org/gnome/shell/extensions/caffeine" = {
+        toggle-state = true;
+      };
     };
   };
 }
