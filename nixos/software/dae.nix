@@ -50,6 +50,8 @@
         dip(geoip:cn) -> direct
         domain(geosite:cn) -> direct
 
+        domain(location.services.mozilla.com) -> direct
+
         fallback: my_group
       }
     '';
