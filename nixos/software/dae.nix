@@ -16,6 +16,8 @@
         sniffing_timeout: 100ms
         tls_implementation: tls
         utls_imitate: chrome_auto
+
+        dial_mode: ip
       }
 
       node {
@@ -23,6 +25,8 @@
       }
 
       dns {
+        ipversion_prefer: 4
+
         upstream {
           alidns: 'udp://dns.alidns.com:53'
           googledns: 'tcp+udp://dns.google:53'
@@ -42,6 +46,7 @@
       }
 
       routing {
+        domain(location.services.mozilla.com) -> direct
         pname(NetworkManager) -> direct
         dport(52443) -> direct
         dip(224.0.0.0/3, 'ff00::/8') -> direct
@@ -49,8 +54,6 @@
         dip(geoip:private) -> direct
         dip(geoip:cn) -> direct
         domain(geosite:cn) -> direct
-
-        domain(location.services.mozilla.com) -> direct
 
         fallback: my_group
       }
