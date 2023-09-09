@@ -1,9 +1,9 @@
-{ ... }:
+{ config, ... }:
 {
-  services.dae = {
-    enable = true;
-    config = ''
-      global {
+  sops.secrets.proxy-definition = { };
+
+  sops.templates."config.dae".content = ''
+    global {
         tproxy_port: 12345
         tproxy_port_protect: true
         so_mark_from_dae: 0
@@ -14,22 +14,22 @@
 
         allow_insecure: false
         sniffing_timeout: 100ms
-        tls_implementation: tls
+        tls_implementation: utls
         utls_imitate: chrome_auto
 
-        dial_mode: ip
+        dial_mode: domain
       }
 
       node {
-        node1: 'socks5://localhost:2080'
+        node1: '${config.sops.placeholder."proxy-definition"}'
       }
 
       dns {
         ipversion_prefer: 4
 
         upstream {
-          alidns: 'udp://dns.alidns.com:53'
-          googledns: 'tcp+udp://dns.google:53'
+          alidns: 'udp://223.5.5.5:53'
+          googledns: 'tcp+udp://8.8.8.8:53'
         }
         routing {
           request {
@@ -47,6 +47,7 @@
 
       routing {
         domain(location.services.mozilla.com) -> direct
+        domain(gis.gnome.org) -> direct
         pname(NetworkManager) -> direct
         dport(52443) -> direct
         dip(224.0.0.0/3, 'ff00::/8') -> direct
@@ -57,6 +58,10 @@
 
         fallback: my_group
       }
-    '';
+  '';
+
+  services.dae = {
+    enable = true;
+    configFile = config.sops.templates."config.dae".path;
   };
 }

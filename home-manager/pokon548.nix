@@ -84,7 +84,6 @@ in
 
       tela-circle-icon-theme
 
-      nur.repos.pokon548.nekoray-bin
       nur.repos.pokon548.rustdesk-bin
       nur.repos.pokon548.chengla-electron
       virt-manager
