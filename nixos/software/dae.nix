@@ -29,7 +29,7 @@
 
         upstream {
           alidns: 'udp://223.5.5.5:53'
-          googledns: 'tcp+udp://8.8.8.8:53'
+          googledns: 'tcp+udp://94.140.14.140:53'
         }
         routing {
           request {
