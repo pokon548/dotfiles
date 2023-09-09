@@ -46,8 +46,8 @@
       }
 
       routing {
-        domain(geosite:category-ads-all) -> block
-        
+        domain(geosite:category-ads) -> block
+
         domain(location.services.mozilla.com) -> direct
         domain(gis.gnome.org) -> direct
         pname(NetworkManager) -> direct
