@@ -14,10 +14,10 @@
 
       allow_insecure: false
       sniffing_timeout: 100ms
-      tls_implementation: tls
+      tls_implementation: utls
       utls_imitate: chrome_auto
 
-      dial_mode: ip
+      dial_mode: domain++
     }
 
     node {
@@ -25,11 +25,9 @@
     }
 
     dns {
-      ipversion_prefer: 4
-
       upstream {
-        alidns: 'udp://223.5.5.5:53'
-        adguardiodns: 'tcp+udp://94.140.14.140:53'
+        alidns: 'udp://127.0.0.1:53214'
+        adguardiodns: 'tcp://94.140.14.140:53'
       }
       routing {
         request {
@@ -65,5 +63,18 @@
   services.dae = {
     enable = true;
     configFile = config.sops.templates."config.dae".path;
+  };
+
+  # Served as DNS-over-HTTPS server...
+  services.smartdns = {
+    enable = true;
+    settings = {
+      bind = ":53214";
+      server = "223.5.5.5 -bootstrap-dns";
+      server-https = [
+        "https://223.5.5.5/dns-query"
+        "https://1.12.12.12/dns-query"
+      ];
+    };
   };
 }
