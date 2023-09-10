@@ -40,6 +40,7 @@
             EmojiEnabled = "True";
             CloudPinyinEnabled = "False";
             CloudPinyinIndex = 2;
+            QuickPhraseKey = "";
             VAsQuickphrase = "False";
           };
         };
