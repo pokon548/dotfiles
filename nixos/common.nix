@@ -68,8 +68,6 @@
 
   programs.command-not-found.enable = lib.mkForce false;
 
-  services.fstrim.enable = true;
-
   boot.lanzaboote = {
     enable = true;
     configurationLimit = 28;
