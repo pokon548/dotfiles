@@ -9,7 +9,16 @@
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
+    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-gtk ];
+  };
+
+  # Workaround for fcitx5 issue under wayland. See: https://github.com/NixOS/nixpkgs/issues/129442
+  environment.sessionVariables = {
+    NIX_PROFILES =
+      "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
   };
 
   networking.firewall =
