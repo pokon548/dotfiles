@@ -25,6 +25,7 @@
     {
       device = "/dev/mapper/MyVolGroup-root";
       fsType = "btrfs";
+      options = [ "compress=zstd" ];
     };
 
   fileSystems."/boot" =
