@@ -38,7 +38,7 @@
           };
           pinyin.globalSection = {
             EmojiEnabled = "True";
-            CloudPinyinEnabled = "True";
+            CloudPinyinEnabled = "False";
             CloudPinyinIndex = 2;
             VAsQuickphrase = "False";
           };
