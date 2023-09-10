@@ -50,6 +50,11 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  services.undervolt = {
+    enable = true;
+    coreOffset = -70;
+  };
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
