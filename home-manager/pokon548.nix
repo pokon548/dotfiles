@@ -119,8 +119,9 @@ in
         click-policy = "single";
       };
 
-      "org/gnome/shell/extensions/caffeine" = {
-        toggle-state = true;
+      "org/gnome/Solanum" = {
+        lap-length = "unit32 45";
+        sessions-until-long-break = "unit32 3";
       };
     };
   };
