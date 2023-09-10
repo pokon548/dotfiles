@@ -12,6 +12,8 @@ let
     transparent-top-bar
     just-perfection
 
+    blur-my-shell
+
     caffeine
 
     bing-wallpaper-changer
@@ -55,6 +57,8 @@ in
       todoist-electron
       gnome-solanum
       goldendict-ng
+
+      motrix
 
       obs-studio
 
