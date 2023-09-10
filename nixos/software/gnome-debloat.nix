@@ -1,7 +1,14 @@
 { pkgs, ... }: {
   environment = {
     gnome.excludePackages =
-      (with pkgs; [ baobab gnome-tour gnome-console gnome-connections ])
+      (with pkgs; [
+        baobab
+        gnome-tour
+        gnome-console
+        gnome-connections
+        tracker-miners
+        tracker
+      ])
       ++ (with pkgs.gnome; [
         cheese
         gnome-terminal
