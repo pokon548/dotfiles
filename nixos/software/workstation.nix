@@ -1,15 +1,10 @@
 { lib, config, pkgs, ... }: {
-  imports = [ ./dae.nix ./font.nix ./gnome-debloat.nix ];
+  imports = [ ./dae.nix ./font.nix ./gnome-debloat.nix ./fcitx5.nix ];
 
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-  };
-
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-gtk ];
   };
 
   # Workaround for fcitx5 issue under wayland. See: https://github.com/NixOS/nixpkgs/issues/129442
