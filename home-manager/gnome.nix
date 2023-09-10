@@ -15,13 +15,6 @@ in
       button-layout = "appmenu:minimize,maximize,close";
     };
 
-    "org/gnome/desktop/input-sources" = {
-      sources = mkArray (type.tupleOf [ type.string type.string ]) [
-        (mkTuple [ (mkString "xkb") (mkString "us") ])
-        (mkTuple [ (mkString "ibus") (mkString "libpinyin") ])
-      ];
-    };
-
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
       night-light-schedule-automatic = true;
@@ -77,8 +70,8 @@ in
       startup-status = 0;
     };
 
-    "desktop/ibus/general" = {
-      preload-engines = [ "libpinyin" "xkb:us::eng" ];
+    "org/gnome/shell/keybindings" = {
+      show-screenshot-ui = ["<Alt>s"];
     };
   };
 }
