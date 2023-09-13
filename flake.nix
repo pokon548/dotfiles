@@ -19,6 +19,8 @@
     # sops-nix
     sops-nix.url = "github:Mic92/sops-nix";
 
+    nix-environments.url = "github:nix-community/nix-environments";
+
     # nix-index
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";

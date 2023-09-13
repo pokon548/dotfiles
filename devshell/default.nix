@@ -102,6 +102,8 @@
 
           LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib64:$LD_LIBRARY_PATH";
         };
+
+        openwrt = inputs.nix-environments.devShells."x86_64-linux".openwrt;
       };
     };
 }
