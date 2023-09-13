@@ -1,9 +1,10 @@
 { config, ... }:
 {
   sops.secrets = {
-    proxy-definition = { };
-    proxy-definition-chained = { };
-    proxy-definition-direct = { };
+    proxy-definition-tcp = { };
+    proxy-definition-chained-tcp = { };
+    proxy-definition-udp = { };
+    proxy-definition-chained-udp = { };
   };
 
   sops.templates."config.dae".content = ''
@@ -25,9 +26,10 @@
     }
 
     node {
-      node1: '${config.sops.placeholder."proxy-definition"}'
-      node2: '${config.sops.placeholder."proxy-definition-chained"}'
-      node3: '${config.sops.placeholder."proxy-definition-direct"}'
+      tcp: '${config.sops.placeholder."proxy-definition-tcp"}'
+      chained-tcp: '${config.sops.placeholder."proxy-definition-chained-tcp"}'
+      udp: '${config.sops.placeholder."proxy-definition-udp"}'
+      chained-udp: '${config.sops.placeholder."proxy-definition-chained-udp"}'
     }
 
     dns {
