@@ -1,6 +1,10 @@
 { config, ... }:
 {
-  sops.secrets.proxy-definition = { };
+  sops.secrets = {
+    proxy-definition = { };
+    proxy-definition-chained = { };
+    proxy-definition-direct = { };
+  };
 
   sops.templates."config.dae".content = ''
     global {
@@ -22,6 +26,8 @@
 
     node {
       node1: '${config.sops.placeholder."proxy-definition"}'
+      node2: '${config.sops.placeholder."proxy-definition-chained"}'
+      node3: '${config.sops.placeholder."proxy-definition-direct"}'
     }
 
     dns {
@@ -50,6 +56,7 @@
       domain(gis.gnome.org) -> direct
       pname(NetworkManager) -> direct
       dport(52443) -> direct
+
       dip(224.0.0.0/3, 'ff00::/8') -> direct
 
       dip(geoip:private) -> direct

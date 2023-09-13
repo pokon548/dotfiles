@@ -36,6 +36,9 @@ in
     "openssl-1.1.1v"
   ];
 
+  # TODO: Define all these ports in one place, so you don't mess the configs with random numbers :)
+  networking.firewall.allowedTCPPorts = [ 53317 ];
+
   home-manager.users.pokon548 = {
     imports = [ inputs.nix-index-database.hmModules.nix-index ./common.nix ./gnome.nix ./librewolf.nix ./vscode.nix ./ohmyzsh.nix ];
 
