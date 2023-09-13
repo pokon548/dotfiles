@@ -40,8 +40,6 @@ in
   networking.firewall.allowedTCPPorts = [ 53317 ];
 
   home-manager.users.pokon548 = {
-    imports = [ inputs.nix-index-database.hmModules.nix-index ./common.nix ./gnome.nix ./librewolf.nix ./vscode.nix ./ohmyzsh.nix ];
-
     # TODO: Remove openssl_1 if mono no longer depend on it
     home.packages = extensionPkgs ++ (with pkgs; [
       vim
