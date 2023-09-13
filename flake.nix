@@ -38,7 +38,6 @@
       {
         imports = [
           ./nixos
-          ./home-manager
           ./devshell
         ];
         systems = [ "x86_64-linux" ];

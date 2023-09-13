@@ -54,6 +54,7 @@ in
         virtualisationModules
 
         ./modules/lanzaboote.nix
+        ./home/pokon548.nix
         ./xiaoxin
       ];
     };
