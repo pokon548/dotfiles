@@ -8,6 +8,9 @@ let
     jnoortheen.nix-ide
     gruntfuggly.todo-tree
   ];
+  shellScriptExtensions = with pkgs.vscode-extensions; [
+    foxundermoon.shell-format
+  ];
   frontendDevExtensions = with pkgs.vscode-extensions; [
     dbaeumer.vscode-eslint
     esbenp.prettier-vscode
@@ -33,7 +36,7 @@ in
     enable = true;
     enableUpdateCheck = false;
     package = pkgs.vscodium;
-    extensions = commonExtensions ++ frontendDevExtensions;
+    extensions = commonExtensions ++ shellScriptExtensions ++ frontendDevExtensions;
     mutableExtensionsDir = false;
     userSettings = {
       "window.dialogStyle" = "custom";
