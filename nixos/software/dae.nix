@@ -3,8 +3,11 @@
   sops.secrets = {
     proxy-definition-tcp = { };
     proxy-definition-chained-tcp = { };
-    proxy-definition-udp = { };
-    proxy-definition-chained-udp = { };
+
+    proxy-definition-tcp-backup = { };
+    proxy-definition-chained-tcp-backup = { };
+    proxy-definition-udp-backup = { };
+    proxy-definition-chained-udp-backup = { };
   };
 
   sops.templates."config.dae".content = ''
@@ -28,8 +31,11 @@
     node {
       tcp: '${config.sops.placeholder."proxy-definition-tcp"}'
       chained-tcp: '${config.sops.placeholder."proxy-definition-chained-tcp"}'
-      udp: '${config.sops.placeholder."proxy-definition-udp"}'
-      chained-udp: '${config.sops.placeholder."proxy-definition-chained-udp"}'
+
+      tcp-backup: '${config.sops.placeholder."proxy-definition-tcp-backup"}'
+      chained-tcp-backup: '${config.sops.placeholder."proxy-definition-chained-tcp-backup"}'
+      udp-backup: '${config.sops.placeholder."proxy-definition-udp-backup"}'
+      chained-udp-backup: '${config.sops.placeholder."proxy-definition-chained-udp-backup"}'
     }
 
     dns {
@@ -46,7 +52,23 @@
     }
 
     group {
-      my_group {
+      normal-network {
+        filter: name(tcp)
+        policy: min_moving_avg
+      }
+
+      campus-network {
+        filter: name(tcp, chained-tcp)
+        policy: min_moving_avg
+      }
+
+      backup-normal-network {
+        filter: name(tcp-backup, udp-backup)
+        policy: min_moving_avg
+      }
+
+      backup-campus-network {
+        filter: name(tcp-backup, chained-tcp-backup, udp-backup, chained-udp-backup)
         policy: min_moving_avg
       }
     }
@@ -65,7 +87,7 @@
       dip(geoip:cn) -> direct
       domain(geosite:cn) -> direct
 
-      fallback: my_group
+      fallback: backup-campus-network
     }
   '';
 
