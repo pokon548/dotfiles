@@ -32,13 +32,6 @@ in
     extraGroups = [ "wheel" "networkmanager" "kvm" "libvirt" "vboxusers" ];
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1v"
-  ];
-
-  # TODO: Define all these ports in one place, so you don't mess the configs with random numbers :)
-  networking.firewall.allowedTCPPorts = [ 53317 ];
-
   home-manager.users.pokon548 = {
     imports = [ inputs.nix-index-database.hmModules.nix-index ./modules/common.nix ./modules/gnome.nix ./modules/librewolf.nix ./modules/vscode.nix ./modules/ohmyzsh.nix ];
 
