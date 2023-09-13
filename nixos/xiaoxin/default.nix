@@ -5,16 +5,14 @@
     [
       common-pc-ssd
       common-cpu-intel
-
-      ../home-manager/pokon548.nix
-      ../home-manager/zenarea.nix
-      ./software/workstation.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.initrd.luks.devices."cryptroot" = {
     device = "/dev/disk/by-uuid/3d9a75e3-2f54-45ea-b679-ef5297e72397";
@@ -55,6 +53,8 @@
     coreOffset = -70;
   };
 
+  time.timeZone = "Asia/Shanghai";
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -82,4 +82,6 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  system.stateVersion = "23.11";
 }

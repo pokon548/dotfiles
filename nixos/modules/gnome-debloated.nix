@@ -1,4 +1,10 @@
 { pkgs, ... }: {
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
+
   environment = {
     gnome.excludePackages =
       (with pkgs; [
@@ -30,4 +36,20 @@
         totem
       ]);
   };
+
+  networking = { networkmanager.enable = true; };
+
+  networking.firewall =
+    {
+      allowedTCPPortRanges = [
+        # KDE Connect
+        { from = 1714; to = 1764; }
+      ];
+      allowedUDPPortRanges = [
+        # KDE Connect
+        { from = 1714; to = 1764; }
+      ];
+    };
+
+  services.xserver.excludePackages = [ pkgs.xterm ];
 }
