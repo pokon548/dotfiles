@@ -25,7 +25,7 @@
       tls_implementation: utls
       utls_imitate: chrome_auto
 
-      dial_mode: domain++
+      dial_mode: ip
     }
 
     node {
