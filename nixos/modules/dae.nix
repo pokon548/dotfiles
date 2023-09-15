@@ -3,6 +3,8 @@
   sops.secrets = {
     proxy-definition-tcp = { };
     proxy-definition-chained-tcp = { };
+    proxy-definition-udp = { };
+    proxy-definition-chained-udp = { };
 
     proxy-definition-tcp-backup = { };
     proxy-definition-chained-tcp-backup = { };
@@ -31,6 +33,8 @@
     node {
       tcp: '${config.sops.placeholder."proxy-definition-tcp"}'
       chained-tcp: '${config.sops.placeholder."proxy-definition-chained-tcp"}'
+      udp: '${config.sops.placeholder."proxy-definition-udp"}'
+      chained-udp: '${config.sops.placeholder."proxy-definition-chained-udp"}'
 
       tcp-backup: '${config.sops.placeholder."proxy-definition-tcp-backup"}'
       chained-tcp-backup: '${config.sops.placeholder."proxy-definition-chained-tcp-backup"}'
@@ -53,12 +57,12 @@
 
     group {
       normal-network {
-        filter: name(tcp)
+        filter: name(tcp, udp)
         policy: min_moving_avg
       }
 
       campus-network {
-        filter: name(tcp, chained-tcp)
+        filter: name(tcp, chained-tcp, udp, chained-udp)
         policy: min_moving_avg
       }
 
@@ -87,7 +91,7 @@
       dip(geoip:cn) -> direct
       domain(geosite:cn) -> direct
 
-      fallback: backup-campus-network
+      fallback: campus-network
     }
   '';
 
