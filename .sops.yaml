@@ -1,12 +1,19 @@
 keys:
-  - &pokon548 age1rlxnl9ngsmfzf2k9037d42rgyd696qk3axhg5dm0u9yhk9v955zqdyt5yy
+  - &pokon548 age1lhkmsy3h090smuwg9r32xjs00uly74rz74vsu7cx4zyw8nytwypsh3hk5u
+  - &server_fwrouter age1rlxnl9ngsmfzf2k9037d42rgyd696qk3axhg5dm0u9yhk9v955zqdyt5yy
   - &workstation_xiaoxin age1mpn4tcwu4fnv5fn05cgzfddsf5f7mzcv0u2njefh9vaf6vptxspq3g79vp
   - &workstation_surface age100k4tfn8ks43fktwjwrrzqhe7nkc3zvn79mr0kw52h0yqdzhp4vsclvhgq
 
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/common.yaml$
     key_groups:
-    - age:
-      - *pokon548
-      - *workstation_xiaoxin
-      - *workstation_surface
+      - age:
+          - *pokon548
+          - *workstation_xiaoxin
+          - *workstation_surface
+  
+  - path_regex: secrets/fwrouter.yaml$
+    key_groups:
+      - age:
+          - *pokon548
+          - *server_fwrouter
