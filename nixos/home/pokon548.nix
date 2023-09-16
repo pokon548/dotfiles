@@ -65,6 +65,7 @@ in
       libreoffice-fresh
 
       androidStudioPackages.canary
+      godot_4
 
       (steam.override {
         extraPkgs = pkgs: [ openssl_1_1 ];
@@ -80,7 +81,7 @@ in
       telegram-desktop
       element-desktop
 
-      anki
+      anki-bin
 
       tela-circle-icon-theme
 
