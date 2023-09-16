@@ -55,6 +55,7 @@ in
       "[typescriptreact]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
+      "window.commandCenter" = false;
     };
   };
 
