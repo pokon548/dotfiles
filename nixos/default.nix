@@ -1,19 +1,27 @@
 { self, inputs, outputs, ... }:
 let
+  basicModules = {
+    imports = [
+      inputs.sops-nix.nixosModules.sops
+      inputs.home-manager.nixosModules.home-manager
+
+      ./modules/nix.nix
+      ./modules/sops.nix
+      ./modules/nixpkgs.nix
+    ];
+  };
+
   commonModules = {
     imports = [
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.nur.nixosModules.nur
       inputs.nix-index-database.nixosModules.nix-index
-      inputs.sops-nix.nixosModules.sops
-      inputs.home-manager.nixosModules.home-manager
+
 
       ./modules/auto-upgrade.nix
       ./modules/dae.nix
-      ./modules/nix.nix
-      ./modules/nixpkgs.nix
+
       ./modules/i18n.nix
-      ./modules/sops.nix
     ];
   };
   graphicModules = {
@@ -37,10 +45,11 @@ in
         inherit inputs outputs;
       };
       modules = [
+        basicModules
         commonModules
         graphicModules
 
-        ./surfacego
+        ./hosts/surfacego
       ];
     };
 
@@ -49,13 +58,27 @@ in
         inherit inputs outputs;
       };
       modules = [
+        basicModules
         commonModules
         graphicModules
         virtualisationModules
 
         ./modules/lanzaboote.nix
         ./home/pokon548.nix
-        ./xiaoxin
+        ./hosts/xiaoxin
+      ];
+    };
+
+    fwrouter = inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs outputs;
+      };
+      modules = [
+        basicModules
+
+        ./home/bukun.nix
+        ./modules/openssh.nix
+        ./hosts/fwrouter
       ];
     };
   };
