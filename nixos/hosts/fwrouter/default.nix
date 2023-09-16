@@ -16,7 +16,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.enable = true;
+
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
