@@ -16,8 +16,10 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  boot.loader.grub.enable = true;
-
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda";
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
