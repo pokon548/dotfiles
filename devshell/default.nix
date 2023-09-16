@@ -54,7 +54,7 @@
                 libdbusmenu
                 libxkbcommon
                 zlib
-                yarn
+                nodePackages.pnpm
                 wine
                 wine64
                 ungoogled-chromium
