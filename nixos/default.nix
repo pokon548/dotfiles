@@ -78,6 +78,7 @@ in
 
         ./home/bukun.nix
         ./modules/openssh.nix
+        ./modules/caddy/fwrouter.nix
         ./hosts/fwrouter
       ];
     };
