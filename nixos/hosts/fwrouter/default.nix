@@ -7,31 +7,18 @@
       common-cpu-intel
     ];
 
+  disko.devices = import ./disko-config.nix {
+    inherit lib;
+  };
+
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  boot.loader.systemd-boot.enable = true;
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-partlabel/root";
-      fsType = "btrfs";
-      options = [ "compress=zstd" ];
-    };
-
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-partlabel/ESP";
-      fsType = "vfat";
-    };
-
-  swapDevices = [
-    {
-      device = "/dev/disk/by-partlabel/swap";
-    }
-  ];
 
   hardware.enableRedistributableFirmware = true;
 

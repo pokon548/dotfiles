@@ -1,13 +1,14 @@
-{ disk ? null, ... }: {
-  disk.nixos = {
-    device = disk;
+# Example to create a bios compatible gpt partition
+{ lib, disks ? [ "/dev/vda" ], ... }: {
+  disk = lib.genAttrs disks (dev: {
+    device = dev;
     type = "disk";
     content = {
-      type = "table";
-      format = "gpt";
+      type = "gpt";
       partitions = {
         ESP = {
           size = "100M";
+          name = "ESP";
           content = {
             type = "filesystem";
             device = "by-partlabel";
@@ -35,5 +36,5 @@
         };
       };
     };
-  };
+  });
 }

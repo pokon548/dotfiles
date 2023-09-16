@@ -75,6 +75,7 @@ in
       };
       modules = [
         basicModules
+        inputs.disko.nixosModules.disko
 
         ./home/bukun.nix
         ./modules/openssh.nix
