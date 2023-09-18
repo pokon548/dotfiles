@@ -7,7 +7,7 @@
   };
 
   users.users.bukun = {
-    passwordFile = config.sops.secrets."bukun_password_${config.networking.hostName}".path;
+    hashedPasswordFile = config.sops.secrets."bukun_password_${config.networking.hostName}".path;
     shell = "${pkgs.zsh}/bin/zsh";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];

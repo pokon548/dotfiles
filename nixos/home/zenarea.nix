@@ -17,7 +17,7 @@ in {
   sops.secrets.zenarea_password.neededForUsers = true;
 
   users.users.zenarea = {
-    passwordFile = config.sops.secrets.zenarea_password.path;
+    hashedPasswordFile = config.sops.secrets.zenarea_password.path;
     isNormalUser = true;
     extraGroups = [ "networkmanager" ];
   };
