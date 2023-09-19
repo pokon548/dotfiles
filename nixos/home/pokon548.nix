@@ -13,12 +13,10 @@ let
     just-perfection
 
     blur-my-shell
-
     caffeine
-
     bing-wallpaper-changer
-
     night-theme-switcher
+    hibernate-status-button
   ];
   inherit (lib.hm.gvariant) mkArray mkTuple mkString mkUint32 type;
 in

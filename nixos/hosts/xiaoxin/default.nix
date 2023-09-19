@@ -41,6 +41,8 @@
     allowDiscards = true;
   };
 
+  boot.resumeDevice = "/dev/mapper/MyVolGroup-swap";
+
   fileSystems."/" =
     {
       device = "/dev/mapper/MyVolGroup-root";
@@ -54,11 +56,11 @@
       fsType = "vfat";
     };
 
-  zramSwap = {
-    enable = true;
-    memoryPercent = 100;
-    writebackDevice = "/dev/mapper/MyVolGroup-swap";
-  };
+  swapDevices = [
+    {
+      device = "/dev/mapper/MyVolGroup-swap";
+    }
+  ];
 
   hardware.enableRedistributableFirmware = true;
 
