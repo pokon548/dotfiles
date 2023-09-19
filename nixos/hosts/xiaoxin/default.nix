@@ -24,6 +24,10 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 1;
+  };
+
   boot.initrd.systemd.enable = true;
 
   boot.initrd.luks.devices."cryptroot" = {
