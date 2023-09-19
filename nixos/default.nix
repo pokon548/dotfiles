@@ -19,7 +19,6 @@ let
 
 
       ./modules/dae.nix
-
       ./modules/i18n.nix
     ];
   };
@@ -62,7 +61,10 @@ in
         graphicModules
         virtualisationModules
 
+        inputs.microvm.nixosModules.host
+
         ./modules/lanzaboote.nix
+        ./modules/workprofile.nix
         ./modules/zram.nix
         ./home/pokon548.nix
         ./hosts/xiaoxin
