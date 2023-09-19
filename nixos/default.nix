@@ -64,6 +64,7 @@ in
         virtualisationModules
 
         ./modules/lanzaboote.nix
+        ./modules/zram.nix
         ./home/pokon548.nix
         ./hosts/xiaoxin
       ];
