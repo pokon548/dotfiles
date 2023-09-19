@@ -24,6 +24,11 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.plymouth = {
+    enable = true;
+    theme = "breeze";
+  };
+
   boot.kernel.sysctl = {
     "kernel.sysrq" = 1;
   };
