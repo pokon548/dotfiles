@@ -39,6 +39,12 @@
 
   networking = { networkmanager.enable = true; };
 
+  # TODO: Workaround for gdm crash issue, see https://github.com/NixOS/nixpkgs/issues/103746
+  systemd.services = {
+    "getty@tty1".enable = false;
+    "autovt@tty1".enable = false;
+  };
+
   networking.firewall =
     {
       allowedTCPPortRanges = [

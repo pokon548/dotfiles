@@ -32,6 +32,11 @@ in
     extraGroups = [ "wheel" "networkmanager" "kvm" "libvirt" "vboxusers" "tss" ];
   };
 
+  services.xserver.displayManager.autoLogin = {
+    enable = true;
+    user = "pokon548";
+  };
+
   home-manager.users.pokon548 = {
     imports = [ inputs.nix-index-database.hmModules.nix-index ./modules/common.nix ./modules/gnome.nix ./modules/librewolf.nix ./modules/vscode.nix ./modules/ohmyzsh.nix ];
 
