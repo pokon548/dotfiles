@@ -29,7 +29,7 @@ in
     hashedPasswordFile = config.sops.secrets.pokon548_password.path;
     shell = "${pkgs.zsh}/bin/zsh";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "kvm" "libvirt" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "kvm" "libvirt" "vboxusers" "tss" ];
   };
 
   home-manager.users.pokon548 = {

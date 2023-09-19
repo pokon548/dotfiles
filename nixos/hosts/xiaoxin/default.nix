@@ -7,16 +7,29 @@
       common-cpu-intel
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+    "rtsx_pci_sdmmc"
+    "tpm"
+    "tpm_tis"
+    "tpm_crb"
+  ];
+
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.initrd.systemd.enable = true;
+
   boot.initrd.luks.devices."cryptroot" = {
     device = "/dev/disk/by-uuid/3d9a75e3-2f54-45ea-b679-ef5297e72397";
     preLVM = true;
+    allowDiscards = true;
   };
 
   fileSystems."/" =
@@ -39,6 +52,16 @@
   };
 
   hardware.enableRedistributableFirmware = true;
+
+  security.tpm2 = {
+    enable = true;
+    pkcs11.enable = true;
+    tctiEnvironment.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    tpm2-tools
+  ];
 
   hardware.opengl = {
     enable = true;
