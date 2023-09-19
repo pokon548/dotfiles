@@ -18,7 +18,6 @@ let
       inputs.nix-index-database.nixosModules.nix-index
 
 
-      ./modules/auto-upgrade.nix
       ./modules/dae.nix
 
       ./modules/i18n.nix
