@@ -36,7 +36,16 @@ in
   };
 
   home-manager.users.pokon548 = {
-    imports = [ inputs.nix-index-database.hmModules.nix-index ./modules/common.nix ./modules/gnome.nix ./modules/librewolf.nix ./modules/vscode.nix ./modules/ohmyzsh.nix ];
+    imports = [
+      inputs.nix-index-database.hmModules.nix-index
+
+      ./modules/common.nix
+      ./modules/gnome.nix
+      ./modules/librewolf.nix
+      ./modules/vscode.nix
+      ./modules/syncthing.nix
+      ./modules/ohmyzsh.nix
+    ];
 
     # TODO: Remove openssl_1 if mono no longer depend on it
     home.packages = extensionPkgs ++ (with pkgs; [
@@ -48,7 +57,7 @@ in
       blanket
       eyedropper
       gnome.gnome-tweaks
-      gnome.gnome-system-monitor
+      mission-center
       drawing
       metadata-cleaner
       obsidian

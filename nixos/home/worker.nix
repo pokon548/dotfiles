@@ -20,6 +20,10 @@
   environment.systemPackages = with pkgs; [
     obsidian
     bitwarden
+    vivaldi
+    vivaldi-ffmpeg-codecs
+    keepassxc
+    wpsoffice-cn
     ungoogled-chromium
 
     kwin
