@@ -19,7 +19,6 @@ let
     night-theme-switcher
     hibernate-status-button
   ];
-  inherit (lib.hm.gvariant) mkArray mkTuple mkString mkUint32 type;
 in
 {
   sops.secrets.pokon548_password.neededForUsers = true;
@@ -36,7 +35,7 @@ in
     user = "pokon548";
   };
 
-  home-manager.users.pokon548 = {
+  home-manager.users.pokon548 = { lib, ... }: {
     imports = [
       inputs.nix-index-database.hmModules.nix-index
 
@@ -68,10 +67,10 @@ in
       goldendict-ng
 
       motrix
-
       obs-studio
 
       transmission_4-gtk
+      geogebra6
 
       ungoogled-chromium
       wpsoffice-cn
@@ -100,6 +99,7 @@ in
 
       nur.repos.pokon548.rustdesk-bin
       nur.repos.pokon548.chengla-electron
+      nur.repos.federicoschonborn.metronome
       virt-manager
     ]);
 
@@ -130,12 +130,20 @@ in
       };
 
       "org/gnome/Solanum" = {
-        lap-length = "unit32 45";
-        sessions-until-long-break = "unit32 3";
+        lap-length = lib.hm.gvariant.mkUint32 45;
+        sessions-until-long-break = lib.hm.gvariant.mkUint32 3;
       };
 
       "org/gnome/shell/extensions/emoji-copy" = {
         always-show = false;
+      };
+
+      "org/gnome/shell/extensions/bingwallpaper" = {
+        hide = true;
+      };
+
+      "com/adrienplazas/Metronome" = {
+        beats-per-minute = lib.hm.gvariant.mkUint32 20;
       };
     };
   };
