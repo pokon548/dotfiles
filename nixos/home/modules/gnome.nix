@@ -45,6 +45,7 @@ in
     "org/gnome/shell/extensions/dash-to-dock" = {
       transparency-mode = "DYNAMIC";
       multi-monitor = true;
+      running-indicator-style = "DOTS";
       isolate-monitors = true;
       show-mounts = false;
       custom-theme-shrink = true;
