@@ -9,6 +9,7 @@ let
     kimpanel
 
     clipboard-history
+    emoji-copy
     transparent-top-bar
     just-perfection
 
@@ -131,6 +132,10 @@ in
       "org/gnome/Solanum" = {
         lap-length = "unit32 45";
         sessions-until-long-break = "unit32 3";
+      };
+
+      "org/gnome/shell/extensions/emoji-copy" = {
+        always-show = false;
       };
     };
   };

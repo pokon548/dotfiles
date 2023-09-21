@@ -85,6 +85,7 @@
   services.undervolt = {
     enable = true;
     coreOffset = -70;
+    analogioOffset = -50;
   };
 
   time.timeZone = "Asia/Shanghai";
