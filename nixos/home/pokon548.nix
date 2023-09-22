@@ -93,6 +93,7 @@ in
       telegram-desktop
       element-desktop
 
+      drawio
       anki-bin
 
       tela-circle-icon-theme
@@ -144,6 +145,17 @@ in
 
       "com/adrienplazas/Metronome" = {
         beats-per-minute = lib.hm.gvariant.mkUint32 20;
+        beats-per-bar = lib.hm.gvariant.mkUint32 4;
+      };
+
+      "com/rafaelmardojai/Blanket" = {
+        active-preset = "e3a69a28-e8bc-402d-8c29-388f19d8b301";
+        background-playback = true;
+      };
+
+      "com/rafaelmardojai/Blanket/e3a69a28-e8bc-402d-8c29-388f19d8b301" = {
+        visible-name = "Peace";
+        sounds-volume = ''{"rain": 0.57,"storm": 0.29,"wind": 1.0,"waves" = 0.38,"stream" = 0.54}'';
       };
     };
   };
