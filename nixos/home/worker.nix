@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:{
+{ config, pkgs, lib, ... }: {
   users.users.worker = {
     password = "";
     group = "user";
@@ -22,10 +22,12 @@
     bitwarden
     vivaldi
     vivaldi-ffmpeg-codecs
+    localsend
     keepassxc
     wpsoffice-cn
     ungoogled-chromium
-
     kwin
   ];
+
+  programs.kdeconnect.enable = true;
 }
