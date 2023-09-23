@@ -53,6 +53,7 @@ in
 
     "org/gnome/desktop/interface" = {
       clock-show-weekday = true;
+      clock-format = "12h";
       text-scaling-factor = 1.12;
 
       color-scheme = "prefer-dark";
@@ -60,6 +61,10 @@ in
       icon-theme = "Tela-circle-dark";
 
       show-battery-percentage = true;
+    };
+
+    "org/gtk/settings/file-chooser" = {
+      clock-format = "12h";
     };
 
     "org/gnome/shell/extensions/just-perfection" = {

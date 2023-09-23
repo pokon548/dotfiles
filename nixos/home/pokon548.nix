@@ -12,6 +12,7 @@ let
     emoji-copy
     transparent-top-bar
     just-perfection
+    pip-on-top
 
     blur-my-shell
     caffeine
