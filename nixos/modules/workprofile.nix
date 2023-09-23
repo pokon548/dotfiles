@@ -34,9 +34,14 @@
           mem = 4096;
           shares = [
             {
+              tag = "ro-store";
               source = "/nix/store";
               mountPoint = "/nix/.ro-store";
-              tag = "ro-store";
+            }
+            {
+              tag = "rw-share";
+              source = "/home/worker";
+              mountPoint = "/home/worker/Share";
             }
           ];
           writableStoreOverlay = "/nix/.rw-store";
