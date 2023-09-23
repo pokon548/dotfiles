@@ -27,7 +27,7 @@ in
     hashedPasswordFile = config.sops.secrets.pokon548_password.path;
     shell = "${pkgs.zsh}/bin/zsh";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "kvm" "qemu" "libvirt" "vboxusers" "tss" ];
+    extraGroups = [ "wheel" "networkmanager" "kvm" "qemu" "libvirt" "vboxusers" "tss" "pipewire" ];
   };
 
   services.xserver.displayManager.autoLogin = {
