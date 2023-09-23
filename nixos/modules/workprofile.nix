@@ -6,6 +6,11 @@
         microvm = {
           hypervisor = "qemu";
           graphics.enable = true;
+          qemu.extraArgs = [
+            "-audiodev" "pipewire,id=auddev0"
+            "-device" "intel-hda"
+            "-device" "hda-output,audiodev=auddev0"
+          ];
           interfaces = [
             {
               type = "user";
