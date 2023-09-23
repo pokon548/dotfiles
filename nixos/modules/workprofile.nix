@@ -7,9 +7,21 @@
           hypervisor = "qemu";
           graphics.enable = true;
           qemu.extraArgs = [
-            "-audiodev" "pipewire,id=auddev0"
-            "-device" "intel-hda"
-            "-device" "hda-output,audiodev=auddev0"
+            "-audiodev"
+            "pipewire,id=auddev0"
+            "-device"
+            "intel-hda"
+            "-device"
+            "hda-output,audiodev=auddev0"
+            "-enable-kvm"
+            "-device"
+            "virtio-balloon"
+            "-chardev"
+            "qemu-vdagent,id=ch1,name=vdagent,clipboard=on"
+            "-device"
+            "virtio-serial-pci"
+            "-device"
+            "virtserialport,chardev=ch1,id=ch1,name=com.redhat.spice.0"
           ];
           interfaces = [
             {
