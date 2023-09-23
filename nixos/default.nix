@@ -25,6 +25,7 @@ let
   graphicModules = {
     imports = [
       ./modules/fcitx5.nix
+      ./modules/pipewire.nix
       ./modules/font.nix
       ./modules/gnome-debloated.nix
     ];

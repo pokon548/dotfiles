@@ -64,6 +64,21 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        ControllerMode = "dual";
+        FastConnectable = "true";
+        Experimental = "true";
+      };
+      Policy = {
+        AutoEnable = "true";
+      };
+    };
+  };
+
   security.tpm2 = {
     enable = true;
     pkcs11.enable = true;
