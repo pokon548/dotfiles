@@ -91,7 +91,6 @@ in
       vlc
       bitwarden
       keepassxc
-      telegram-desktop
       element-desktop
 
       drawio

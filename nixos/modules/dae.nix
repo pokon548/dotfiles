@@ -92,7 +92,7 @@
       dip(geoip:cn) -> direct
       domain(geosite:cn) -> direct
 
-      fallback: campus-network
+      fallback: backup-campus-network
     }
   '';
 
