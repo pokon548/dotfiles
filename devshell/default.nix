@@ -8,7 +8,15 @@
     { inputs'
     , pkgs
     , ...
-    }: {
+    }:
+    let
+      eachSystem = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ];
+      crossPkgs = eachSystem (system: import inputs.nixpkgs {
+        inherit system;
+        crossSystem.config = "riscv64-unknown-linux-gnu";
+      });
+    in
+    {
       devShells = {
         default = pkgs.mkShell {
           # Enable experimental features without having to specify the argument
@@ -66,8 +74,8 @@
                 librsvg
                 pixman
                 pkg-config
-                glibc
                 gcc_debug
+                glibc
                 binutils
                 stdenv.cc.cc.lib
                 clang
@@ -91,7 +99,10 @@
                 libXtst
                 libxcb
               ]
-            );
+            ) ++ (with pkgs.pkgsCross; [ 
+              mingwW64.buildPackages.gcc
+              gnu64.buildPackages.gcc
+            ]); # Cross-compiling windows binary on Linux. Feel free to remove them if you don't need :)
           }).env;
 
         learning = pkgs.mkShell {
@@ -101,6 +112,27 @@
           ];
 
           LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib64:$LD_LIBRARY_PATH";
+        };
+
+        gtk4-rust = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            gtk4
+            libadwaita
+            cairo
+            glib
+            pkg-config
+            librsvg
+
+            cargo
+            rustc
+          ];
+
+          LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath (with pkgs; [
+            pkg-config
+            libadwaita
+            glib
+            gtk4
+          ])}:$LD_LIBRARY_PATH";
         };
 
         openwrt = inputs.nix-environments.devShells."x86_64-linux".openwrt;
