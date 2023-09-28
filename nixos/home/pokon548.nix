@@ -13,6 +13,7 @@ let
     transparent-top-bar
     just-perfection
     pip-on-top
+    cronomix
 
     blur-my-shell
     caffeine
@@ -156,6 +157,19 @@ in
       "com/rafaelmardojai/Blanket/e3a69a28-e8bc-402d-8c29-388f19d8b301" = {
         visible-name = "Peace";
         sounds-volume = ''{"rain": 0.57,"storm": 0.29,"wind": 1.0,"waves" = 0.38,"stream" = 0.54}'';
+      };
+
+      "org/gnome/mutter" = {
+        dynamic-workspaces = false;
+        workspaces-only-on-primary = false;
+      };
+
+      "org/gnome/desktop/wm/preferences" = {
+        num-workspaces = 6;
+      };
+
+      "org/gnome/shell/app-switcher" = {
+        current-workspace-only = true;
       };
     };
   };

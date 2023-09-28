@@ -6,7 +6,9 @@ let
     ms-ceintl.vscode-language-pack-zh-hans
     github.vscode-pull-request-github
     jnoortheen.nix-ide
+    arrterian.nix-env-selector
     gruntfuggly.todo-tree
+    rust-lang.rust-analyzer
   ];
   shellScriptExtensions = with pkgs.vscode-extensions; [
     foxundermoon.shell-format

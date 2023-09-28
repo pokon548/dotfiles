@@ -47,6 +47,8 @@ in
       multi-monitor = true;
       running-indicator-style = "DOTS";
       isolate-monitors = true;
+      isolate-workspaces = true;
+      click-action = "minimize-or-overview";
       show-mounts = false;
       custom-theme-shrink = true;
     };
