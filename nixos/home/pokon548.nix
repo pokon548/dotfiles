@@ -92,7 +92,7 @@ in
       vlc
       bitwarden
       keepassxc
-      element-desktop
+      schildichat-desktop
 
       drawio
       anki-bin
