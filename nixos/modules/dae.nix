@@ -58,22 +58,22 @@
     group {
       normal-network {
         filter: name(tcp, udp)
-        policy: fixed(0)
+        policy: min_moving_avg
       }
 
       campus-network {
         filter: name(tcp, chained-tcp, udp, chained-udp)
-        policy: fixed(0)
+        policy: min_moving_avg
       }
 
       backup-normal-network {
         filter: name(tcp-backup, udp-backup)
-        policy: fixed(0)
+        policy: min_moving_avg
       }
 
       backup-campus-network {
         filter: name(tcp-backup, chained-tcp-backup, udp-backup, chained-udp-backup)
-        policy: fixed(0)
+        policy: min_moving_avg
       }
     }
 
