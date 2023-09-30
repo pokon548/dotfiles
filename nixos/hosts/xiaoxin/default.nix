@@ -18,8 +18,8 @@
     "tpm_tis"
     "tpm_crb"
   ];
-
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.initrd.kernelModules = [ "kvm-intel" ];
+  boot.kernelParams = [ "intel_iommu=on" ];
   boot.extraModulePackages = [ ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -133,5 +133,6 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  virtualisation.spiceUSBRedirection.enable = true;
   system.stateVersion = "23.11";
 }

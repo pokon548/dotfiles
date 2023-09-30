@@ -66,6 +66,7 @@ in
 
         ./modules/lanzaboote.nix
         ./modules/workprofile.nix
+        ./modules/vmware.nix
         ./modules/zram.nix
         ./home/pokon548.nix
         ./hosts/xiaoxin
