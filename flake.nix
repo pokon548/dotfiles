@@ -33,7 +33,7 @@
     lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    microvm.url = "github:astro/microvm.nix";
+    microvm.url = "github:astro/microvm.nix/f92c94536c6be299730180a1a7caaab31e8657fb";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 

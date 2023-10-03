@@ -84,6 +84,7 @@
       domain(gis.gnome.org) -> direct
       pname(NetworkManager) -> direct
       pname(qemu-system-x86_64) -> direct
+      pname(chromium) -> direct
       dport(52443) -> direct
 
       dip(224.0.0.0/3, 'ff00::/8') -> direct

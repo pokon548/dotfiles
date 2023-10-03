@@ -60,6 +60,9 @@ in
       "[jsonc]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
+      "[json]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
       "[html]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };

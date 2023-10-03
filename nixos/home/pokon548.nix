@@ -86,6 +86,7 @@ in
       })
 
       prismlauncher
+      cartridges
 
       localsend
 
