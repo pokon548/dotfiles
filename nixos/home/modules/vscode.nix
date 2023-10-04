@@ -17,6 +17,7 @@ let
     dbaeumer.vscode-eslint
     esbenp.prettier-vscode
     bradlc.vscode-tailwindcss
+    astro-build.astro-vscode
   ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     {
       name = "vscode-postcss";
