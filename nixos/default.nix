@@ -86,5 +86,18 @@ in
         ./hosts/fwrouter
       ];
     };
+
+    hetzner = inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs outputs;
+      };
+      modules = [
+        basicModules
+        inputs.disko.nixosModules.disko
+
+        ./modules/openssh.nix
+        ./hosts/hetzner
+      ];
+    };
   };
 }
