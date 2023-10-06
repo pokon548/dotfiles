@@ -10,6 +10,9 @@
     proxy-definition-chained-tcp-backup = { };
     proxy-definition-udp-backup = { };
     proxy-definition-chained-udp-backup = { };
+
+    proxy-definition-udp-megatraffic = { };
+    megatraffic-website-definition = { };
   };
 
   sops.templates."config.dae".content = ''
@@ -40,6 +43,8 @@
       chained-tcp-backup: '${config.sops.placeholder."proxy-definition-chained-tcp-backup"}'
       udp-backup: '${config.sops.placeholder."proxy-definition-udp-backup"}'
       chained-udp-backup: '${config.sops.placeholder."proxy-definition-chained-udp-backup"}'
+
+      udp-megatraffic: '${config.sops.placeholder."proxy-definition-udp-megatraffic"}'
     }
 
     dns {
@@ -75,6 +80,11 @@
         filter: name(tcp-backup, chained-tcp-backup, udp-backup, chained-udp-backup)
         policy: min_moving_avg
       }
+
+      megatraffic-network {
+        filter: name(udp-megatraffic)
+        policy: fixed(0)
+      }
     }
 
     routing {
@@ -83,7 +93,6 @@
       domain(location.services.mozilla.com) -> direct
       domain(gis.gnome.org) -> direct
       pname(NetworkManager) -> direct
-      pname(qemu-system-x86_64) -> direct
       pname(chromium) -> direct
       dport(52443) -> direct
 
@@ -92,6 +101,8 @@
       dip(geoip:private) -> direct
       dip(geoip:cn) -> direct
       domain(geosite:cn) -> direct
+
+      domain(${config.sops.placeholder."megatraffic-website-definition"}) -> megatraffic-network
 
       fallback: backup-campus-network
     }
