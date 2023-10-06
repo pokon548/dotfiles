@@ -103,6 +103,7 @@
       domain(geosite:cn) -> direct
 
       domain(${config.sops.placeholder."megatraffic-website-definition"}) -> megatraffic-network
+      pname(aria2c) -> megatraffic-network
 
       fallback: backup-campus-network
     }
