@@ -72,7 +72,8 @@ in
       obs-studio
 
       transmission_4-gtk
-      geogebra6
+      nur.repos.pokon548.geogebra
+      nur.repos.pokon548.zhixi
 
       ungoogled-chromium
       wpsoffice-cn
