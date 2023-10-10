@@ -6,6 +6,13 @@
 
   services.caddy = {
     enable = true;
+    virtualHosts."www.bukn.uk".extraConfig = ''
+      tls me@www.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      redir https://bukn.uk{uri}
+    '';
+
     virtualHosts."bukn.uk".extraConfig = ''
       tls me@bukn.uk
       header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
