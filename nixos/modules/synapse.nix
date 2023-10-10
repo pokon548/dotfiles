@@ -4,7 +4,7 @@
     settings = {
       server_name = "bukn.uk";
 
-      url_preview_enabled = true;
+      url_preview_enabled = false;
       max_upload_size = "100M";
       enable_registration = false;
 

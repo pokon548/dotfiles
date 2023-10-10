@@ -96,6 +96,7 @@ in
         inputs.disko.nixosModules.disko
 
         ./home/bukun.nix
+        ./modules/auto-upgrade.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
         ./modules/caddy/hetzner.nix
