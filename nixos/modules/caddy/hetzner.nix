@@ -8,7 +8,7 @@
     enable = true;
     virtualHosts."bukn.uk".extraConfig = ''
       tls me@bukn.uk
-      header / Strict-Transport-Security "max-age=63072000"
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
 
       header /.well-known/matrix/* Content-Type application/json
       header /.well-known/matrix/* Access-Control-Allow-Origin *
@@ -18,7 +18,7 @@
 
     virtualHosts."chat.bukn.uk".extraConfig = ''
       tls me@chat.bukn.uk
-      header / Strict-Transport-Security "max-age=63072000"
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
 
       reverse_proxy localhost:8448
     '';
