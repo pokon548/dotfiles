@@ -48,7 +48,7 @@
           ./nixos
           ./devshell
         ];
-        systems = [ "x86_64-linux" ];
+        systems = [ "x86_64-linux" "aarch64-linux" ];
         perSystem = { config, inputs', self', lib, system, ... }: {
           # make pkgs available to all `perSystem` functions
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages;
