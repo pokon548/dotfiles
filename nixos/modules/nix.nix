@@ -17,6 +17,7 @@
       dates = "daily";
     };
 
+    # TODO: exclude mirrors in non-mainland servers
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
