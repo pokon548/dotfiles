@@ -98,6 +98,7 @@ in
         ./home/bukun.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
+        ./modules/caddy/hetzner.nix
         ./hosts/hetzner
       ];
     };
