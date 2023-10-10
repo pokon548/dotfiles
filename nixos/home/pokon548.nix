@@ -68,6 +68,8 @@ in
       gnome-solanum
       goldendict-ng
 
+      gnome-frog
+
       motrix
       obs-studio
 
