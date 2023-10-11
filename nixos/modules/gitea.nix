@@ -19,6 +19,8 @@ in
         };
         server = {
           ROOT_URL = "https://gitea.bukn.uk";
+          START_SSH_SERVER = true;
+          SSH_PORT = 22222;
         };
         log = {
           MODE = "console";
@@ -36,6 +38,12 @@ in
         password = "gitea";
       };
     };
+
+    networking.firewall =
+      {
+        allowedTCPPorts = [ 22222 ];
+        allowedUDPPorts = [ 22222 ];
+      };
 
     systemd.services.gitea = {
       path = [ pkgs.bash ];
