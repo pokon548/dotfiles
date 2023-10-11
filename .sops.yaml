@@ -24,3 +24,9 @@ creation_rules:
       - age:
           - *pokon548
           - *server_hetzner
+
+  - path_regex: secrets/pinepea$
+    key_groups:
+      - age:
+          - *pokon548
+          - *server_hetzner

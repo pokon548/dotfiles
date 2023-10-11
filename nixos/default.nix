@@ -94,6 +94,7 @@ in
       modules = [
         basicModules
         inputs.disko.nixosModules.disko
+        inputs.private-configs.nixosModules
 
         ./home/bukun.nix
         ./modules/auto-upgrade.nix

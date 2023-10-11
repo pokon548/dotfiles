@@ -33,9 +33,9 @@
     lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Private
-    #private-configs.url = "git+ssh://pokon548@gitea.bukn.uk:22222/pokon548/private-configs.git";
-    #private-configs.inputs.nixpkgs.follows = "nixpkgs";
+    # Private configs
+    private-configs.url = "git+ssh://gitea@gitea.bukn.uk:22222/pokon548/private-configs";
+    private-configs.inputs.nixpkgs.follows = "nixpkgs";
 
     microvm.url = "github:astro/microvm.nix/f92c94536c6be299730180a1a7caaab31e8657fb";
 
