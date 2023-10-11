@@ -97,6 +97,7 @@ in
 
         ./home/bukun.nix
         ./modules/auto-upgrade.nix
+        ./modules/gitea.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
         ./modules/caddy/hetzner.nix
