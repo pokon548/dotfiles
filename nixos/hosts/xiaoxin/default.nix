@@ -63,6 +63,7 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
+  networking.fwrouter.enable = true;
 
   hardware.bluetooth = {
     enable = true;

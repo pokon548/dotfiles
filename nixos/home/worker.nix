@@ -1,9 +1,12 @@
 { config, pkgs, lib, ... }: {
-  users.users.worker = {
-    password = "";
-    group = "user";
-    isNormalUser = true;
-    extraGroups = [ "wheel" "video" ];
+  users = {
+    users.worker = {
+      password = "";
+      group = "user";
+      isNormalUser = true;
+      extraGroups = [ "wheel" "video" ];
+    };
+    groups.user = {};
   };
 
   security.sudo = {
