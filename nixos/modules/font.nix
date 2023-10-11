@@ -3,6 +3,7 @@
     packages = with pkgs; [
       roboto
       noto-fonts
+      noto-fonts-cjk    # Workaround: https://github.com/NixOS/nixpkgs/issues/259890
       dejavu_fonts
       source-han-sans
       source-han-serif
