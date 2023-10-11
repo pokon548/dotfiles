@@ -1,8 +1,8 @@
 { ... }: {
   system.autoUpgrade = {
     enable = true;
-    dates = "Fri 04:00";
-    operation = "switch";
+    dates = "Fri 23:00";
+    operation = "boot";
 
     allowReboot = true;
     rebootWindow = {
