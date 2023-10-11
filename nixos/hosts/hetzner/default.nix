@@ -12,22 +12,22 @@
 
   sops = {
     secrets = {
-      cifs-username = {
+      gitea-cifs-username = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
-      cifs-password = {
+      gitea-cifs-password = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
-      cifs-domain = {
+      gitea-cifs-domain = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
     };
   };
 
-  sops.templates."smb-secrets".content = ''
-    username=${config.sops.placeholder."cifs-username"}
-    domain=${config.sops.placeholder."cifs-domain"}
-    password=${config.sops.placeholder."cifs-password"}
+  sops.templates."gitea-smb-secrets".content = ''
+    username=${config.sops.placeholder."gitea-cifs-username"}
+    domain=${config.sops.placeholder."gitea-cifs-domain"}
+    password=${config.sops.placeholder."gitea-cifs-password"}
   '';
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "virtio_pci" "sd_mod" ];
@@ -52,16 +52,16 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/external-storage" = {
-    device = "//u370687-sub1.your-storagebox.de/u370687-sub1";
+  fileSystems."/mnt/external-storage/gitea" = {
+    device = "//u370687-sub2.your-storagebox.de/u370687-sub2";
     fsType = "cifs";
     options =
       let
         # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+        automount_opts = "_netdev,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,mfsymlinks,uid=995,gid=995";
 
       in
-      [ "${automount_opts},credentials=${config.sops.templates."smb-secrets".path}" ];
+      [ "${automount_opts},credentials=${config.sops.templates."gitea-smb-secrets".path}" ];
   };
 
   networking = {
@@ -77,6 +77,8 @@
       address = "fe80::1";
       interface = "enp1s0";
     };
+
+    gitea-server.enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
