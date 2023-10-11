@@ -31,6 +31,11 @@
       seafile-cifs-domain = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
+
+      pinepea-config = {
+        format = "binary";
+        sopsFile = ../../../secrets/pinepea;
+      };
     };
   };
 
@@ -109,7 +114,13 @@
     };
 
     gitea-server.enable = true;
-    #seafile-server.enable = true;  // FIXME: Not working
+    #seafile-server.enable = true;  // FIXME: Not working for unstable
+  };
+
+  services.pinepea = {
+    enable = true;
+    configFile = config.sops.secrets.pinepea-config.path;
+    openFirewall.enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
