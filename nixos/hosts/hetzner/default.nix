@@ -64,6 +64,8 @@
       [ "${automount_opts},credentials=${config.sops.templates."gitea-smb-secrets".path}" ];
   };
 
+  swapDevices = [ { device = "/swap/swapfile"; } ];
+
   networking = {
     useDHCP = lib.mkDefault true;
     hostName = "hetzner";
