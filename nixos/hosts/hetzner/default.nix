@@ -8,6 +8,28 @@
       common-pc-ssd
     ]);
 
+  environment.systemPackages = [ pkgs.cifs-utils ];
+
+  sops = {
+    secrets = {
+      cifs-username = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+      cifs-password = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+      cifs-domain = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+    };
+  };
+
+  sops.templates."smb-secrets".content = ''
+    username=${config.sops.placeholder."cifs-username"}
+    domain=${config.sops.placeholder."cifs-domain"}
+    password=${config.sops.placeholder."cifs-password"}
+  '';
+
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "virtio_pci" "sd_mod" ];
   boot.initrd.kernelModules = [ "virtio_gpu" ];
   boot.kernelParams = [ "console=tty" ];
@@ -29,6 +51,18 @@
       device = "/dev/sda1";
       fsType = "vfat";
     };
+
+  fileSystems."/mnt/external-storage" = {
+    device = "//u370687-sub1.your-storagebox.de/u370687-sub1";
+    fsType = "cifs";
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+      in
+      [ "${automount_opts},credentials=${config.sops.templates."smb-secrets".path}" ];
+  };
 
   networking = {
     useDHCP = lib.mkDefault true;
