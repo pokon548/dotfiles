@@ -1,9 +1,9 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.networking.gitea-server;
 in
-{ 
+{
   options = {
     networking.gitea-server = with lib; {
       enable = mkEnableOption (mdDoc "Gitea server");
@@ -20,6 +20,11 @@ in
         server = {
           ROOT_URL = "https://gitea.bukn.uk";
         };
+        log = {
+          MODE = "console";
+          LEVEL = "Debug";
+          ROUTER = "console";
+        };
         other = {
           SHOW_FOOTER_VERSION = false;
         };
@@ -30,6 +35,11 @@ in
         user = "gitea";
         password = "gitea";
       };
+    };
+
+    systemd.services.gitea = {
+      path = [ pkgs.bash ];
+      serviceConfig.LimitNOFILE = 65536;
     };
   };
 }
