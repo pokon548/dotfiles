@@ -21,6 +21,16 @@
       gitea-cifs-domain = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
+      
+      seafile-cifs-username = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+      seafile-cifs-password = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+      seafile-cifs-domain = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
     };
   };
 
@@ -28,6 +38,12 @@
     username=${config.sops.placeholder."gitea-cifs-username"}
     domain=${config.sops.placeholder."gitea-cifs-domain"}
     password=${config.sops.placeholder."gitea-cifs-password"}
+  '';
+
+  sops.templates."seafile-smb-secrets".content = ''
+    username=${config.sops.placeholder."seafile-cifs-username"}
+    domain=${config.sops.placeholder."seafile-cifs-domain"}
+    password=${config.sops.placeholder."seafile-cifs-password"}
   '';
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "virtio_pci" "sd_mod" ];
@@ -64,6 +80,18 @@
       [ "${automount_opts},credentials=${config.sops.templates."gitea-smb-secrets".path}" ];
   };
 
+  fileSystems."/mnt/external-storage/seafile" = {
+    device = "//u370687-sub3.your-storagebox.de/u370687-sub3";
+    fsType = "cifs";
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "_netdev,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,mfsymlinks,uid=995,gid=995";
+
+      in
+      [ "${automount_opts},credentials=${config.sops.templates."seafile-smb-secrets".path}" ];
+  };
+
   swapDevices = [ { device = "/swap/swapfile"; } ];
 
   networking = {
@@ -81,6 +109,7 @@
     };
 
     gitea-server.enable = true;
+    #seafile-server.enable = true;  // FIXME: Not working
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
