@@ -21,7 +21,7 @@
       gitea-cifs-domain = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
-      
+
       seafile-cifs-username = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
@@ -53,7 +53,12 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "virtio_pci" "sd_mod" ];
   boot.initrd.kernelModules = [ "virtio_gpu" ];
-  boot.kernelParams = [ "console=tty" ];
+
+  boot.kernelParams = [ "tcp_bbr" "console=tty" ];
+  boot.kernel.sysctl = {
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "fs.inotify.max_user_watches" = "100000";
+  };
   boot.extraModulePackages = [ ];
 
   boot.loader.systemd-boot.enable = true;
@@ -97,7 +102,7 @@
       [ "${automount_opts},credentials=${config.sops.templates."seafile-smb-secrets".path}" ];
   };
 
-  swapDevices = [ { device = "/swap/swapfile"; } ];
+  swapDevices = [{ device = "/swap/swapfile"; }];
 
   networking = {
     useDHCP = lib.mkDefault true;
@@ -120,7 +125,6 @@
   services.pinepea = {
     enable = true;
     configFile = config.sops.secrets.pinepea-config.path;
-    openFirewall.enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
