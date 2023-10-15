@@ -43,5 +43,12 @@
 
       reverse_proxy localhost:36721
     '';
+
+    virtualHosts."wiki.bukn.uk".extraConfig = ''
+      tls me@wiki.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      reverse_proxy localhost:46172
+    '';
   };
 }
