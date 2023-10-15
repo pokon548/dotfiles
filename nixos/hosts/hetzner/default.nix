@@ -169,6 +169,9 @@
     MICROBIN_PORT=36721
     MICROBIN_BIND=0.0.0.0
     MICROBIN_NO_LISTING=true
+    MICROBIN_ENABLE_BURN_AFTER=true
+    MICROBIN_ENCRYPTION_SERVER_SIDE=true
+    MICROBIN_FOOTER_TEXT=This is a private instance of <a href="https://microbin.eu/">MicroBin</a>. <b>We do not accept public uploads</b>.
     MICROBIN_JSON_DB=true
     MICROBIN_READONLY=true
   '';
