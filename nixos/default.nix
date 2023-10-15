@@ -97,7 +97,7 @@ in
         inputs.private-configs.nixosModules
 
         ./home/bukun.nix
-        ./modules/auto-upgrade.nix
+        #./modules/auto-upgrade.nix
         ./modules/gitea.nix
         ./modules/seafile.nix
         ./modules/openssh.nix
