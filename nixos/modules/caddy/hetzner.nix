@@ -34,7 +34,7 @@
       tls me@gitea.bukn.uk
       header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
 
-      reverse_proxy localhost:3000
+      reverse_proxy localhost:3001
     '';
   };
 }

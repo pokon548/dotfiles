@@ -13,19 +13,19 @@ in
   config = lib.mkIf cfg.enable {
     services.gitea = {
       enable = true;
+      lfs.enable = true;
       settings = {
         service = {
           DISABLE_REGISTRATION = true;
         };
         server = {
-          ROOT_URL = "https://gitea.bukn.uk";
+          DOMAIN = "gitea.bukn.uk";
           START_SSH_SERVER = true;
           SSH_PORT = 22222;
+          HTTP_PORT = 3001;
         };
-        log = {
-          MODE = "console";
-          LEVEL = "Debug";
-          ROUTER = "console";
+        actions = {
+          ENABLED = true;
         };
         other = {
           SHOW_FOOTER_VERSION = false;
@@ -47,7 +47,6 @@ in
 
     systemd.services.gitea = {
       path = [ pkgs.bash ];
-      serviceConfig.LimitNOFILE = 65536;
     };
   };
 }
