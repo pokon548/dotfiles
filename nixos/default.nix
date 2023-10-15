@@ -103,6 +103,7 @@ in
         ./modules/seafile.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
+        ./modules/wiki-js.nix
         ./modules/caddy/hetzner.nix
         ./hosts/hetzner
       ];
