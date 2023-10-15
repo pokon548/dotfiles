@@ -60,12 +60,12 @@ in
 
       dns {
         upstream {
-          alidns: 'udp://127.0.0.1:53214'
+          whatever: 'udp+tcp://223.5.5.5:53'
           adguardiodns: 'udp://127.0.0.1:53215'
         }
         routing {
           request {
-            qname(geosite:cn) -> alidns
+            qname(geosite:cn) -> whatever
             fallback: adguardiodns
           }
         }
@@ -100,6 +100,7 @@ in
 
       routing {
         domain(geosite:category-ads-all) -> block
+        domain(keyword: stun) -> block
 
         domain(location.services.mozilla.com) -> direct
         domain(gis.gnome.org) -> direct
@@ -129,11 +130,11 @@ in
     services.smartdns = {
       enable = true;
       settings = {
-        bind = [":53214 -group china" ":53215 -group global"];
-        server = "223.5.5.5 -bootstrap-dns";
+        bind = [":53215"];
+        server = "1.1.1.1 -bootstrap-dns";
         server-https = [
-          "https://1.12.12.12/dns-query -group china -exclude-default-group"
-          "https://94.140.14.140/dns-query -group global -exclude-default-group"
+          "https://94.140.14.140/dns-query"
+          "https://94.140.14.141/dns-query"
         ];
       };
     };
