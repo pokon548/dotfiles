@@ -32,6 +32,7 @@ in
         };
       };
       stateDir = "/mnt/external-storage/gitea";
+      after = [ "mnt-external\x2dstorage-gitea.mount" "var-lib-gitea.mount" ];
       database = {
         type = "postgres";
         user = "gitea";
