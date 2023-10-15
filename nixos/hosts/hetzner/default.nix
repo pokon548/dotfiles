@@ -131,7 +131,7 @@
     options =
       let
         # this line prevents hanging on network split
-        automount_opts = "_netdev,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,mfsymlinks,uid=65534,gid=65534";
+        automount_opts = "_netdev,x-systemd.automount,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=65534,gid=65534";
 
       in
       [ "${automount_opts},credentials=${config.sops.templates."microbin-smb-secrets".path}" ];
@@ -165,6 +165,7 @@
   sops.templates."microbin-env".content = ''
     MICROBIN_ADMIN_USERNAME=${config.sops.placeholder."microbin-username"}
     MICROBIN_ADMIN_PASSWORD=${config.sops.placeholder."microbin-password"}
+    MICROBIN_UPLOADER_PASSWORD=${config.sops.placeholder."microbin-password"}
     MICROBIN_PORT=36721
     MICROBIN_BIND=0.0.0.0
     MICROBIN_NO_LISTING=true
