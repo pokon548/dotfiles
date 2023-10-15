@@ -107,7 +107,7 @@
     options =
       let
         # this line prevents hanging on network split
-        automount_opts = "_netdev,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,mfsymlinks,uid=995,gid=995";
+        automount_opts = "_netdev,x-systemd.automount,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=995,gid=995";
 
       in
       [ "${automount_opts},credentials=${config.sops.templates."gitea-smb-secrets".path}" ];
@@ -119,7 +119,7 @@
     options =
       let
         # this line prevents hanging on network split
-        automount_opts = "_netdev,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,mfsymlinks,uid=995,gid=995";
+        automount_opts = "_netdev,x-systemd.automount,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=995,gid=995";
 
       in
       [ "${automount_opts},credentials=${config.sops.templates."seafile-smb-secrets".path}" ];
