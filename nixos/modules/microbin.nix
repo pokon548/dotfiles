@@ -22,14 +22,14 @@ in
     systemd.services.microbin = {
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
-      description = "juicity daemon";
+      description = "microbin daemon";
       serviceConfig = {
         Type = "simple";
         User = "nobody";
-        RootDirectory= "/";
+        RootDirectory = "/";
         WorkingDirectory = "${cfg.stateDir}";
 
-        ExecStart = "${cfg.package}/bin/microbin"
+        ExecStart = "${pkgs.microbin}/bin/microbin";
       };
 
       serviceConfig.EnvironmentFile = cfg.environmentFile;
