@@ -32,6 +32,23 @@
         sopsFile = ../../../secrets/hetzner.yaml;
       };
 
+      microbin-cifs-username = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+      microbin-cifs-password = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+      microbin-cifs-domain = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+
+      microbin-username = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+      microbin-password = {
+        sopsFile = ../../../secrets/hetzner.yaml;
+      };
+
       pinepea-config = {
         format = "binary";
         sopsFile = ../../../secrets/pinepea;
@@ -49,6 +66,12 @@
     username=${config.sops.placeholder."seafile-cifs-username"}
     domain=${config.sops.placeholder."seafile-cifs-domain"}
     password=${config.sops.placeholder."seafile-cifs-password"}
+  '';
+
+  sops.templates."microbin-smb-secrets".content = ''
+    username=${config.sops.placeholder."microbin-cifs-username"}
+    domain=${config.sops.placeholder."microbin-cifs-domain"}
+    password=${config.sops.placeholder."microbin-cifs-password"}
   '';
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "virtio_pci" "sd_mod" ];
@@ -102,6 +125,18 @@
       [ "${automount_opts},credentials=${config.sops.templates."seafile-smb-secrets".path}" ];
   };
 
+  fileSystems."/mnt/external-storage/pastebin" = {
+    device = "//u370687-sub5.your-storagebox.de/u370687-sub5";
+    fsType = "cifs";
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "_netdev,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,mfsymlinks,uid=65534,gid=65534";
+
+      in
+      [ "${automount_opts},credentials=${config.sops.templates."microbin-smb-secrets".path}" ];
+  };
+
   swapDevices = [{ device = "/swap/swapfile"; }];
 
   networking = {
@@ -120,7 +155,21 @@
 
     gitea-server.enable = true;
     #seafile-server.enable = true;  // FIXME: Not working for unstable
+    microbin-server = {
+      enable = true;
+      stateDir = "/mnt/external-storage/pastebin";
+      environmentFile = config.sops.templates."microbin-env".path;
+    };
   };
+
+  sops.templates."microbin-env".content = ''
+    MICROBIN_ADMIN_USERNAME=${config.sops.placeholder."microbin-username"}
+    MICROBIN_ADMIN_PASSWORD=${config.sops.placeholder."microbin-password"}
+    MICROBIN_PORT=36721
+    MICROBIN_BIND=0.0.0.0
+    MICROBIN_NO_LISTING=true
+    MICROBIN_READONLY=true
+  '';
 
   services.pinepea = {
     enable = true;
