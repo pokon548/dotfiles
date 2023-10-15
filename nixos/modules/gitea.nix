@@ -13,6 +13,7 @@ in
   config = lib.mkIf cfg.enable {
     services.gitea = {
       enable = true;
+      appName = "Bu Kun 的 Gitea";
       settings = {
         service = {
           DISABLE_REGISTRATION = true;
