@@ -7,14 +7,14 @@
   perSystem =
     { inputs'
     , pkgs
+    , system
     , ...
     }:
     let
-      eachSystem = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ];
-      crossPkgs = eachSystem (system: import inputs.nixpkgs {
+      pkgsInsecure = import inputs.nixpkgs {
         inherit system;
-        crossSystem.config = "riscv64-unknown-linux-gnu";
-      });
+        config.permittedInsecurePackages = [ "openssl-1.1.1w" ]; # electron-builder still depend on this :(
+      };
     in
     {
       devShells = {
@@ -26,10 +26,10 @@
 
         # For developing electron apps
         # Wine is included only for cross-compiling Windows binary. Feel free to remove them if you don't need :)
-        electron = (pkgs.buildFHSUserEnv
+        electron = (pkgsInsecure.buildFHSUserEnv
           {
             name = "electron-env";
-            targetPkgs = pkgs: (with pkgs;
+            targetPkgs = pkgsInsecure: (with pkgsInsecure;
               [
                 nodejs
                 python3
@@ -87,6 +87,14 @@
                 # For building flatpak
                 flatpak
                 flatpak-builder
+
+                # For building deb
+                nss
+                gnome2.GConf
+                libnotify
+                libappindicator
+                xorg.libXtst
+                openssl_1_1 # FIXME: Insecure, should be removed asap
               ]
             ) ++ (with pkgs.xorg;
               [
@@ -104,7 +112,7 @@
                 libXtst
                 libxcb
               ]
-            ) ++ (with pkgs.pkgsCross; [ 
+            ) ++ (with pkgs.pkgsCross; [
               mingwW64.buildPackages.gcc
               gnu64.buildPackages.gcc
             ]); # Cross-compiling windows binary on Linux. Feel free to remove them if you don't need :)
