@@ -63,9 +63,6 @@
                 libxkbcommon
                 zlib
                 nodePackages.pnpm
-                wine
-                wine64
-                ungoogled-chromium
                 cairo
                 pango
                 libjpeg
@@ -82,6 +79,14 @@
                 llvmPackages.bintools
                 rustup
                 rust-analyzer
+
+                # For building window variant
+                wine
+                wine64
+
+                # For building flatpak
+                flatpak
+                flatpak-builder
               ]
             ) ++ (with pkgs.xorg;
               [
