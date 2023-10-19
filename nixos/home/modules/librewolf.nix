@@ -20,6 +20,9 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/adguard-adblocker/latest.xpi";
       };
+      "uBlock0@raymondhill.net" = {
+        installation_mode = "Uninstall";
+      };
       "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
         default_area = "navbar";
         installation_mode = "force_installed";

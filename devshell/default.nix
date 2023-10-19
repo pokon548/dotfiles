@@ -94,7 +94,11 @@
                 libnotify
                 libappindicator
                 xorg.libXtst
-                openssl_1_1 # FIXME: Insecure, should be removed asap
+                libxcrypt
+                libxcrypt-legacy
+
+                # For building rpm
+                rpm
               ]
             ) ++ (with pkgs.xorg;
               [
