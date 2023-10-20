@@ -67,6 +67,12 @@ in
       "[html]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
+      "[javascript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[typescript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
       "window.commandCenter" = false;
     };
   };
