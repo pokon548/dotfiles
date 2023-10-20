@@ -99,6 +99,9 @@
 
                 # For building rpm
                 rpm
+
+                # For cross-compiling arm64 binary
+                zig
               ]
             ) ++ (with pkgs.xorg;
               [
