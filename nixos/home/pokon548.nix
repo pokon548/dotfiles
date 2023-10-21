@@ -10,10 +10,13 @@ let
 
     clipboard-history
     emoji-copy
-    transparent-top-bar
     just-perfection
     pip-on-top
-    cronomix
+    remove-alttab-delay-fork
+    gtk4-desktop-icons-ng-ding
+    workspace-indicator-2
+    fuzzy-app-search
+    unmess
 
     blur-my-shell
     caffeine
@@ -72,6 +75,7 @@ in
 
       motrix
       obs-studio
+      newsflash
 
       transmission_4-gtk
       nur.repos.pokon548.geogebra
@@ -101,7 +105,17 @@ in
       drawio
       anki-bin
 
+      remmina
+
       tela-circle-icon-theme
+      gnome-menus
+
+      (kodi.passthru.withPackages (kodiPkgs: with kodiPackages; [
+        inputstream-adaptive
+        jellyfin
+      ]))
+
+      freetube
 
       nur.repos.pokon548.rustdesk-bin
       nur.repos.pokon548.chengla-electron
@@ -160,7 +174,13 @@ in
 
       "com/rafaelmardojai/Blanket/e3a69a28-e8bc-402d-8c29-388f19d8b301" = {
         visible-name = "Peace";
-        sounds-volume = ''{"rain": 0.57,"storm": 0.29,"wind": 1.0,"waves" = 0.38,"stream" = 0.54}'';
+        sounds-volume = builtins.toJSON {
+          rain = 0.57;
+          storm = 0.29;
+          wind = 1.0;
+          waves = 0.38;
+          stream = 0.54;
+        };
       };
 
       "org/gnome/mutter" = {
@@ -169,11 +189,110 @@ in
       };
 
       "org/gnome/desktop/wm/preferences" = {
-        num-workspaces = 6;
+        num-workspaces = 8;
       };
 
       "org/gnome/shell/app-switcher" = {
         current-workspace-only = true;
+      };
+
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        show-mounts = false;
+        show-trash = false;
+        show-show-apps-button = true;
+      };
+
+      "org/gnome/shell/extensions/just-perfection" = {
+        app-menu = false;
+      };
+
+      "org/gnome/shell/extensions/horizontal-workspace-indicator" = {
+        widget-position = "left";
+      };
+
+      "org/gnome/desktop/wm/keybindings" = {
+        switch-to-workspace-1 = [ "<Alt>z" ];
+        switch-to-workspace-2 = [ "<Alt>x" ];
+        switch-to-workspace-3 = [ "<Alt>c" ];
+        switch-to-workspace-4 = [ "<Alt>a" ];
+        switch-to-workspace-5 = [ "<Alt>s" ];
+        switch-to-workspace-6 = [ "<Alt>d" ];
+        switch-to-workspace-7 = [ "<Alt>w" ];
+        switch-to-workspace-8 = [ "<Alt>e" ];
+      };
+
+      "org/gnome/shell/extensions/unmess" = {
+        classgroup = builtins.toJSON {
+          SchildiChat = 1;
+          Todoist = 1;
+          thunderbird = 1;
+
+          Anki = 2;
+          chengla-linux-unofficial = 2;
+          draw.io = 2;
+          Geogrebra = 2;
+          GoldenDict-ng = 2;
+          Obsidian = 2;
+
+          "Android Studio" = 3;
+          Vscodium = 3;
+          Godot = 3;
+
+          org.prismlauncher.PrismLauncher = 4;
+          hu.kramo.Cartridges = 4;
+          Steam = 4;
+          steamwebhelper = 4;
+
+          Rustdesk = 5;
+          org.remmina.Remmina = 5;
+
+          virt-manager = 6;
+          Qemu-system-x86_64 = 6;
+          "VirtualBox Manager" = 6;
+
+          io.missioncenter.MissionCenter = 7;
+          io.bassi.Amberol = 7;
+          com.rafaelmardojai.Blanket = 7;
+          FreeTube = 7;
+
+          io.gitlab.news_flash.NewsFlash = 8;
+        };
+
+        classinstance = builtins.toJSON {
+          schildichat = 1;
+          todoist = 1;
+          thunderbird = 1;
+
+          anki = 2;
+          chengla-linux-unofficial = 2;
+          draw.io = 2;
+          geogrebra = 2;
+          goldenDict = 2;
+          obsidian = 2;
+
+          android-studio-canary = 3;
+          vscodium = 3;
+          Godot_ProjectList = 3;
+
+          org.prismlauncher.PrismLauncher = 4;
+          hu.kramo.Cartridges = 4;
+          steam = 4;
+          steamwebhelper = 4;
+
+          rustdesk = 5;
+          org.remmina.Remmina = 5;
+
+          virt-manager = 6;
+          qemu = 6;
+          "VirtualBox Manager" = 6;
+
+          io.missioncenter.MissionCenter = 7;
+          io.bassi.Amberol = 7;
+          com.rafaelmardojai.Blanket = 7;
+          freetube = 7;
+
+          io.gitlab.news_flash.NewsFlash = 8;
+        };
       };
     };
   };

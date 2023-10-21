@@ -79,7 +79,7 @@ in
     };
 
     "org/gnome/shell/keybindings" = {
-      show-screenshot-ui = ["<Alt>s"];
+      show-screenshot-ui = ["<Super>s"];
     };
   };
 }
