@@ -69,6 +69,11 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/single-file/latest.xpi";
       };
+      "jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack" = {
+        installation_mode = "force_installed";
+        install_url =
+          "https://addons.mozilla.org/firefox/downloads/latest/terms-of-service-didnt-read/addon-latest.xpi";
+      };
       "{b86e4813-687a-43e6-ab65-0bde4ab75758}" = {
         installation_mode = "force_installed";
         install_url =
