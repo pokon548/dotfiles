@@ -5,13 +5,12 @@ let
 
   package-settings = {
     db = {
-      host = "127.0.0.1";
-      port = 5432;
+      host = "localhost";
       user = "wikijs";
       type = "postgres";
       pass = "wikijs";
     };
-    port = 46172;
+    port = 46178;
   };
 
   format = pkgs.formats.json { };
@@ -48,18 +47,6 @@ in
         group = "nogroup";
         WorkingDirectory = lib.mkForce "${cfg.stateDir}";
       };
-    };
-    services.postgresql = {
-      enable = true;
-      ensureDatabases = [ "wiki" ];
-      ensureUsers = [
-        {
-          name = "wikijs";
-          ensurePermissions = {
-            "DATABASE wiki" = "ALL PRIVILEGES";
-          };
-        }
-      ];
     };
   };
 }
