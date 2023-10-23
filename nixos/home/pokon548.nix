@@ -17,6 +17,7 @@ let
     workspace-indicator-2
     fuzzy-app-search
     unmess
+    smart-auto-move
 
     blur-my-shell
     caffeine
@@ -100,7 +101,7 @@ in
       vlc
       bitwarden
       keepassxc
-      schildichat-desktop
+      element-desktop
 
       drawio
       anki-bin
@@ -108,7 +109,6 @@ in
       remmina
 
       tela-circle-icon-theme
-      gnome-menus
 
       (kodi.passthru.withPackages (kodiPkgs: with kodiPackages; [
         inputstream-adaptive
@@ -121,6 +121,9 @@ in
       nur.repos.pokon548.chengla-electron
       nur.repos.federicoschonborn.metronome
       virt-manager
+
+      gocryptfs
+      nur.repos.pokon548.vaults
     ]);
 
     dconf.settings = {
@@ -189,7 +192,7 @@ in
       };
 
       "org/gnome/desktop/wm/preferences" = {
-        num-workspaces = 8;
+        num-workspaces = 9;
       };
 
       "org/gnome/shell/app-switcher" = {
@@ -217,19 +220,25 @@ in
         switch-to-workspace-4 = [ "<Alt>a" ];
         switch-to-workspace-5 = [ "<Alt>s" ];
         switch-to-workspace-6 = [ "<Alt>d" ];
-        switch-to-workspace-7 = [ "<Alt>w" ];
-        switch-to-workspace-8 = [ "<Alt>e" ];
+        switch-to-workspace-7 = [ "<Alt>q" ];
+        switch-to-workspace-8 = [ "<Alt>w" ];
+        switch-to-workspace-9 = [ "<Alt>e" ];
       };
 
       "org/gnome/shell/extensions/unmess" = {
         classgroup = builtins.toJSON {
           SchildiChat = 1;
+          Element = 1;
           Todoist = 1;
           thunderbird = 1;
+          "org.gnome.Settings" = 1;
+          "io.missioncenter.MissionCenter" = 1;
+          gnome-tweaks = 1;
+          "org.gnome.Extensions" = 1;
 
           Anki = 2;
           chengla-linux-unofficial = 2;
-          draw.io = 2;
+          "draw.io" = 2;
           Geogrebra = 2;
           GoldenDict-ng = 2;
           Obsidian = 2;
@@ -238,34 +247,43 @@ in
           Vscodium = 3;
           Godot = 3;
 
-          org.prismlauncher.PrismLauncher = 4;
-          hu.kramo.Cartridges = 4;
+          "org.prismlauncher.PrismLauncher" = 4;
+          "hu.kramo.Cartridges" = 4;
           Steam = 4;
           steamwebhelper = 4;
 
           Rustdesk = 5;
-          org.remmina.Remmina = 5;
+          "org.remmina.Remmina" = 5;
 
           virt-manager = 6;
           Qemu-system-x86_64 = 6;
           "VirtualBox Manager" = 6;
 
-          io.missioncenter.MissionCenter = 7;
-          io.bassi.Amberol = 7;
-          com.rafaelmardojai.Blanket = 7;
-          FreeTube = 7;
+          "io.gitlab.news_flash.NewsFlash" = 7;
 
-          io.gitlab.news_flash.NewsFlash = 8;
+          "io.bassi.Amberol" = 8;
+          "com.rafaelmardojai.Blanket" = 8;
+          FreeTube = 8;
+
+          Bitwarden = 9;
+          KeePassXC = 9;
+          "fr.romainvigier.MetadataCleaner" = 9;
+          "io.github.mpobaschnig.Vaults" = 9;
         };
 
         classinstance = builtins.toJSON {
           schildichat = 1;
+          element = 1;
           todoist = 1;
           thunderbird = 1;
+          "org.gnome.Settings" = 1;
+          "io.missioncenter.MissionCenter" = 1;
+          gnome-tweaks = 1;
+          "org.gnome.Extensions" = 1;
 
           anki = 2;
           chengla-linux-unofficial = 2;
-          draw.io = 2;
+          "draw.io" = 2;
           geogrebra = 2;
           goldenDict = 2;
           obsidian = 2;
@@ -274,24 +292,28 @@ in
           vscodium = 3;
           Godot_ProjectList = 3;
 
-          org.prismlauncher.PrismLauncher = 4;
-          hu.kramo.Cartridges = 4;
+          "org.prismlauncher.PrismLauncher" = 4;
+          "hu.kramo.Cartridges" = 4;
           steam = 4;
           steamwebhelper = 4;
 
           rustdesk = 5;
-          org.remmina.Remmina = 5;
+          "org.remmina.Remmina" = 5;
 
           virt-manager = 6;
           qemu = 6;
           "VirtualBox Manager" = 6;
 
-          io.missioncenter.MissionCenter = 7;
-          io.bassi.Amberol = 7;
-          com.rafaelmardojai.Blanket = 7;
-          freetube = 7;
+          "io.gitlab.news_flash.NewsFlash" = 7;
 
-          io.gitlab.news_flash.NewsFlash = 8;
+          "io.bassi.Amberol" = 8;
+          "com.rafaelmardojai.Blanket" = 8;
+          freetube = 8;
+
+          bitwarden = 9;
+          keepassxc = 9;
+          "fr.romainvigier.MetadataCleaner" = 9;
+          "io.github.mpobaschnig.Vaults" = 9;
         };
       };
     };

@@ -5,9 +5,11 @@ let
 
   package-settings = {
     db = {
-      type = "postgres";
-      host = "/run/postgresql";
+      host = "127.0.0.1";
+      port = 5432;
       user = "wikijs";
+      type = "postgres";
+      pass = "wikijs";
     };
     port = 46172;
   };
