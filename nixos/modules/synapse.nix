@@ -41,12 +41,6 @@
         TEMPLATE template0
         LC_COLLATE = "C"
         LC_CTYPE = "C";
-
-      CREATE ROLE "freshrss";
-      CREATE DATABASE "freshrss" WITH OWNER "freshrss"
-        TEMPLATE template0
-        LC_COLLATE = "C"
-        LC_CTYPE = "C";
     '';
   };
 }

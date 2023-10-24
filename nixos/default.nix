@@ -99,11 +99,11 @@ in
         ./home/bukun.nix
         ./modules/auto-upgrade.nix
         ./modules/gitea.nix
-        ./modules/freshrss.nix
         ./modules/microbin.nix
         ./modules/seafile.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
+        ./modules/umami.nix
         ./modules/wiki-js.nix
         ./modules/caddy/hetzner.nix
         ./hosts/hetzner
