@@ -99,6 +99,7 @@ in
         ./home/bukun.nix
         ./modules/auto-upgrade.nix
         ./modules/gitea.nix
+        ./modules/freshrss.nix
         ./modules/microbin.nix
         ./modules/seafile.nix
         ./modules/openssh.nix

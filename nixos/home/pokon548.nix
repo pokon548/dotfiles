@@ -17,7 +17,6 @@ let
     workspace-indicator-2
     fuzzy-app-search
     unmess
-    smart-auto-move
 
     blur-my-shell
     caffeine
