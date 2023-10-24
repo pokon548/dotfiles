@@ -50,5 +50,12 @@
 
       reverse_proxy localhost:46178
     '';
+
+    virtualHosts."telemetry.bukn.uk".extraConfig = ''
+      tls me@telemetry.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      reverse_proxy localhost:3000
+    '';
   };
 }

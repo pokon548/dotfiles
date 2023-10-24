@@ -58,13 +58,6 @@
       microbin-password = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
-      freshrss-pass = {
-        sopsFile = ../../../secrets/hetzner.yaml;
-      };
-      freshrss-password = {
-        sopsFile = ../../../secrets/hetzner.yaml;
-      };
-
       pinepea-config = {
         format = "binary";
         sopsFile = ../../../secrets/pinepea;
@@ -198,11 +191,8 @@
       enable = true;
       stateDir = "/mnt/external-storage/wiki-js";
     };
-    freshrss-server = {
+    umami-server = {
       enable = true;
-      baseUrl = "https://freshrss.bukn.uk";
-      passFile = config.sops.secrets.freshrss-pass.path;
-      passwordFile = config.sops.secrets.freshrss-password.path;
     };
   };
 
