@@ -48,6 +48,7 @@
       tls me@wiki.bukn.uk
       header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
 
+      reverse_proxy /sitemap.xml localhost:3012
       reverse_proxy localhost:46178
     '';
 
