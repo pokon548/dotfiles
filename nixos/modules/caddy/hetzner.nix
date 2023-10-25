@@ -58,12 +58,5 @@
 
       reverse_proxy localhost:3000
     '';
-
-    virtualHosts."artalk.bukn.uk".extraConfig = ''
-      tls me@artalk.bukn.uk
-      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
-
-      reverse_proxy localhost:23366
-    '';
   };
 }
