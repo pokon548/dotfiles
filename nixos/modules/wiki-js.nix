@@ -48,5 +48,25 @@ in
         WorkingDirectory = lib.mkForce "${cfg.stateDir}";
       };
     };
+
+    virtualisation.oci-containers = {
+      backend = "podman";
+      containers = {
+        wikijs-sitemap = {
+          autoStart = true;
+          image = "docker.io/hostwiki/wikijs-sitemap:latest";
+          environment = {
+            DB_TYPE = "postgres";
+            DB_HOST = "localhost";
+            DB_PORT = "5432";
+            DB_PASS = "wikijs";
+            DB_USER = "wikijs";
+            DB_NAME = "wiki";
+          };
+          environmentFiles = [ ];
+          extraOptions = [ "--network=host" ];
+        };
+      };
+    };
   };
 }
