@@ -105,6 +105,7 @@ in
         ./modules/synapse.nix
         ./modules/umami.nix
         ./modules/wiki-js.nix
+        ./modules/artalk.nix
         ./modules/caddy/hetzner.nix
         ./hosts/hetzner
       ];
