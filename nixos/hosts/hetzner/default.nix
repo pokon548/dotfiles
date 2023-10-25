@@ -52,16 +52,6 @@
         sopsFile = ../../../secrets/hetzner.yaml;
       };
 
-      artalk-cifs-username = {
-        sopsFile = ../../../secrets/hetzner.yaml;
-      };
-      artalk-cifs-password = {
-        sopsFile = ../../../secrets/hetzner.yaml;
-      };
-      artalk-cifs-domain = {
-        sopsFile = ../../../secrets/hetzner.yaml;
-      };
-
       microbin-username = {
         sopsFile = ../../../secrets/hetzner.yaml;
       };
@@ -97,12 +87,6 @@
     username=${config.sops.placeholder."wikijs-cifs-username"}
     domain=${config.sops.placeholder."wikijs-cifs-domain"}
     password=${config.sops.placeholder."wikijs-cifs-password"}
-  '';
-
-  sops.templates."artalk-smb-secrets".content = ''
-    username=${config.sops.placeholder."artalk-cifs-username"}
-    domain=${config.sops.placeholder."artalk-cifs-domain"}
-    password=${config.sops.placeholder."artalk-cifs-password"}
   '';
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "virtio_pci" "sd_mod" ];
@@ -180,18 +164,6 @@
       [ "${automount_opts},credentials=${config.sops.templates."microbin-smb-secrets".path}" ];
   };
 
-  fileSystems."/mnt/external-storage/artalk" = {
-    device = "//u370687-sub4.your-storagebox.de/u370687-sub4";
-    fsType = "cifs";
-    options =
-      let
-        # this line prevents hanging on network split
-        automount_opts = "_netdev,x-systemd.automount,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=65534,gid=65534";
-
-      in
-      [ "${automount_opts},credentials=${config.sops.templates."artalk-smb-secrets".path}" ];
-  };
-
   swapDevices = [{ device = "/swap/swapfile"; }];
 
   networking = {
@@ -220,9 +192,6 @@
       stateDir = "/mnt/external-storage/wiki-js";
     };
     umami-server = {
-      enable = true;
-    };
-    artalk-server = {
       enable = true;
     };
   };
