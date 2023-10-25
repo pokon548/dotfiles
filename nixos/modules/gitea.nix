@@ -17,12 +17,19 @@ in
       settings = {
         service = {
           DISABLE_REGISTRATION = true;
+          DEFAULT_ALLOW_CREATE_ORGANIZATION = false;
+        };
+        admin = {
+          DISABLE_REGULAR_ORG_CREATION = true;
         };
         server = {
           ROOT_URL = "https://gitea.bukn.uk";
           START_SSH_SERVER = true;
           SSH_PORT = 22222;
           HTTP_PORT = 3001;
+        };
+        repository = {
+          MAX_CREATION_LIMIT = 0;
         };
         actions = {
           ENABLED = true;
