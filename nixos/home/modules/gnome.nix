@@ -77,9 +77,5 @@ in
       window-demands-attention-focus = true;
       startup-status = 0;
     };
-
-    "org/gnome/shell/keybindings" = {
-      show-screenshot-ui = ["<Super>s"];
-    };
   };
 }

@@ -10,6 +10,10 @@
           mutter = gsuper.mutter.overrideAttrs (old: {
             patches = [ ./gnome-patch/mr1441.patch ./gnome-patch/mr3113.patch ];
           });
+
+          gnome-shell = gsuper.gnome-shell.overrideAttrs (old: {
+            patches = [ ./gnome-patch/no-screen-flash.patch ];
+          });
         });
       })
     ];

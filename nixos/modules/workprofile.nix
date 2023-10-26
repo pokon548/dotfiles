@@ -1,4 +1,4 @@
-{ config, self, pkgs, ... }:
+{ config, self, pkgs, nixosTestRunner? false, ... }:
 {
   microvm.vms = {
     workvm = {

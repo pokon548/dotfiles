@@ -17,6 +17,9 @@ let
     workspace-indicator-2
     fuzzy-app-search
     unmess
+    always-indicator
+    do-not-disturb-while-screen-sharing-or-recording
+    removable-drive-menu
 
     blur-my-shell
     caffeine
@@ -101,6 +104,8 @@ in
       bitwarden
       keepassxc
       element-desktop
+
+      flameshot
 
       drawio
       anki-bin
@@ -191,7 +196,7 @@ in
       };
 
       "org/gnome/desktop/wm/preferences" = {
-        num-workspaces = 9;
+        num-workspaces = 10;
       };
 
       "org/gnome/shell/app-switcher" = {
@@ -222,6 +227,28 @@ in
         switch-to-workspace-7 = [ "<Alt>q" ];
         switch-to-workspace-8 = [ "<Alt>w" ];
         switch-to-workspace-9 = [ "<Alt>e" ];
+        switch-to-workspace-10 = [ "<Alt>r" ];
+      };
+
+      "org/gnome/shell/extensions/pip-on-top" = {
+        stick = true;
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        name = "DND Quick Switch";
+        binding = "<Super>z";
+        command = "bash -c \"[[ $(gsettings get org.gnome.desktop.notifications show-banners) == 'false' ]] && gsettings set org.gnome.desktop.notifications show-banners true || gsettings set org.gnome.desktop.notifications show-banners false\"";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+        name = "Flameshot to clipboard";
+        binding = "<Super>s";
+        command = "flameshot gui --clipboard";
+      };
+
+      "org/gnome/shell/extensions/runcat" = {
+        idle-threshold = 80;
+        displaying-items = "character-only";
       };
 
       "org/gnome/shell/extensions/unmess" = {
