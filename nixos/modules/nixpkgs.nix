@@ -12,7 +12,7 @@
           });
 
           gnome-shell = gsuper.gnome-shell.overrideAttrs (old: {
-            patches = [ ./gnome-patch/no-screen-flash.patch ];
+            patches = old.patches ++ [ ./gnome-patch/no-screenshot-flash.patch ];
           });
         });
       })
@@ -23,6 +23,8 @@
         allowUnfree = true;
         permittedInsecurePackages = [
           "openssl-1.1.1w"
+          "electron-24.8.6"
+          "electron-22.3.27"
         ];
       };
   };
