@@ -5,26 +5,26 @@ let
     appindicator
     dash-to-dock
     runcat
-
     kimpanel
 
     clipboard-history
     emoji-copy
     just-perfection
     pip-on-top
-    remove-alttab-delay-fork
-    gtk4-desktop-icons-ng-ding
     workspace-indicator-2
-    fuzzy-app-search
     unmess
     always-indicator
     do-not-disturb-while-screen-sharing-or-recording
     removable-drive-menu
+    native-window-placement
+    gtk4-desktop-icons-ng-ding
+    hide-top-bar
+    weather-oclock
+    night-theme-switcher
 
     blur-my-shell
     caffeine
     bing-wallpaper-changer
-    night-theme-switcher
     hibernate-status-button
   ];
 in
@@ -100,15 +100,15 @@ in
 
       localsend
 
-      vlc
+      celluloid
       bitwarden
       keepassxc
       element-desktop
 
-      flameshot
+      lz4
 
       drawio
-      anki-bin
+      anki
 
       remmina
 
@@ -128,6 +128,9 @@ in
 
       gocryptfs
       nur.repos.pokon548.vaults
+
+      android-tools
+      scrcpy
     ]);
 
     dconf.settings = {
@@ -240,15 +243,25 @@ in
         command = "bash -c \"[[ $(gsettings get org.gnome.desktop.notifications show-banners) == 'false' ]] && gsettings set org.gnome.desktop.notifications show-banners true || gsettings set org.gnome.desktop.notifications show-banners false\"";
       };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-        name = "Flameshot to clipboard";
-        binding = "<Super>s";
-        command = "flameshot gui --clipboard";
+      "org/gnome/shell/keybindings" = {
+        show-screenshot-ui = ["<Super>s"];
       };
 
       "org/gnome/shell/extensions/runcat" = {
         idle-threshold = 80;
         displaying-items = "character-only";
+      };
+
+      "org/gnome/shell/extensions/hidetopbar" = {
+        mouse-sensitive = true;
+      };
+
+      "org/gnome/shell/extensions/kimpanel" = {
+        vertical = true;
+      };
+
+      "org/gnome/shell/weather" = {
+        automatic-location = false;
       };
 
       "org/gnome/shell/extensions/unmess" = {
@@ -295,6 +308,8 @@ in
           KeePassXC = 9;
           "fr.romainvigier.MetadataCleaner" = 9;
           "io.github.mpobaschnig.Vaults" = 9;
+
+          ".scrcpy-wrapped" = 10;
         };
 
         classinstance = builtins.toJSON {
@@ -340,6 +355,8 @@ in
           keepassxc = 9;
           "fr.romainvigier.MetadataCleaner" = 9;
           "io.github.mpobaschnig.Vaults" = 9;
+
+          ".scrcpy-wrapped" = 10;
         };
       };
     };

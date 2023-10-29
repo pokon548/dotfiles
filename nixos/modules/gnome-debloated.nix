@@ -19,7 +19,6 @@
         cheese
         gnome-terminal
         gnome-calendar
-        gnome-weather
         gnome-music
         gnome-contacts
         gnome-maps

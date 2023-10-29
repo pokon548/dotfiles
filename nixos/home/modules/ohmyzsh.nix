@@ -3,6 +3,7 @@
     enable = true;
     shellAliases = {
       ll = "ls -l";
+      ma = "for i in $(adb devices); do scrcpy -s $i -w -S &; done";
       update = "sudo nixos-rebuild switch";
     };
     history = {
