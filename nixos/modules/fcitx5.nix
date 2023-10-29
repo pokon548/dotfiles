@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: {
   # Workaround for fcitx5 issue under wayland. See: https://github.com/NixOS/nixpkgs/issues/129442
-  environment.sessionVariables = {
+  environment.sessionVariables = lib.mkDefault {
     NIX_PROFILES =
       "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
-    GTK_IM_MODULE = "fcitx";
-    QT_IM_MODULE = "fcitx";
+    GTK_IM_MODULE = "wayland";
+    QT_IM_MODULE = "wayland";
     XMODIFIERS = "@im=fcitx";
   };
 
