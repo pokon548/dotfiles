@@ -5,9 +5,13 @@
     desktopManager.gnome.enable = true;
   };
 
+  xdg.portal =
+    { enable = true; xdgOpenUsePortal = true; };
+
   environment = {
     gnome.excludePackages =
-      (with pkgs; [
+      (with pkgs;
+      [
         baobab
         gnome-tour
         gnome-console

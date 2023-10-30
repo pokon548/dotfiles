@@ -33,7 +33,7 @@ in
 
   users.users.pokon548 = {
     hashedPasswordFile = config.sops.secrets.pokon548_password.path;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.fish}/bin/fish";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "kvm" "qemu" "libvirt" "vboxusers" "tss" "pipewire" ];
   };
@@ -52,7 +52,7 @@ in
       ./modules/librewolf.nix
       ./modules/vscode.nix
       ./modules/syncthing.nix
-      ./modules/ohmyzsh.nix
+      ./modules/fish.nix
     ];
 
     # TODO: Remove openssl_1 if mono no longer depend on it
@@ -105,10 +105,8 @@ in
       keepassxc
       element-desktop
 
-      lz4
-
       drawio
-      anki
+      anki-bin
 
       remmina
 
@@ -123,11 +121,15 @@ in
 
       nur.repos.pokon548.rustdesk-bin
       nur.repos.pokon548.chengla-electron
+      nur.repos.pokon548.sticky
       nur.repos.federicoschonborn.metronome
       virt-manager
 
       gocryptfs
       nur.repos.pokon548.vaults
+
+      nur.repos.pokon548.flowtime
+      kooha
 
       android-tools
       scrcpy
