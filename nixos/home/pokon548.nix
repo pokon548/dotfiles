@@ -133,6 +133,7 @@ in
 
       android-tools
       scrcpy
+      nmap
     ]);
 
     dconf.settings = {
@@ -264,6 +265,13 @@ in
 
       "org/gnome/shell/weather" = {
         automatic-location = false;
+      };
+
+      "com/raggesilver/BlackBox" = {
+        font = "Cousine for Powerline 11";
+        window-width = lib.hm.gvariant.mkUint32 1366;
+        window-height = lib.hm.gvariant.mkUint32 768;
+        remember-window-size = true;
       };
 
       "org/gnome/shell/extensions/unmess" = {
