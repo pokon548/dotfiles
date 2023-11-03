@@ -29,6 +29,7 @@
   # TODO: Put it in individual config
   services.postgresql = {
     enable = true;
+    package = pkgs.postgresql_14;
     initialScript = pkgs.writeText "synapse-init.sql" ''
       CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
       CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"

@@ -21,7 +21,6 @@
       ])
       ++ (with pkgs.gnome; [
         cheese
-        gnome-terminal
         gnome-calendar
         gnome-music
         gnome-contacts
