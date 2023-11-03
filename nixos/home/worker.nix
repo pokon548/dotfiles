@@ -30,6 +30,8 @@
     wpsoffice-cn
     ungoogled-chromium
     kwin
+
+    anki-bin
   ];
 
   programs.kdeconnect.enable = true;

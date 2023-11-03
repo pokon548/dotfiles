@@ -23,6 +23,16 @@
           nativeBuildInputs = with pkgs; [ nix home-manager git ];
         };
 
+        postmarket = (pkgs.buildFHSUserEnv
+          {
+            name = "postmarket-env";
+            targetPkgs = pkgs: (with pkgs;
+              [
+                pmbootstrap
+              ]
+            );
+          }).env;
+
         # For developing electron apps
         # Wine is included only for cross-compiling Windows binary. Feel free to remove them if you don't need :)
         electron = (pkgsInsecure.buildFHSUserEnv
