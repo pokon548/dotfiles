@@ -101,7 +101,7 @@
 
   boot.loader.systemd-boot.enable = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_5; # TODO: https://github.com/NixOS/nixpkgs/issues/265521
 
   fileSystems."/" =
     {
