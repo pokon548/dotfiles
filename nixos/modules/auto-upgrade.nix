@@ -2,7 +2,7 @@
   system.autoUpgrade = {
     enable = true;
     dates = "23:00";
-    operation = "switch";
+    operation = "boot";
 
     flags = [
       "--update-input"
