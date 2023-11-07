@@ -9,7 +9,7 @@
       source-han-serif
       source-han-mono
 
-      powerline-fonts
+      fira-code-nerdfont
 
       nur.repos.rewine.ttf-wps-fonts
       nur.repos.rewine.ttf-ms-win10

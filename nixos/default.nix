@@ -101,6 +101,7 @@ in
         ./modules/auto-upgrade.nix
         ./modules/gitea.nix
         ./modules/microbin.nix
+        ./modules/samba.nix
         ./modules/seafile.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
