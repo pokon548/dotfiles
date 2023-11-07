@@ -97,6 +97,7 @@ in
         inputs.private-configs.nixosModules
 
         ./home/bukun.nix
+        ./home/root.nix
         ./modules/auto-upgrade.nix
         ./modules/gitea.nix
         ./modules/microbin.nix
