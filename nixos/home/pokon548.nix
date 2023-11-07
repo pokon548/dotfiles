@@ -134,6 +134,8 @@ in
       android-tools
       scrcpy
       nmap
+
+      abiword
     ]);
 
     dconf.settings = {
