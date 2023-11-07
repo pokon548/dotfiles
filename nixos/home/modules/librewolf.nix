@@ -57,11 +57,6 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/libredirect/latest.xpi";
       };
-      "firefox-translations-addon@mozilla.org" = {
-        installation_mode = "force_installed";
-        install_url =
-          "https://addons.mozilla.org/firefox/downloads/latest/firefox-translations/latest.xpi";
-      };
       "offline-qr-code@rugk.github.io" = {
         default_area = "navbar";
         installation_mode = "force_installed";
