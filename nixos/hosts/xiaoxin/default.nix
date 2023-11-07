@@ -88,6 +88,7 @@
 
   environment.systemPackages = with pkgs; [
     tpm2-tools
+    tpm2-totp
   ];
 
   hardware.opengl = {

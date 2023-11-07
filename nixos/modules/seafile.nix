@@ -4,7 +4,7 @@ let
   nas-path = "/mnt/external-storage/seafile";
   pod-name = "seafile";
   open-ports = [ "127.0.0.1:8088:80" ];
-  seafile-ver = "10.0.1";
+  seafile-ver = "11.0.0";
   mariadb-ver = "10.11.4";
   memcached-ver = "1.6.21";
   caddy-ver = "2.7.5";

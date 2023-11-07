@@ -31,11 +31,18 @@ in
         repository = {
           MAX_CREATION_LIMIT = 0;
         };
+        "repository.upload" = {
+          FILE_MAX_SIZE = 100000;
+        };
         actions = {
           ENABLED = true;
         };
         other = {
           SHOW_FOOTER_VERSION = false;
+        };
+        attachment = {
+          ENABLE = true;
+          MAX_SIZE = 100000;
         };
         log = {
           ROOT_PATH = "/mnt/external-storage/gitea/log";
