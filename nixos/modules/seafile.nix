@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   backend = config.virtualisation.oci-containers.backend;
-  nas-path = "/media/nas/seafile";
+  nas-path = "/mnt/external-storage/seafile";
   pod-name = "seafile";
   open-ports = [ "127.0.0.1:8088:80" ];
   seafile-ver = "10.0.1";
@@ -52,9 +52,25 @@ let
         rewrite /accounts/login* /oauth/login/?
     }
   '';
-in {
-  secrets.seafile-db-pass = { };
-  secrets.seafile-admin-pass = { };
+in
+{
+  sops = {
+    defaultSopsFile = lib.mkForce ../../secrets/hetzner.yaml;
+    secrets = {
+      "seafile/email" = { };
+      "seafile/password" = { };
+      "seafile/db-pass" = { };
+    };
+    templates = {
+      "seafile-db-env".content = ''
+        MYSQL_ROOT_PASSWORD=${config.sops.placeholder."seafile/db-pass"}
+      '';
+      "seafile-admin-env".content = ''
+        SEAFILE_ADMIN_EMAIL=${config.sops.placeholder."seafile/email"}
+        SEAFILE_ADMIN_PASSWORD=${config.sops.placeholder."seafile/password"}
+      '';
+    };
+  };
 
   virtualisation.oci-containers.containers.seafile-server = {
     autoStart = true;
@@ -63,12 +79,10 @@ in {
       DB_HOST = "seafile-db";
       TIME_ZONE = "Asia/Shanghai";
       HTTPS = "true";
-      SEAFILE_SERVER_HOSTNAME = "file.ataraxiadev.com";
+      SEAFILE_SERVER_HOSTNAME = "cloud-next.bukn.uk";
       GC_CRON = "0 6 * * 0";
     };
-    environmentFiles = [
-      config.secrets.seafile-db-pass.decrypted
-    ];
+    environmentFiles = [ config.sops.templates."seafile-db-env".path ];
     extraOptions = [ "--pod=seafile" ];
     image = "docker.io/ggogel/seafile-server:${seafile-ver}";
     volumes = [ "${nas-path}/server-data:/shared" ];
@@ -78,11 +92,9 @@ in {
     autoStart = true;
     dependsOn = [ "seafile-server" "seahub-media" "seafile-caddy" ];
     environment = {
-      SEAFILE_ADMIN_EMAIL = "admin@ataraxiadev.com";
+      SEAFILE_ADMIN_EMAIL = "me@example.com";
     };
-    environmentFiles = [
-      config.secrets.seafile-admin-pass.decrypted
-    ];
+    environmentFiles = [ config.sops.templates."seafile-admin-env".path ];
     extraOptions = [
       "--pod=seafile"
     ];
@@ -109,9 +121,7 @@ in {
     environment = {
       MYSQL_LOG_CONSOLE = "true";
     };
-    environmentFiles = [
-      config.secrets.seafile-db-pass.decrypted
-    ];
+    environmentFiles = [ config.sops.templates."seafile-db-env".path ];
     extraOptions = [ "--pod=seafile" ];
     image = "docker.io/mariadb:${mariadb-ver}";
     volumes = [
@@ -133,28 +143,30 @@ in {
     volumes = [ "${seafile-caddy-caddyfile}:/etc/caddy/Caddyfile" ];
   };
 
-  systemd.services."podman-create-${pod-name}" = let
-    portsMapping = lib.concatMapStrings (port: " -p " + port) open-ports;
-    start = pkgs.writeShellScript "create-pod" ''
-      podman pod exists ${pod-name} || podman pod create -n ${pod-name} ${portsMapping}
-      exit 0
-    '';
-  in rec {
-    path = [ pkgs.coreutils config.virtualisation.podman.package ];
-    before = [
-      "${backend}-seafile-server.service"
-      "${backend}-seahub.service"
-      "${backend}-seahub-media.service"
-      "${backend}-seafile-db.service"
-      "${backend}-memcached.service"
-      "${backend}-seafile-caddy.service"
-    ];
-    requiredBy = before;
-    partOf = before;
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = "yes";
-      ExecStart = start;
+  systemd.services."podman-create-${pod-name}" =
+    let
+      portsMapping = lib.concatMapStrings (port: " -p " + port) open-ports;
+      start = pkgs.writeShellScript "create-pod" ''
+        podman pod exists ${pod-name} || podman pod create -n ${pod-name} ${portsMapping}
+        exit 0
+      '';
+    in
+    rec {
+      path = [ pkgs.coreutils config.virtualisation.podman.package ];
+      before = [
+        "${backend}-seafile-server.service"
+        "${backend}-seahub.service"
+        "${backend}-seahub-media.service"
+        "${backend}-seafile-db.service"
+        "${backend}-memcached.service"
+        "${backend}-seafile-caddy.service"
+      ];
+      requiredBy = before;
+      partOf = before;
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+        ExecStart = start;
+      };
     };
-  };
 }

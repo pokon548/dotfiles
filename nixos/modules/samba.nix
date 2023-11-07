@@ -34,10 +34,6 @@ in
       };
     };
 
-    
-
-    
-
     sops.templates."gitea-smb-secrets".content = ''
       username=${config.sops.placeholder."gitea-cifs-username"}
       domain=${config.sops.placeholder."gitea-cifs-domain"}
