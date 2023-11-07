@@ -7,7 +7,7 @@ let
   seafile-ver = "10.0.1";
   mariadb-ver = "10.11.4";
   memcached-ver = "1.6.21";
-  caddy-ver = "1.1.0";
+  caddy-ver = "2.7.5";
   seahub-media-caddyfile = pkgs.writeText "Caddyfile" ''
     {
         admin off
@@ -63,6 +63,7 @@ in
     };
     templates = {
       "seafile-db-env".content = ''
+        DB_ROOT_PASSWD=${config.sops.placeholder."seafile/db-pass"}
         MYSQL_ROOT_PASSWORD=${config.sops.placeholder."seafile/db-pass"}
       '';
       "seafile-admin-env".content = ''
