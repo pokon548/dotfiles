@@ -236,6 +236,20 @@ in
         switch-to-workspace-8 = [ "<Alt>w" ];
         switch-to-workspace-9 = [ "<Alt>e" ];
         switch-to-workspace-10 = [ "<Alt>r" ];
+
+        move-to-workspace-1 = [ "<Alt><Super>z" ];
+        move-to-workspace-2 = [ "<Alt><Super>x" ];
+        move-to-workspace-3 = [ "<Alt><Super>c" ];
+        move-to-workspace-4 = [ "<Alt><Super>a" ];
+        move-to-workspace-5 = [ "<Alt><Super>s" ];
+        move-to-workspace-6 = [ "<Alt><Super>d" ];
+        move-to-workspace-7 = [ "<Alt><Super>q" ];
+        move-to-workspace-8 = [ "<Alt><Super>w" ];
+        move-to-workspace-9 = [ "<Alt><Super>e" ];
+        move-to-workspace-10 = [ "<Alt><Super>r" ];
+
+        move-to-workspace-left = [ "<Alt><Super>Left" ];
+        move-to-workspace-right = [ "<Alt><Super>Right" ];
       };
 
       "org/gnome/shell/extensions/pip-on-top" = {
