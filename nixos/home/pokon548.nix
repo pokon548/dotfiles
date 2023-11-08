@@ -70,7 +70,7 @@ in
       metadata-cleaner
       obsidian
       thunderbird
-      todoist-electron
+      nur.repos.pokon548.todoist-electron
       gnome-solanum
       goldendict-ng
 
