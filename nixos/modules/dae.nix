@@ -106,6 +106,7 @@ in
         domain(gis.gnome.org) -> direct
         pname(NetworkManager) -> direct
         pname(chromium) -> direct
+        pname(vmnet-natd) -> direct
         dport(52443) -> direct
 
         dip(224.0.0.0/3, 'ff00::/8') -> direct

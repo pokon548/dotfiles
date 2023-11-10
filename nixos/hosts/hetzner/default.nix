@@ -6,6 +6,10 @@
     secrets = {
       microbin-username = { };
       microbin-password = { };
+
+      "authentik/secret-key" = { };
+      "authentik/email-password" = { };
+
       pinepea-config = {
         format = "binary";
         sopsFile = ../../../secrets/pinepea;
@@ -94,9 +98,33 @@
     MICROBIN_READONLY=true
   '';
 
+  sops.templates."authentik-env".content = ''
+    AUTHENTIK_SECRET_KEY=${config.sops.placeholder."authentik/secret-key"}
+    AUTHENTIK_EMAIL__PASSWORD=${config.sops.placeholder."authentik/email-password"}
+  '';
+
   services.pinepea = {
     enable = true;
     configFile = config.sops.secrets.pinepea-config.path;
+  };
+
+  services.authentik = {
+    enable = true;
+    # The environmentFile needs to be on the target host!
+    # Best use something like sops-nix or agenix to manage it
+    environmentFile = config.sops.templates."authentik-env".path;
+    settings = {
+      email = {
+        host = "mail.smtp2go.com";
+        port = 587;
+        username = "bukun-authentik@bukn.uk";
+        use_tls = true;
+        use_ssl = false;
+        from = "bukun-authentik@bukn.uk";
+      };
+      disable_startup_analytics = true;
+      avatars = "initials";
+    };
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";

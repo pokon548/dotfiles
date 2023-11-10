@@ -250,6 +250,9 @@ in
 
         move-to-workspace-left = [ "<Alt><Super>Left" ];
         move-to-workspace-right = [ "<Alt><Super>Right" ];
+
+        switch-to-workspace-left = [ "<Alt>Left" ];
+        switch-to-workspace-right = [ "<Alt>Right" ];
       };
 
       "org/gnome/shell/extensions/pip-on-top" = {
@@ -263,7 +266,7 @@ in
       };
 
       "org/gnome/shell/keybindings" = {
-        show-screenshot-ui = ["<Super>s"];
+        show-screenshot-ui = [ "<Super>s" ];
       };
 
       "org/gnome/shell/extensions/runcat" = {
@@ -288,6 +291,12 @@ in
         window-width = lib.hm.gvariant.mkUint32 1366;
         window-height = lib.hm.gvariant.mkUint32 768;
         remember-window-size = true;
+      };
+
+      "org/gnome/shell/extensions/caffeine" = {
+        toggle-shortcut = [ "<Super>x" ];
+        restore-state = true;
+        inhibit-apps = [ "chengla-electron.desktop" "obsidian.desktop" "rustdesk-bin.desktop" "todoist.desktop" "org.remmina.Remmina.desktop" "codium.desktop" ];
       };
 
       "org/gnome/shell/extensions/unmess" = {
