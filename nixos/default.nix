@@ -112,5 +112,22 @@ in
         ./hosts/hetzner
       ];
     };
+
+    hetzner-core = inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs outputs;
+      };
+      modules = [
+        basicModules
+        inputs.authentik-nix.nixosModules.default
+
+        ./home/bukun.nix
+        ./home/root.nix
+        ./modules/auto-upgrade.nix
+        ./modules/openssh.nix
+        ./modules/caddy/hetzner-core.nix
+        ./hosts/hetzner-core
+      ];
+    };
   };
 }
