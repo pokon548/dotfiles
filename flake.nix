@@ -16,6 +16,9 @@
     # Rusty!
     rust-overlay.url = "github:oxalica/rust-overlay";
 
+    # Authentik SSO
+    authentik-nix.url = "github:nix-community/authentik-nix";
+
     # sops-nix
     sops-nix.url = "github:Mic92/sops-nix";
 

@@ -58,5 +58,16 @@
 
       reverse_proxy localhost:3000
     '';
+
+    virtualHosts."authentik.bukn.uk".extraConfig = ''
+      tls me@authentik.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      reverse_proxy https://localhost:9443 {
+        transport http {
+			    tls_insecure_skip_verify
+		    }
+      }
+    '';
   };
 }
