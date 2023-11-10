@@ -123,7 +123,7 @@ in
 
         ./home/bukun.nix
         ./home/root.nix
-        ./modules/auto-upgrade.nix
+        ./modules/auto-upgrade-slowring.nix
         ./modules/openssh.nix
         ./modules/caddy/hetzner-core.nix
         ./hosts/hetzner-core

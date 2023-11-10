@@ -83,6 +83,13 @@
     };
   };
 
+  services.uptime-kuma = {
+    enable = true;
+    settings = {
+      PORT = "4000";
+    };
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 
