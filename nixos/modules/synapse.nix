@@ -1,6 +1,43 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
+  sops = {
+    defaultSopsFile = lib.mkDefault ../../../secrets/hetzner.yaml;
+    secrets = {
+      "synapse-oidc/client-id" = { };
+      "synapse-oidc/client-secret" = { };
+    };
+  };
+
+  sops.templates."oidc-config.yaml" = {
+    content = ''
+      oidc_providers:
+        - idp_id: authentik
+          idp_name: authentik
+          discover: true
+          issuer: "https://authentik.bukn.uk/application/o/matrix-slug/"
+          client_id: "${config.sops.placeholder."synapse-oidc/client-id"}"
+          client_secret: "${config.sops.placeholder."synapse-oidc/client-secret"}"
+          scopes:
+            - "openid"
+            - "profile"
+            - "email"
+          user_mapping_provider:
+            config:
+              localpart_template: "{{ user.preferred_username }}"
+              display_name_template: "{{ user.preferred_username|capitalize }}"
+    '';
+    owner = "matrix-synapse";
+  };
+
   services.matrix-synapse = {
     enable = true;
+    extras = [
+      "systemd"
+      "postgres"
+      "url-preview"
+      "user-search"
+
+      "oidc"
+    ];
     settings = {
       server_name = "bukn.uk";
 
@@ -24,12 +61,16 @@
 
       registration_requires_token = true;
     };
+
+    extraConfigFiles = [
+      config.sops.templates."oidc-config.yaml".path
+    ];
   };
 
   # TODO: Put it in individual config
   services.postgresql = {
     enable = true;
-    package = lib.mkDefault pkgs.postgresql_14;
+    package = lib.mkForce pkgs.postgresql_14;
     initialScript = pkgs.writeText "synapse-init.sql" ''
       CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
       CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"

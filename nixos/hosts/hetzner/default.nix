@@ -2,7 +2,7 @@
 
 {
   sops = {
-    defaultSopsFile = lib.mkForce ../../../secrets/hetzner.yaml;
+    defaultSopsFile = lib.mkDefault ../../../secrets/hetzner.yaml;
     secrets = {
       microbin-username = { };
       microbin-password = { };

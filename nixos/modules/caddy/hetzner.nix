@@ -21,6 +21,16 @@
       header /.well-known/matrix/* Access-Control-Allow-Origin *
       respond /.well-known/matrix/server `{"m.server": "chat.bukn.uk:443"}`
       respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://chat.bukn.uk"}}`
+
+      handle_path /_matrix/* {
+        rewrite * /_matrix{uri}
+	      reverse_proxy localhost:8448
+      }
+
+      handle_path /_synapse/* {
+        rewrite * /_synapse{uri}
+	      reverse_proxy localhost:8448
+      }
     '';
 
     virtualHosts."chat.bukn.uk".extraConfig = ''
