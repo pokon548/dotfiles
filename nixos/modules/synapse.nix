@@ -2,8 +2,11 @@
   sops = {
     defaultSopsFile = lib.mkDefault ../../../secrets/hetzner.yaml;
     secrets = {
-      "synapse-oidc/client-id" = { };
-      "synapse-oidc/client-secret" = { };
+      "synapse/oidc/client-id" = { };
+      "synapse/oidc/client-secret" = { };
+      "synapse/registration-shared-secret" = { 
+        owner = "matrix-synapse";
+      };
     };
   };
 
@@ -14,8 +17,8 @@
           idp_name: authentik
           discover: true
           issuer: "https://authentik.bukn.uk/application/o/matrix-slug/"
-          client_id: "${config.sops.placeholder."synapse-oidc/client-id"}"
-          client_secret: "${config.sops.placeholder."synapse-oidc/client-secret"}"
+          client_id: "${config.sops.placeholder."synapse/oidc/client-id"}"
+          client_secret: "${config.sops.placeholder."synapse/oidc/client-secret"}"
           scopes:
             - "openid"
             - "profile"
@@ -60,6 +63,7 @@
       ];
 
       registration_requires_token = true;
+      registration_shared_secret_path = config.sops.secrets."synapse/registration-shared-secret".path;
     };
 
     extraConfigFiles = [
