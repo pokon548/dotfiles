@@ -96,6 +96,7 @@ in
         inputs.disko.nixosModules.disko
         inputs.private-configs.nixosModules
         inputs.authentik-nix.nixosModules.default
+        inputs.filestash-nix.nixosModule
 
         ./home/bukun.nix
         ./home/root.nix
@@ -103,6 +104,7 @@ in
         ./modules/gitea.nix
         ./modules/microbin.nix
         ./modules/samba.nix
+        ./modules/filestash.nix
         # ./modules/seafile.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
