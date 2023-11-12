@@ -19,6 +19,9 @@
     # Authentik SSO
     authentik-nix.url = "github:nix-community/authentik-nix";
 
+    # Filestash
+    filestash-nix.url = "github:matthewcroughan/filestash-nix";
+    
     # sops-nix
     sops-nix.url = "github:Mic92/sops-nix";
 
