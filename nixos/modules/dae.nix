@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.networking.fwrouter;
@@ -60,7 +60,7 @@ in
 
       dns {
         upstream {
-          whatever: 'udp+tcp://223.5.5.5:53'
+          whatever: 'udp://127.0.0.1:53216'
           adguardiodns: 'udp://127.0.0.1:53215'
         }
         routing {
@@ -131,14 +131,26 @@ in
     services.smartdns = {
       enable = true;
       settings = {
-        bind = [":53215"];
-        server = "1.1.1.1 -bootstrap-dns";
+        bind = [":53215 -group global" ":53216 -group china"];
+        conf-file = [
+          "${pkgs.nur.repos.pokon548.smartdns-rules-adrules}/adrules-smartdns.conf"
+          "${pkgs.nur.repos.pokon548.smartdns-rules-stevenblocks}/stevenblocks-smartdns.conf"
+        ];
+        server = "114.114.114.114 -bootstrap-dns";
+        user = "nobody";
         force-AAAA-SOA = "yes";
         server-https = [
-          "https://94.140.14.140/dns-query"
-          "https://94.140.14.141/dns-query"
+          "https://94.140.14.140/dns-query -group global -exclude-default-group"
+          "https://94.140.14.141/dns-query -group global -exclude-default-group"
+          "https://223.5.5.5/dns-query -group china -exclude-default-group"
+          "https://223.6.6.6/dns-query -group china -exclude-default-group"
         ];
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      nur.repos.pokon548.smartdns-rules-adrules
+      nur.repos.pokon548.smartdns-rules-stevenblocks
+    ];
   };
 }

@@ -3,7 +3,9 @@
     enable = true;
     shellAbbrs = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
+      gg = "vlc -I dummy \"/home/$(whoami)/音乐/[230301]OCTOPATH TRAVELER II Original Soundtrack[320K]/45.勝利のファンファーレ.mp3\" --run-time=17 vlc://quit 2> /dev/null &";
+      mz = "vlc -I dummy \"/home/$(whoami)/音乐/[230301]OCTOPATH TRAVELER II Original Soundtrack[320K]/46.敗北のレクイエム.mp3\" vlc://quit 2> /dev/null &";
+      up = "cd /etc/nixos && nix flake update && sudo nixos-rebuild switch";
     };
     functions = {
       fish_greeting = "";

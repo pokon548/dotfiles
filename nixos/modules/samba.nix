@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 
+# TODO: Pasta code found. Any elegant ideas?
 let
   cfg = config.networking.samba;
 in
@@ -35,6 +36,10 @@ in
         filestash-cifs-username = { };
         filestash-cifs-password = { };
         filestash-cifs-domain = { };
+
+        kosync-cifs-username = { };
+        kosync-cifs-password = { };
+        kosync-cifs-domain = { };
       };
     };
 
@@ -66,6 +71,12 @@ in
       username=${config.sops.placeholder."filestash-cifs-username"}
       domain=${config.sops.placeholder."filestash-cifs-domain"}
       password=${config.sops.placeholder."filestash-cifs-password"}
+    '';
+
+    sops.templates."kosync-smb-secrets".content = ''
+      username=${config.sops.placeholder."kosync-cifs-username"}
+      domain=${config.sops.placeholder."kosync-cifs-domain"}
+      password=${config.sops.placeholder."kosync-cifs-password"}
     '';
 
     fileSystems."/mnt/external-storage/wiki-js" = {
@@ -126,6 +137,18 @@ in
 
         in
         [ "${automount_opts},credentials=${config.sops.templates."filestash-smb-secrets".path}" ];
+    };
+
+    fileSystems."/mnt/external-storage/kosync" = {
+      device = "//u370687-sub7.your-storagebox.de/u370687-sub7";
+      fsType = "cifs";
+      options =
+        let
+          # this line prevents hanging on network split
+          automount_opts = "_netdev,x-systemd.automount,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=65534,gid=65534";
+
+        in
+        [ "${automount_opts},credentials=${config.sops.templates."kosync-smb-secrets".path}" ];
     };
   };
 }
