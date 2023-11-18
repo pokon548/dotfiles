@@ -23,8 +23,6 @@
         allowUnfree = true;
         permittedInsecurePackages = [
           "openssl-1.1.1w"
-          "electron-24.8.6"
-          "electron-22.3.27"
         ];
       };
   };

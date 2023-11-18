@@ -136,6 +136,7 @@ in
       nmap
 
       abiword
+      vlc
     ]);
 
     dconf.settings = {

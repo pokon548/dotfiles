@@ -1,28 +1,48 @@
 { config, inputs, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = with inputs.nixos-hardware.nixosModules;
+  sops = {
+    defaultSopsFile = lib.mkForce ../../../secrets/hetzner-core.yaml;
+    secrets = {
+      "authentik/secret-key" = { };
+      "authentik/email-password" = { };
+    };
+  };
+
+  imports = [
+    "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
+  ] ++ (with inputs.nixos-hardware.nixosModules;
     [
       common-pc-ssd
-      common-cpu-intel
-    ];
+    ]);
 
-  disko.devices = import ./disko-config.nix {
-    inherit lib;
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "virtio_pci" "sd_mod" ];
+  boot.initrd.kernelModules = [ "virtio_gpu" ];
+
+  boot.kernelParams = [ "tcp_bbr" "console=tty" ];
+  boot.kernel.sysctl = {
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "fs.inotify.max_user_watches" = "100000";
   };
-
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/vda";
-  };
-
+  boot.loader.systemd-boot.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  hardware.enableRedistributableFirmware = true;
+  fileSystems."/" =
+    {
+      device = "/dev/sda2";
+      fsType = "btrfs";
+      options = [ "compress=zstd" ];
+    };
+
+  fileSystems."/boot" =
+    {
+      device = "/dev/sda1";
+      fsType = "vfat";
+    };
+
+  swapDevices = [{ device = "/swap/swapfile"; }];
 
   networking = {
     useDHCP = lib.mkDefault true;
@@ -31,7 +51,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   system.stateVersion = "23.11";
 }
