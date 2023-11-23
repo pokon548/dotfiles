@@ -11,7 +11,6 @@ let
     emoji-copy
     just-perfection
     pip-on-top
-    workspace-indicator-2
     unmess
     always-indicator
     do-not-disturb-while-screen-sharing-or-recording

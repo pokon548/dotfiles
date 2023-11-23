@@ -8,7 +8,7 @@
       (self: super: {
         gnome = super.gnome.overrideScope' (gself: gsuper: {
           mutter = gsuper.mutter.overrideAttrs (old: {
-            patches = [ ./gnome-patch/mr1441.patch ./gnome-patch/mr3113.patch ];
+            patches = [ ./gnome-patch/mr1441.patch ./gnome-patch/mr3327.patch ];
           });
 
           gnome-shell = gsuper.gnome-shell.overrideAttrs (old: {

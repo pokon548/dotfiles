@@ -1,17 +1,19 @@
 ---
 
-Fuck the annoying flash when you do a screenshot in GNOME
+Fuck the annoying flash when you do a screenshot in GNOME.
+
+This patch is specified for GNOME 45.
 
 ---
 diff --git a/js/ui/screenshot.js b/js/ui/screenshot.js
 
 --- a/js/ui/screenshot.js   2023-10-26 09:37:37.247661812 +0800
 +++ b/js/ui/screenshot.js   2023-10-26 09:39:54.212736643 +0800
-@@ -2937,16 +2937,8 @@
+@@ -2988,17 +2988,9 @@
      }
  
      fire(doneCallback) {
--        this.set({ visible: true, opacity: 255 });
+-        this.set({visible: true, opacity: 255});
 -        this.ease({
 -            opacity: 0,
 -            duration: FLASHSPOT_ANIMATION_OUT_TIME,

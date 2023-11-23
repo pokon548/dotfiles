@@ -70,7 +70,7 @@ in
     };
 
     "org/gnome/shell/extensions/just-perfection" = {
-      activities-button = false;
+      activities-button = true;
       accessibility-menu = false;
       calendar = false;
       events-button = false;
