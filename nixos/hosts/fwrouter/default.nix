@@ -1,14 +1,6 @@
 { config, inputs, lib, pkgs, modulesPath, ... }:
 
 {
-  sops = {
-    defaultSopsFile = lib.mkForce ../../../secrets/hetzner-core.yaml;
-    secrets = {
-      "authentik/secret-key" = { };
-      "authentik/email-password" = { };
-    };
-  };
-
   imports = [
     "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
   ] ++ (with inputs.nixos-hardware.nixosModules;

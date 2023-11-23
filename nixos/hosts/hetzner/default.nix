@@ -79,10 +79,6 @@
     umami-server = {
       enable = true;
     };
-    kosync-server = {
-      enable = true;
-      stateDir = "/mnt/external-storage/kosync";
-    };
   };
 
   sops.templates."microbin-env".content = ''

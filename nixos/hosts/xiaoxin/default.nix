@@ -91,8 +91,6 @@
     tpm2-totp
   ];
 
-  virtualisation.vmware.host.enable = true;
-
   hardware.opengl = {
     enable = true;
     driSupport = true;
