@@ -78,6 +78,7 @@ in
       };
       modules = [
         basicModules
+        inputs.private-configs.nixosModules
         inputs.disko.nixosModules.disko
 
         ./home/bukun.nix
@@ -107,7 +108,6 @@ in
         ./modules/filestash.nix
         # ./modules/seafile.nix
         ./modules/openssh.nix
-        ./modules/kosync.nix
         ./modules/synapse.nix
         ./modules/umami.nix
         ./modules/wiki-js.nix
