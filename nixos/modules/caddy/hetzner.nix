@@ -86,5 +86,12 @@
 
       reverse_proxy http://localhost:8334
     '';
+
+    virtualHosts."cloud-next.bukn.uk".extraConfig = ''
+      tls me@cloud-next.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      reverse_proxy localhost:8088
+    '';
   };
 }

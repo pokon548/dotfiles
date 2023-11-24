@@ -99,7 +99,7 @@ in
       options =
         let
           # this line prevents hanging on network split
-          automount_opts = "_netdev,x-systemd.automount,hard,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=65534,gid=65534";
+          automount_opts = "_netdev,x-systemd.automount,hard,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=0,gid=0";
 
         in
         [ "${automount_opts},credentials=${config.sops.templates."seafile-smb-secrets".path}" ];
