@@ -14,8 +14,6 @@
       [
         baobab
         gnome-tour
-        gnome-console
-        gnome-connections
         tracker-miners
         tracker
       ])

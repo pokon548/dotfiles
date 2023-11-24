@@ -66,7 +66,6 @@
     };
 
     gitea-server.enable = true;
-    #seafile-server.enable = true;  // FIXME: Not working for unstable
     microbin-server = {
       enable = true;
       stateDir = "/mnt/external-storage/pastebin";
