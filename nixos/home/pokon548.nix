@@ -4,7 +4,6 @@ let
     gsconnect
     appindicator
     dash-to-dock
-    runcat
     kimpanel
 
     clipboard-history
@@ -14,10 +13,7 @@ let
     unmess
     always-indicator
     do-not-disturb-while-screen-sharing-or-recording
-    removable-drive-menu
     native-window-placement
-    gtk4-desktop-icons-ng-ding
-    hide-top-bar
     weather-oclock
     night-theme-switcher
 
@@ -149,7 +145,7 @@ in
         enabled-extensions = map (p: p.extensionUuid) extensionPkgs;
         favorite-apps = lib.mkBefore [
           "librewolf.desktop"
-          "com.raggesilver.BlackBox.desktop"
+          "org.gnome.Console.desktop"
           "obsidian.desktop"
           "codium.desktop"
           "org.gnome.Nautilus.desktop"
@@ -221,10 +217,6 @@ in
         app-menu = false;
       };
 
-      "org/gnome/shell/extensions/horizontal-workspace-indicator" = {
-        widget-position = "left";
-      };
-
       "org/gnome/desktop/wm/keybindings" = {
         switch-to-workspace-1 = [ "<Alt>z" ];
         switch-to-workspace-2 = [ "<Alt>x" ];
@@ -269,15 +261,6 @@ in
         show-screenshot-ui = [ "<Super>s" ];
       };
 
-      "org/gnome/shell/extensions/runcat" = {
-        idle-threshold = 80;
-        displaying-items = "character-only";
-      };
-
-      "org/gnome/shell/extensions/hidetopbar" = {
-        mouse-sensitive = true;
-      };
-
       "org/gnome/shell/extensions/kimpanel" = {
         vertical = true;
       };
@@ -291,6 +274,15 @@ in
         window-width = lib.hm.gvariant.mkUint32 1366;
         window-height = lib.hm.gvariant.mkUint32 768;
         remember-window-size = true;
+      };
+
+      "org/gnome/Console" = {
+        use-system-font = false;
+        custom-font = "FiraCode Nerd Font 11";
+      };
+
+      "org/gnome/shell/extensions/clipboard-history" = {
+        display-mode = 3;
       };
 
       "org/gnome/shell/extensions/caffeine" = {

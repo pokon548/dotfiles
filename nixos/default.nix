@@ -105,8 +105,8 @@ in
         ./modules/gitea.nix
         ./modules/microbin.nix
         ./modules/samba.nix
-        ./modules/filestash.nix
-        # ./modules/seafile.nix
+        #./modules/filestash.nix
+        ./modules/seafile.nix
         ./modules/openssh.nix
         ./modules/synapse.nix
         ./modules/umami.nix
