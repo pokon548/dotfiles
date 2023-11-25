@@ -18,6 +18,13 @@
       }
     '';
 
+    virtualHosts."ntfy.bukn.uk".extraConfig = ''
+      tls me@ntfy.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      reverse_proxy http://localhost:33871
+    '';
+
     virtualHosts."uptime.bukn.uk".extraConfig = ''
       tls me@uptime.bukn.uk
       header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
