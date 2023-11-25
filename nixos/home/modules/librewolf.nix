@@ -13,7 +13,6 @@ let
     lockPref("svg.context-properties.content.enabled", true);
 
     lockPref("permissions.default.geo", 2);
-    lockPref("permissions.default.desktop-notification", 2);
 
     lockPref("identity.fxaccounts.enabled", true);
 
