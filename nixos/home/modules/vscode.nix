@@ -74,6 +74,7 @@ in
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
       "window.commandCenter" = false;
+      "git.enableCommitSigning" = true;
     };
   };
 
