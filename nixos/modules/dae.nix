@@ -41,7 +41,7 @@ in
         tls_implementation: utls
         utls_imitate: chrome_auto
 
-        dial_mode: domain
+        dial_mode: ip
       }
 
       node {
@@ -136,7 +136,7 @@ in
           "${pkgs.nur.repos.pokon548.smartdns-rules-adrules}/adrules-smartdns.conf"
           "${pkgs.nur.repos.pokon548.smartdns-rules-stevenblocks}/stevenblocks-smartdns.conf"
         ];
-        server = "114.114.114.114 -bootstrap-dns";
+        server = "1.1.1.1 -bootstrap-dns";
         user = "nobody";
         force-AAAA-SOA = "yes";
         server-https = [
