@@ -106,7 +106,6 @@ in
         domain(gis.gnome.org) -> direct
         pname(NetworkManager) -> direct
         pname(chromium) -> direct
-        pname(vmnet-natd) -> direct
         dport(52443) -> direct
 
         dip(224.0.0.0/3, 'ff00::/8') -> direct
@@ -137,6 +136,8 @@ in
           "${pkgs.nur.repos.pokon548.smartdns-rules-stevenblocks}/stevenblocks-smartdns.conf"
         ];
         server = "1.1.1.1 -bootstrap-dns";
+        cache-size = 32768;
+        cache-persist = "no";
         user = "nobody";
         force-AAAA-SOA = "yes";
         server-https = [

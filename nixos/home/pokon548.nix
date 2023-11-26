@@ -117,6 +117,7 @@ in
       nur.repos.pokon548.rustdesk-bin
       nur.repos.pokon548.chengla-electron
       nur.repos.pokon548.sticky
+      nur.repos.pokon548.ntfy-naive
       nur.repos.federicoschonborn.metronome
       virt-manager
 
