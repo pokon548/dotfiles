@@ -93,5 +93,12 @@
 
       reverse_proxy localhost:8088
     '';
+
+    virtualHosts."webdav.bukn.uk".extraConfig = ''
+      tls me@webdav.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      reverse_proxy localhost:46732
+    '';
   };
 }

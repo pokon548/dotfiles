@@ -3,7 +3,7 @@ let
   backend = config.virtualisation.oci-containers.backend;
   nas-path = "/mnt/external-storage/seafile";
   pod-name = "seafile";
-  open-ports = [ "127.0.0.1:8088:80" ];
+  open-ports = [ "127.0.0.1:8088:80" "127.0.0.1:46732:8080" ];
   seafile-ver = "11.0.2";
   mariadb-ver = "10.11";
   memcached-ver = "1.6.18";
