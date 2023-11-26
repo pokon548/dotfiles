@@ -54,7 +54,7 @@ in
 
   virtualisation.oci-containers.containers.memcached = {
     autoStart = true;
-    cmd = [ "memcached" "-m 256" ];
+    cmd = [ "memcached" "-m 512" ];
     extraOptions = [ "--pod=seafile" ];
     image = "docker.io/memcached:${memcached-ver}";
   };
