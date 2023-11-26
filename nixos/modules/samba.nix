@@ -36,6 +36,10 @@ in
         filestash-cifs-username = { };
         filestash-cifs-password = { };
         filestash-cifs-domain = { };
+
+        send-cifs-username = { };
+        send-cifs-password = { };
+        send-cifs-domain = { };
       };
     };
 
@@ -67,6 +71,12 @@ in
       username=${config.sops.placeholder."filestash-cifs-username"}
       domain=${config.sops.placeholder."filestash-cifs-domain"}
       password=${config.sops.placeholder."filestash-cifs-password"}
+    '';
+
+    sops.templates."send-smb-secrets".content = ''
+      username=${config.sops.placeholder."send-cifs-username"}
+      domain=${config.sops.placeholder."send-cifs-domain"}
+      password=${config.sops.placeholder."send-cifs-password"}
     '';
 
     fileSystems."/mnt/external-storage/wiki-js" = {
@@ -127,6 +137,18 @@ in
 
         in
         [ "${automount_opts},credentials=${config.sops.templates."filestash-smb-secrets".path}" ];
+    };
+
+    fileSystems."/mnt/external-storage/send" = {
+      device = "//u370687-sub6.your-storagebox.de/u370687-sub8";
+      fsType = "cifs";
+      options =
+        let
+          # this line prevents hanging on network split
+          automount_opts = "_netdev,x-systemd.automount,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=65534,gid=65534";
+
+        in
+        [ "${automount_opts},credentials=${config.sops.templates."send-smb-secrets".path}" ];
     };
   };
 }

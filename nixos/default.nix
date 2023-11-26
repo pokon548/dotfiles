@@ -108,6 +108,7 @@ in
         #./modules/filestash.nix
         ./modules/seafile.nix
         ./modules/openssh.nix
+        ./modules/send.nix
         ./modules/synapse.nix
         ./modules/umami.nix
         ./modules/wiki-js.nix

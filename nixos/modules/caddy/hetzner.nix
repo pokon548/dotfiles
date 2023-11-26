@@ -100,5 +100,12 @@
 
       reverse_proxy localhost:46732
     '';
+
+    virtualHosts."send.bukn.uk".extraConfig = ''
+      tls me@send.bukn.uk
+      header / Strict-Transport-Security "max-age=63072000;includeSubDomains;preload"
+
+      reverse_proxy localhost:1443
+    '';
   };
 }
