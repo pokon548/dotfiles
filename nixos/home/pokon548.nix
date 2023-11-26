@@ -133,6 +133,7 @@ in
 
       abiword
       vlc
+      rnote
     ]);
 
     dconf.settings = {
