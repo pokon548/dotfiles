@@ -17,6 +17,8 @@ let
     weather-oclock
     night-theme-switcher
 
+    upower-battery
+
     blur-my-shell
     caffeine
     bing-wallpaper-changer

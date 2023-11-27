@@ -38,7 +38,7 @@
 
   networking = {
     useDHCP = lib.mkDefault true;
-    hostName = "fwrouter";
+    hostName = "relay";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -72,7 +72,7 @@ in
       ];
     };
 
-    fwrouter = inputs.nixpkgs.lib.nixosSystem {
+    relay = inputs.nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs outputs;
       };
@@ -83,8 +83,8 @@ in
 
         ./home/bukun.nix
         ./modules/openssh.nix
-        ./modules/caddy/fwrouter.nix
-        ./hosts/fwrouter
+        ./modules/caddy/relay.nix
+        ./hosts/relay
       ];
     };
 
@@ -109,6 +109,7 @@ in
         ./modules/seafile.nix
         ./modules/openssh.nix
         ./modules/send.nix
+        ./modules/shlink.nix
         ./modules/synapse.nix
         ./modules/umami.nix
         ./modules/wiki-js.nix

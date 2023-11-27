@@ -8,13 +8,13 @@
 
   users.users.bukun = {
     hashedPasswordFile = config.sops.secrets."bukun_password_${config.networking.hostName}".path;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.fish}/bin/fish";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
   };
 
   home-manager.users.bukun = {
-    imports = [ inputs.nix-index-database.hmModules.nix-index ./modules/common.nix ./modules/ohmyzsh.nix ];
+    imports = [ inputs.nix-index-database.hmModules.nix-index ./modules/common.nix ];
 
     home.packages = with pkgs; [
       vim
