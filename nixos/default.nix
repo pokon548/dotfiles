@@ -82,7 +82,9 @@ in
         inputs.disko.nixosModules.disko
 
         ./home/bukun.nix
+        ./modules/auto-upgrade.nix
         ./modules/openssh.nix
+        ./modules/zram.nix
         ./modules/caddy/relay.nix
         ./hosts/relay
       ];

@@ -1,11 +1,16 @@
 { config, pkgs, ... }: {
-  sops.secrets.caddy_config_relay = {
+  sops.secrets.Caddyfile = {
     sopsFile = ../../../secrets/relay.yaml;
-    neededForUsers = true;
+    owner = "caddy";
+    group = "caddy";
   };
 
   services.caddy-flavor = {
     enable = true;
-    configFile = config.sops.secrets.caddy_config_relay.path;
+    configFile = config.sops.secrets.Caddyfile.path;
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [ 80 443 ];
   };
 }
