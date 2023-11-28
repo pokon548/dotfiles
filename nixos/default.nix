@@ -110,6 +110,7 @@ in
         ./modules/samba.nix
         #./modules/filestash.nix
         ./modules/seafile.nix
+        ./modules/ssh-totp-auth.nix
         ./modules/openssh.nix
         ./modules/send.nix
         ./modules/shlink.nix
