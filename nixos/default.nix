@@ -84,6 +84,7 @@ in
         ./home/bukun.nix
         ./modules/auto-upgrade.nix
         ./modules/openssh.nix
+        ./modules/ssh-totp-auth.nix
         ./modules/zram.nix
         ./modules/caddy/relay.nix
         ./hosts/relay
