@@ -7,6 +7,7 @@ let
   seafile-ver = "11.0.2";
   mariadb-ver = "10.11";
   memcached-ver = "1.6.18";
+  perserve-backups = 92;
 in
 {
   sops = {
@@ -115,7 +116,7 @@ in
         OnCalendar = "02:00";
         Persistent = true;
       };
-      pruneOpts = [ "--keep-last 30" ];
+      pruneOpts = [ "--keep-last ${toString perserve-backups}" ];
       backupPrepareCommand = ''
         NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
 
@@ -155,7 +156,7 @@ in
       passwordFile = config.sops.secrets."b2/seafile-db/repo-password".path;
       paths = [ "/tmp/seafile-db-backup" ];
       initialize = true;
-      pruneOpts = [ "--keep-last 30" ];
+      pruneOpts = [ "--keep-last ${toString perserve-backups}" ];
       backupPrepareCommand = ''
         TIME=$(date +"%Y-%m-%d-%H-%M-%S")
         NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
