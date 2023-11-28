@@ -134,6 +134,7 @@ in
         ./home/root.nix
         ./modules/auto-upgrade-slowring.nix
         ./modules/openssh.nix
+        ./modules/ssh-totp-auth.nix
         ./modules/ntfy.nix
         ./modules/caddy/hetzner-core.nix
         ./hosts/hetzner-core
