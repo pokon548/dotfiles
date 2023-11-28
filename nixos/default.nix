@@ -7,6 +7,7 @@ let
 
       ./modules/nix.nix
       ./modules/sops.nix
+      ./modules/sudo.nix
       ./modules/nixpkgs.nix
     ];
   };
@@ -16,7 +17,6 @@ let
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.nur.nixosModules.nur
       inputs.nix-index-database.nixosModules.nix-index
-
 
       ./modules/dae.nix
       ./modules/i18n.nix
