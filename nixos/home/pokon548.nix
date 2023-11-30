@@ -23,6 +23,7 @@ let
     caffeine
     bing-wallpaper-changer
     hibernate-status-button
+    user-avatar-in-quick-settings
   ];
 in
 {
@@ -293,6 +294,11 @@ in
         toggle-shortcut = [ "<Super>x" ];
         restore-state = true;
         inhibit-apps = [ "chengla-electron.desktop" "obsidian.desktop" "rustdesk-bin.desktop" "todoist.desktop" "org.remmina.Remmina.desktop" "codium.desktop" ];
+      };
+
+      "org/gnome/shell/extensions/quick-settings-avatar" = {
+        avatar-position = 1;
+        avatar-nobackground = false;
       };
 
       "org/gnome/shell/extensions/unmess" = {

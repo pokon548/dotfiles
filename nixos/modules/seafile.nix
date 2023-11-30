@@ -28,6 +28,16 @@ in
       "b2/seafile-db/appkey" = { };
       "b2/seafile-db/repo-password" = { };
 
+      "storj/seafile-data/bucket" = { };
+      "storj/seafile-data/keyid" = { };
+      "storj/seafile-data/accesskey" = { };
+      "storj/seafile-data/repo-password" = { };
+
+      "storj/seafile-db/bucket" = { };
+      "storj/seafile-db/keyid" = { };
+      "storj/seafile-db/accesskey" = { };
+      "storj/seafile-db/repo-password" = { };
+
       "ntfy-token" = { };
     };
     templates = {
@@ -50,6 +60,14 @@ in
       "restic-b2-db-env".content = ''
         B2_ACCOUNT_ID=${config.sops.placeholder."b2/seafile-db/appid"}
         B2_ACCOUNT_KEY=${config.sops.placeholder."b2/seafile-db/appkey"}
+      '';
+      "restic-storj-data-env".content = ''
+        AWS_ACCESS_KEY_ID=${config.sops.placeholder."storj/seafile-data/keyid"}
+        AWS_SECRET_ACCESS_KEY=${config.sops.placeholder."storj/seafile-data/accesskey"}
+      '';
+      "restic-storj-db-env".content = ''
+        AWS_ACCESS_KEY_ID=${config.sops.placeholder."storj/seafile-db/keyid"}
+        AWS_SECRET_ACCESS_KEY=${config.sops.placeholder."storj/seafile-db/accesskey"}
       '';
     };
   };
@@ -106,7 +124,7 @@ in
     };
 
   services.restic.backups = {
-    seafile-data = {
+    seafile-data-b2 = {
       environmentFile = config.sops.templates."restic-b2-data-env".path;
       repositoryFile = config.sops.secrets."b2/seafile-data/bucket".path;
       passwordFile = config.sops.secrets."b2/seafile-data/repo-password".path;
@@ -122,7 +140,7 @@ in
 
         ${pkgs.curl}/bin/curl \
         -u $NTFY_TOKEN \
-        -H "Title: [Seafile] 正在备份文件..." \
+        -H "Title: [Seafile] 正在备份文件到 B2 可用区..." \
         -d "这可能需要很长时间..." \
         https://ntfy.bukn.uk/backup-notice
 
@@ -131,11 +149,11 @@ in
       backupCleanupCommand = ''
         NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
 
-        journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value restic-backups-seafile-data.service` > /tmp/restic-backups-seafile-data.log
+        journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value restic-backups-seafile-data-b2.service` > /tmp/restic-backups-seafile-data.log
 
         ${pkgs.curl}/bin/curl \
         -u $NTFY_TOKEN \
-        -H "Title: [Seafile] 文件备份完毕" \
+        -H "Title: [Seafile] 文件备份完毕。区域：B2" \
         -d "请参考运行日志，确认备份是否顺利完成" \
         https://ntfy.bukn.uk/backup-notice
 
@@ -150,7 +168,7 @@ in
         rm -r /tmp/restic-backups-seafile-data.log
       '';
     };
-    seafile-db = {
+    seafile-db-b2 = {
       environmentFile = config.sops.templates."restic-b2-db-env".path;
       repositoryFile = config.sops.secrets."b2/seafile-db/bucket".path;
       passwordFile = config.sops.secrets."b2/seafile-db/repo-password".path;
@@ -164,7 +182,7 @@ in
 
         ${pkgs.curl}/bin/curl \
         -u $NTFY_TOKEN \
-        -H "Title: [Seafile] 正在备份数据库..." \
+        -H "Title: [Seafile] 正在备份数据库到 B2 可用区..." \
         -d "这应该不需要太多时间... 吧？" \
         https://ntfy.bukn.uk/backup-notice
 
@@ -182,11 +200,11 @@ in
       backupCleanupCommand = ''
         NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
 
-        journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value restic-backups-seafile-db.service` > /tmp/restic-backups-seafile-db.log
+        journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value restic-backups-seafile-db-b2.service` > /tmp/restic-backups-seafile-db.log
 
         ${pkgs.curl}/bin/curl \
         -u $NTFY_TOKEN \
-        -H "Title: [Seafile] 数据库备份完毕" \
+        -H "Title: [Seafile] 数据库备份完毕。区域：B2" \
         -d "请参考运行日志，确认备份是否顺利完成" \
         https://ntfy.bukn.uk/backup-notice
 
@@ -203,6 +221,106 @@ in
       '';
       timerConfig = {
         OnCalendar = "01:55";
+        Persistent = true;
+      };
+    };
+    seafile-data-storj = {
+      environmentFile = config.sops.templates."restic-storj-data-env".path;
+      repositoryFile = config.sops.secrets."storj/seafile-data/bucket".path;
+      passwordFile = config.sops.secrets."storj/seafile-data/repo-password".path;
+      paths = [ "${nas-path}" ];
+      initialize = true;
+      timerConfig = {
+        OnCalendar = "03:00";
+        Persistent = true;
+      };
+      pruneOpts = [ "--keep-last ${toString perserve-backups}" ];
+      backupPrepareCommand = ''
+        NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
+
+        ${pkgs.curl}/bin/curl \
+        -u $NTFY_TOKEN \
+        -H "Title: [Seafile] 正在备份文件到 Storj 可用区..." \
+        -d "这可能需要很长时间..." \
+        https://ntfy.bukn.uk/backup-notice
+
+        unset NTFY_TOKEN
+      '';
+      backupCleanupCommand = ''
+        NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
+
+        journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value restic-backups-seafile-data-storj.service` > /tmp/restic-backups-seafile-data.log
+
+        ${pkgs.curl}/bin/curl \
+        -u $NTFY_TOKEN \
+        -H "Title: [Seafile] 文件备份完毕。区域：Storj" \
+        -d "请参考运行日志，确认备份是否顺利完成" \
+        https://ntfy.bukn.uk/backup-notice
+
+        ${pkgs.curl}/bin/curl \
+        -u $NTFY_TOKEN \
+        -T /tmp/restic-backups-seafile-data.log \
+        -H "Filename: restic-backups-seafile-data.log" \
+        https://ntfy.bukn.uk/backup-notice
+
+        unset NTFY_TOKEN
+
+        rm -r /tmp/restic-backups-seafile-data.log
+      '';
+    };
+    seafile-db-storj = {
+      environmentFile = config.sops.templates."restic-storj-db-env".path;
+      repositoryFile = config.sops.secrets."storj/seafile-db/bucket".path;
+      passwordFile = config.sops.secrets."storj/seafile-db/repo-password".path;
+      paths = [ "/tmp/seafile-db-backup" ];
+      initialize = true;
+      pruneOpts = [ "--keep-last ${toString perserve-backups}" ];
+      backupPrepareCommand = ''
+        TIME=$(date +"%Y-%m-%d-%H-%M-%S")
+        NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
+        DB_PASSWORD=$(cat ${config.sops.secrets."seafile/seafile-pass".path})
+
+        ${pkgs.curl}/bin/curl \
+        -u $NTFY_TOKEN \
+        -H "Title: [Seafile] 正在备份数据库到 Storj 可用区..." \
+        -d "这应该不需要太多时间... 吧？" \
+        https://ntfy.bukn.uk/backup-notice
+
+        unset NTFY_TOKEN
+
+        mkdir -pv /tmp/seafile-db-backup
+
+        ${pkgs.podman}/bin/podman exec -it seafile-db mysqldump -useafile -p$DB_PASSWORD -hseafile-db --opt ccnet_db > /tmp/seafile-db-backup/ccnet.sql.$TIME
+        ${pkgs.podman}/bin/podman exec -it seafile-db mysqldump -useafile -p$DB_PASSWORD -hseafile-db --opt seafile_db > /tmp/seafile-db-backup/seafile.sql.$TIME
+        ${pkgs.podman}/bin/podman exec -it seafile-db mysqldump -useafile -p$DB_PASSWORD -hseafile-db --opt seahub_db > /tmp/seafile-db-backup/seahub.sql.$TIME
+
+        unset DB_PASSWORD
+        echo "Done"
+      '';
+      backupCleanupCommand = ''
+        NTFY_TOKEN=$(cat ${config.sops.secrets."ntfy-token".path})
+
+        journalctl _SYSTEMD_INVOCATION_ID=`systemctl show -p InvocationID --value restic-backups-seafile-db-storj.service` > /tmp/restic-backups-seafile-db.log
+
+        ${pkgs.curl}/bin/curl \
+        -u $NTFY_TOKEN \
+        -H "Title: [Seafile] 数据库备份完毕。区域：Storj" \
+        -d "请参考运行日志，确认备份是否顺利完成" \
+        https://ntfy.bukn.uk/backup-notice
+
+        ${pkgs.curl}/bin/curl \
+        -u $NTFY_TOKEN \
+        -T /tmp/restic-backups-seafile-db.log \
+        -H "Filename: restic-backups-seafile-db.log" \
+        https://ntfy.bukn.uk/backup-notice
+
+        unset NTFY_TOKEN
+
+        rm -r /tmp/restic-backups-seafile-db.log
+        rm -r /tmp/seafile-db-backup
+      '';
+      timerConfig = {
+        OnCalendar = "02:55";
         Persistent = true;
       };
     };

@@ -62,6 +62,11 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/offline-qr-code-generator/latest.xpi";
       };
+      "leechblockng@proginosko.com" = {
+        installation_mode = "force_installed";
+        install_url =
+          "https://addons.mozilla.org/firefox/downloads/latest/leechblock-ng/latest.xpi";
+      };
       "simple-tab-groups@drive4ik" = {
         default_area = "navbar";
         installation_mode = "force_installed";
