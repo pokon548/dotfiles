@@ -58,7 +58,10 @@
     configFile = config.sops.secrets.ninjasight-config.path;
   };
 
-  services.relay-network.enable = true;
+  services = {
+    relay-network.enable = true;
+    sakurafountain.enable = true;
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
