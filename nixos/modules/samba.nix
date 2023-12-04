@@ -3,6 +3,7 @@
 # TODO: Pasta code found. Any elegant ideas?
 let
   cfg = config.networking.samba;
+  services = [ "gitea" "seafile" "microbin" "wikijs" "send" ];
 in
 {
   options = {
@@ -16,68 +17,34 @@ in
 
     sops = {
       defaultSopsFile = lib.mkForce ../../secrets/hetzner.yaml;
-      secrets = {
-        gitea-cifs-username = { };
-        gitea-cifs-password = { };
-        gitea-cifs-domain = { };
 
-        seafile-cifs-username = { };
-        seafile-cifs-password = { };
-        seafile-cifs-domain = { };
+      secrets = builtins.listToAttrs (
+        builtins.concatLists (
+          map
+            (x: [
+              { name = x + "-cifs-username"; value = { }; }
+              { name = x + "-cifs-password"; value = { }; }
+              { name = x + "-cifs-domain"; value = { }; }
+            ])
+            services));
 
-        microbin-cifs-username = { };
-        microbin-cifs-password = { };
-        microbin-cifs-domain = { };
-
-        wikijs-cifs-username = { };
-        wikijs-cifs-password = { };
-        wikijs-cifs-domain = { };
-
-        filestash-cifs-username = { };
-        filestash-cifs-password = { };
-        filestash-cifs-domain = { };
-
-        send-cifs-username = { };
-        send-cifs-password = { };
-        send-cifs-domain = { };
-      };
+      templates = builtins.listToAttrs (
+        builtins.concatLists (
+          map
+            (x: [
+              {
+                name = x + "-smb-secrets";
+                value = {
+                  content = ''
+                    username=${config.sops.placeholder."${x}-cifs-username"}
+                    domain=${config.sops.placeholder."${x}-cifs-domain"}
+                    password=${config.sops.placeholder."${x}-cifs-password"}
+                  '';
+                };
+              }
+            ])
+            services));
     };
-
-    sops.templates."gitea-smb-secrets".content = ''
-      username=${config.sops.placeholder."gitea-cifs-username"}
-      domain=${config.sops.placeholder."gitea-cifs-domain"}
-      password=${config.sops.placeholder."gitea-cifs-password"}
-    '';
-
-    sops.templates."seafile-smb-secrets".content = ''
-      username=${config.sops.placeholder."seafile-cifs-username"}
-      domain=${config.sops.placeholder."seafile-cifs-domain"}
-      password=${config.sops.placeholder."seafile-cifs-password"}
-    '';
-
-    sops.templates."microbin-smb-secrets".content = ''
-      username=${config.sops.placeholder."microbin-cifs-username"}
-      domain=${config.sops.placeholder."microbin-cifs-domain"}
-      password=${config.sops.placeholder."microbin-cifs-password"}
-    '';
-
-    sops.templates."wikijs-smb-secrets".content = ''
-      username=${config.sops.placeholder."wikijs-cifs-username"}
-      domain=${config.sops.placeholder."wikijs-cifs-domain"}
-      password=${config.sops.placeholder."wikijs-cifs-password"}
-    '';
-
-    sops.templates."filestash-smb-secrets".content = ''
-      username=${config.sops.placeholder."filestash-cifs-username"}
-      domain=${config.sops.placeholder."filestash-cifs-domain"}
-      password=${config.sops.placeholder."filestash-cifs-password"}
-    '';
-
-    sops.templates."send-smb-secrets".content = ''
-      username=${config.sops.placeholder."send-cifs-username"}
-      domain=${config.sops.placeholder."send-cifs-domain"}
-      password=${config.sops.placeholder."send-cifs-password"}
-    '';
 
     fileSystems."/mnt/external-storage/wiki-js" = {
       device = "//u370687-sub1.your-storagebox.de/u370687-sub1";
@@ -125,18 +92,6 @@ in
 
         in
         [ "${automount_opts},credentials=${config.sops.templates."microbin-smb-secrets".path}" ];
-    };
-
-    fileSystems."/mnt/external-storage/filestash" = {
-      device = "//u370687-sub6.your-storagebox.de/u370687-sub6";
-      fsType = "cifs";
-      options =
-        let
-          # this line prevents hanging on network split
-          automount_opts = "_netdev,x-systemd.automount,nofail,x-systemd.device-timeout=10ms,mfsymlinks,uid=65534,gid=65534";
-
-        in
-        [ "${automount_opts},credentials=${config.sops.templates."filestash-smb-secrets".path}" ];
     };
 
     fileSystems."/mnt/external-storage/send" = {

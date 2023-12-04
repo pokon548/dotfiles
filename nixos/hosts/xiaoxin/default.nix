@@ -64,6 +64,7 @@
 
   hardware.enableRedistributableFirmware = true;
   networking.fwrouter.enable = true;
+  #services.freshkuma.enable = true;
 
   hardware.bluetooth = {
     enable = true;

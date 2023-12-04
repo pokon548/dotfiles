@@ -18,7 +18,7 @@ let
       inputs.nur.nixosModules.nur
       inputs.nix-index-database.nixosModules.nix-index
 
-      ./modules/dae.nix
+      # ./modules/dae.nix
       ./modules/i18n.nix
     ];
   };
@@ -63,8 +63,10 @@ in
         virtualisationModules
 
         inputs.microvm.nixosModules.host
+        inputs.private-configs.nixosModules
 
         ./modules/lanzaboote.nix
+        ./modules/dae.nix
         ./modules/workprofile.nix
         ./modules/zram.nix
         ./home/pokon548.nix
