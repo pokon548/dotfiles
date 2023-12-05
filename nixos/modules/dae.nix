@@ -106,7 +106,9 @@ in
         domain(gis.gnome.org) -> direct
         pname(NetworkManager) -> direct
         pname(chromium) -> direct
-        dport(52443) -> direct
+
+        dport(53215) -> must_direct
+        dport(53216) -> must_direct
 
         dip(224.0.0.0/3, 'ff00::/8') -> direct
 

@@ -25,6 +25,19 @@ let
     hibernate-status-button
     user-avatar-in-quick-settings
   ];
+
+  noBannerApps = [
+    "org-gnome-shell-extensions-gsconnect"
+    "io-gitlab-news-flash-newsflash"
+    "ntfy-native"
+    "librewolf"
+    "org-gnome-console"
+    "element-desktop"
+  ];
+
+  showDetailApps = [
+    "thunderbird"
+  ];
 in
 {
   sops.secrets.pokon548_password.neededForUsers = true;
@@ -396,6 +409,29 @@ in
           ".scrcpy-wrapped" = 10;
         };
       };
-    };
+    } // builtins.listToAttrs (
+      builtins.concatLists (
+        map
+          (x: [
+            {
+              name = "org/gnome/desktop/notifications/application/" + x;
+              value = {
+                show-banners = false;
+                enable-sound-alerts = false;
+              };
+            }
+          ])
+          noBannerApps)) // builtins.listToAttrs (
+      builtins.concatLists (
+        map
+          (x: [
+            {
+              name = "org/gnome/desktop/notifications/application/" + x;
+              value = {
+                force-expanded = true;
+              };
+            }
+          ])
+          showDetailApps));
   };
 }

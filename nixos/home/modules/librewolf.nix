@@ -120,6 +120,11 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/spoof-timezone/latest.xpi";
       };
+      "{74145f27-f039-47ce-a470-a662b129930a}" = {
+        installation_mode = "force_installed";
+        install_url =
+          "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
+      };
       "extension@tabliss.io" = {
         installation_mode = "force_installed";
         install_url =
