@@ -100,6 +100,11 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/scroll-to-top/latest.xpi";
       };
+      "jid1-xUfzOsOFlzSOXg@jetpack" = {
+        installation_mode = "force_installed";
+        install_url =
+          "https://addons.mozilla.org/firefox/downloads/file/4092764/reddit_enhancement_suite-latest.xpi";
+      };
       "{2e5ff8c8-32fe-46d0-9fc8-6b8986621f3c}" = {
         installation_mode = "force_installed";
         install_url =

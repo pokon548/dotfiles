@@ -99,6 +99,8 @@
     configFile = config.sops.secrets.pinepea-config.path;
   };
 
+  services.swiftbus.enable = true;
+
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 

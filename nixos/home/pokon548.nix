@@ -123,18 +123,13 @@ in
 
       tela-circle-icon-theme
 
-      (kodi.passthru.withPackages (kodiPkgs: with kodiPackages; [
-        inputstream-adaptive
-        jellyfin
-      ]))
-
       freetube
 
       nur.repos.pokon548.rustdesk-bin
       nur.repos.pokon548.chengla-electron
       nur.repos.pokon548.sticky
+      nur.repos.pokon548.favagtk
       nur.repos.pokon548.ntfy-naive
-      nur.repos.federicoschonborn.metronome
       virt-manager
 
       gocryptfs
@@ -150,6 +145,9 @@ in
       abiword
       vlc
       rnote
+      koreader
+
+      authenticator
     ]);
 
     dconf.settings = {
@@ -276,7 +274,7 @@ in
       };
 
       "org/gnome/shell/keybindings" = {
-        show-screenshot-ui = [ "<Super>s" ];
+        show-screenshot-ui = [ "<Super>d" ];
       };
 
       "org/gnome/shell/extensions/kimpanel" = {

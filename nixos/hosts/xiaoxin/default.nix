@@ -29,6 +29,8 @@
     theme = "breeze";
   };
 
+  boot.tmp.cleanOnBoot = true;
+
   boot.kernel.sysctl = {
     "kernel.sysrq" = 1;
   };
@@ -43,18 +45,19 @@
 
   boot.resumeDevice = "/dev/mapper/MyVolGroup-swap";
 
-  fileSystems."/" =
-    {
-      device = "/dev/mapper/MyVolGroup-root";
-      fsType = "btrfs";
-      options = [ "compress=zstd" ];
-    };
-
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/CDDF-AEBF";
-      fsType = "vfat";
-    };
+  fileSystems = {
+    "/" =
+      {
+        device = "/dev/mapper/MyVolGroup-root";
+        fsType = "btrfs";
+        options = [ "compress=zstd:1" "x-gvfs-hide" ];
+      };
+    "/boot" =
+      {
+        device = "/dev/disk/by-uuid/CDDF-AEBF";
+        fsType = "vfat";
+      };
+  };
 
   swapDevices = [
     {
@@ -104,6 +107,11 @@
     enable = true;
     coreOffset = -70;
     analogioOffset = -50;
+  };
+
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = config.services.zerotierone.defaultJoinNetworks;
   };
 
   time.timeZone = "Asia/Shanghai";

@@ -109,6 +109,8 @@ in
 
         dport(53215) -> must_direct
         dport(53216) -> must_direct
+        dport(9993) -> direct
+        sport(9993) -> direct
 
         dip(224.0.0.0/3, 'ff00::/8') -> direct
 
