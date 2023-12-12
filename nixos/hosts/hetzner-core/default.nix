@@ -88,13 +88,6 @@
       enable = true;
       baseUrl = "https://ntfy.bukn.uk";
     };
-
-    uptime-kuma = {
-      enable = true;
-      settings = {
-        PORT = "4000";
-      };
-    };
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";

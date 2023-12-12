@@ -43,6 +43,11 @@
     private-configs.url = "git+ssh://gitea@gitea.bukn.uk:22222/pokon548/private-configs";
     private-configs.inputs.nixpkgs.follows = "nixpkgs";
 
+    haumea = {
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     microvm.url = "github:astro/microvm.nix/f92c94536c6be299730180a1a7caaab31e8657fb";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";

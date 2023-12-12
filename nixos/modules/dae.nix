@@ -121,7 +121,7 @@ in
         domain(${config.sops.placeholder."megatraffic-website-definition"}) -> megatraffic-network
         pname(aria2c) -> megatraffic-network
 
-        fallback: campus-network
+        fallback: backup-campus-network
       }
     '';
 

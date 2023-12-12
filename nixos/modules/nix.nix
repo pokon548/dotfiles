@@ -22,7 +22,7 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       substituters = [
-        "https://mirrors.bfsu.edu.cn/nix-channels/store"
+        "https://mirrors.sjtug.sjtu.edu.cn/nix-channels/store"
         "https://nix-community.cachix.org"
         "https://microvm.cachix.org"
         "https://pokon548.cachix.org"

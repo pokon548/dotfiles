@@ -1,4 +1,4 @@
-{ user, config, ... }:
+{ ... }:
 {
   sops = {
     defaultSopsFile = ../../secrets/common.yaml;
