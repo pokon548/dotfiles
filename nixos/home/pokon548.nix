@@ -17,6 +17,8 @@ let
     weather-oclock
     night-theme-switcher
 
+    net-speed-simplified
+
     upower-battery
 
     blur-my-shell
@@ -310,6 +312,17 @@ in
       "org/gnome/shell/extensions/quick-settings-avatar" = {
         avatar-position = 1;
         avatar-nobackground = false;
+      };
+
+      "org/gnome/shell/extensions/netspeedsimplified" = {
+        wpos = 1;
+        mode = 3;
+        chooseiconset = 2;
+        iconstoright = true;
+        reverseindicators = true;
+        lockmouseactions = true;
+        systemcolr = true;
+        refreshtime = 1.0;
       };
 
       "org/gnome/shell/extensions/unmess" = {
