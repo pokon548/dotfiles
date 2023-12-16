@@ -2,8 +2,9 @@
   fonts = {
     packages = with pkgs; [
       roboto
-      noto-fonts
-      noto-fonts-cjk    # Workaround: https://github.com/NixOS/nixpkgs/issues/259890
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+
       dejavu_fonts
       source-han-sans
       source-han-serif
@@ -15,6 +16,7 @@
 
       nur.repos.rewine.ttf-wps-fonts
       nur.repos.rewine.ttf-ms-win10
+      nur.repos.pokon548.ttf-blobmoji
     ];
     fontconfig = {
       # Shamelessly kanged from Arch Wiki :)
@@ -37,6 +39,95 @@
             <edit name="embeddedbitmap" mode="assign">
               <bool>false</bool>
             </edit>
+          </match>
+
+          <!-- Add generic family. -->
+          <match target="pattern">
+            <test qual="any" name="family"><string>emoji</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <!-- This adds Blobmoji as a final fallback font for the default font families. -->
+          <match target="pattern">
+            <test name="family"><string>sans</string></test>
+            <edit name="family" mode="append"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test name="family"><string>serif</string></test>
+            <edit name="family" mode="append"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test name="family"><string>sans-serif</string></test>
+            <edit name="family" mode="append"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test name="family"><string>monospace</string></test>
+            <edit name="family" mode="append"><string>Blobmoji</string></edit>
+          </match>
+
+
+          <!-- Use Blobmoji when other popular fonts are being specifically requested. -->
+          <match target="pattern">
+            <test qual="any" name="family"><string>Apple Color Emoji</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Segoe UI Emoji</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Segoe UI Symbol</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Android Emoji</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Twitter Color Emoji</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Twemoji</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Twemoji Mozilla</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>TwemojiMozilla</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>EmojiTwo</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Emoji Two</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>EmojiSymbols</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family"><string>Symbola</string></test>
+            <edit name="family" mode="assign" binding="same"><string>Blobmoji</string></edit>
           </match>
 
           <!-- 英文默认字体使用 Roboto 和 Noto Serif ,终端使用 DejaVu Sans Mono. -->
@@ -171,7 +262,7 @@
           </alias>
           <alias>
             <family>monospace</family>
-            <prefer>  
+            <prefer>
               <family>Source Han Sans SC</family>
               <family>Source Han Sans TC</family>
               <family>Source Han Sans HW</family>
