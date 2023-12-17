@@ -18,6 +18,7 @@ let
     night-theme-switcher
 
     net-speed-simplified
+    tophat
 
     upower-battery
 
@@ -112,6 +113,8 @@ in
       cartridges
 
       localsend
+
+      easyeffects
 
       celluloid
       bitwarden
@@ -212,6 +215,24 @@ in
         };
       };
 
+      "org/gnome/shell/extensions/nightthemeswitcher/gtk-variants" = {
+        enabled = true;
+        day = "adw-gtk3";
+        night = "adw-gtk3-dark";
+      };
+
+      "org/gnome/shell/extensions/nightthemeswitcher/icon-variants" = {
+        enabled = true;
+        day = "Tela-circle-light";
+        night = "Tela-circle-dark";
+      };
+
+      "org/gnome/shell/extensions/nightthemeswitcher/cursor-variants" = {
+        enabled = true;
+        day = "Simp1e-Adw";
+        night = "Simp1e-Adw-Dark";
+      };
+
       "org/gnome/mutter" = {
         dynamic-workspaces = false;
         workspaces-only-on-primary = false;
@@ -276,7 +297,7 @@ in
       };
 
       "org/gnome/shell/keybindings" = {
-        show-screenshot-ui = [ "<Super>d" ];
+        show-screenshot-ui = [ "<Shift><Super>s" ];
       };
 
       "org/gnome/shell/extensions/kimpanel" = {
@@ -322,6 +343,7 @@ in
         reverseindicators = true;
         lockmouseactions = true;
         systemcolr = true;
+        shortenunits = true;
         refreshtime = 1.0;
       };
 
@@ -335,6 +357,7 @@ in
           "io.missioncenter.MissionCenter" = 1;
           gnome-tweaks = 1;
           "org.gnome.Extensions" = 1;
+          "com.github.wwmm.easyeffects" = 1;
 
           Anki = 2;
           chengla-linux-unofficial = 2;
@@ -382,6 +405,7 @@ in
           "io.missioncenter.MissionCenter" = 1;
           gnome-tweaks = 1;
           "org.gnome.Extensions" = 1;
+          "com.github.wwmm.easyeffects" = 1;
 
           anki = 2;
           chengla-linux-unofficial = 2;

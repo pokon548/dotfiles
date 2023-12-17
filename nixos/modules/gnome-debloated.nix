@@ -37,6 +37,11 @@
       ]);
   };
 
+  environment.systemPackages = with pkgs; [
+    adw-gtk3
+    simp1e-cursors
+  ];
+
   networking = { networkmanager.enable = true; };
 
   # TODO: Workaround for gdm crash issue, see https://github.com/NixOS/nixpkgs/issues/103746
