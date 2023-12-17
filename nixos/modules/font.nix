@@ -10,8 +10,6 @@
       source-han-serif
       source-han-mono
 
-      intel-one-mono
-
       fira-code-nerdfont
 
       nur.repos.rewine.ttf-wps-fonts
