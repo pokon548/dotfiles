@@ -84,6 +84,11 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/read-aloud/latest.xpi";
       };
+      "copyplaintext@eros.man" = {
+        installation_mode = "force_installed";
+        install_url =
+          "https://addons.mozilla.org/firefox/downloads/latest/copy-plaintext/latest.xpi";
+      };
       "{1018e4d6-728f-4b20-ad56-37578a4de76b}" = {
         installation_mode = "force_installed";
         install_url =
