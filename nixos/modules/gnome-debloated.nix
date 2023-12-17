@@ -42,6 +42,12 @@
     simp1e-cursors
   ];
 
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita";
+  };
+
   networking = { networkmanager.enable = true; };
 
   # TODO: Workaround for gdm crash issue, see https://github.com/NixOS/nixpkgs/issues/103746
