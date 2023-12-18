@@ -115,6 +115,11 @@ let
         install_url =
           "https://addons.mozilla.org/firefox/downloads/latest/search-by-image/latest.xpi";
       };
+      "{e58d3966-3d76-4cd9-8552-1582fbc800c1}" = {
+        installation_mode = "force_installed";
+        install_url =
+          "https://addons.mozilla.org/firefox/downloads/latest/buster-captcha-solver/latest.xpi";
+      };
       "jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack" = {
         installation_mode = "force_installed";
         install_url =

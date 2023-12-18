@@ -66,6 +66,7 @@ in
         inputs.private-configs.nixosModules
 
         ./modules/lanzaboote.nix
+        ./modules/ananicy.nix
         ./modules/dae.nix
         ./modules/zram.nix
         ./home/pokon548.nix
