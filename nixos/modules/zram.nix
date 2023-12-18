@@ -2,9 +2,6 @@
 {
   zramSwap = {
     enable = true;
-  };
-
-  services.zram-generator = {
-    enable = true;
+    memoryPercent = 30;
   };
 }

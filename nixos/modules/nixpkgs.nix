@@ -12,7 +12,7 @@
           });
 
           gnome-shell = gsuper.gnome-shell.overrideAttrs (old: {
-            patches = old.patches ++ [ ./gnome-patch/no-screenshot-flash.patch ];
+            patches = old.patches ++ [ ./gnome-patch/no-screenshot-flash.patch ./gnome-patch/no-workspace-animation.patch ];
           });
         });
       })
